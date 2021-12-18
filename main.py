@@ -1,13 +1,14 @@
-import pfmanagement as pfm
+from pfmanager.engine import *
 
-a=pfm.Portfolio("Portfolio de Prueba")
-b=pfm.Asset()
-c=pfm.AssetEquity()
-d=pfm.Transaction()
-e=pfm.TransactionBuyEquity()
-f=pfm.TransactionSellEquity()
-g=pfm.TransactionDividendEquity()
-h=pfm.TransactionDividendWithSharesEquity()
+
+a=Portfolio("Portfolio de Prueba")
+b=Asset()
+c=AssetEquity()
+d=Transaction()
+e=TransactionBuyEquity()
+f=TransactionSellEquity()
+g=TransactionDividendEquity()
+h=TransactionDividendWithSharesEquity()
 
 print(a.pf_name)
 
