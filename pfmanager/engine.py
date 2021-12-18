@@ -1,3 +1,8 @@
+class Currency:
+  def __init__(self,asset_currency,local_currency):
+    self.dummie=[]
+
+
 class Portfolio:
   def __init__(self,name):
     self.pf_name=name
@@ -15,6 +20,7 @@ class Asset:
     self.currency=currency
     self.portfolio = pf_father
     self.transactions_list=[]
+    #Hay que añadir un argumento que sirva para indicar si se quiere o no que se actualice la lista de activos del porfolio pasado 
     
   def set_new_id(self):     
     self.id=int(self.seed_id[0])+1
@@ -39,16 +45,18 @@ class AssetEquity(Asset):
     self.caract=caract
     #Asset internal KPI
     self.curr_shares = 0
-    self.market_value = 0
+    self.market_value = {currency : 0}
+    self.curr_cost= {currency : 0 }    
+    self.total_dividends = {currency : 0}
+    self.total_taxes= {currency : 0}
+    self.total_commissions = {currency : 0}
+    #Auxiliar variables
     self.total_buy_shares =0
     self.total_sell_shares =0 
-    
+    self.total_buy_cost = {currency : 0}
+    self.total_sell_rev = {currency : 0}
 
-
-
-
-
-
+  
 
     
 class Transaction:
