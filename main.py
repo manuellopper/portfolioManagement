@@ -1,19 +1,23 @@
-from pfmanager.engine import *
+import pfmanager.engine as pm
 
 
-pf=Portfolio("Portfolio de Prueba")
-as1=Asset("Telefónica SA","EUR",pf)
-as2=AssetEquity("Iberdrola","EUR","IBR",pf)
-d=Transaction()
-e=TransactionBuyEquity()
-f=TransactionSellEquity()
-g=TransactionDividendEquity()
-h=TransactionDividendWithSharesEquity()
+pf=pm.Portfolio("Portfolio de Prueba")
+as1=pm.Asset("Telefónica SA","EUR",pf)
+as2=pm.AssetEquity("Iberdrola","EUR","IBR",pf)
+d=pm.Transaction()
+e=pm.TransactionBuyEquity()
+f=pm.TransactionSellEquity()
+g=pm.TransactionDividendEquity()
+h=pm.TransactionDividendWithSharesEquity()
+curr1=pm.Currency("EUR",12)
+curr2=pm.Currency("EUR",14,"USD")
+
 
 print(pf.pf_name)
 print(f"Asset - Id: {as1.get_id()} Asset Type: {as1.asset_type} Nombre: {as1.asset_name} Currency: {as1.currency} Portfolio: {as1.portfolio.pf_name}")
 print(f"Asset - Id: {as2.get_id()} Asset Type: {as2.asset_type} Nombre: {as2.asset_name} Symbol: {as2.symbol} Currency: {as2.currency} Portfolio: {as2.portfolio.pf_name}")
-
+print(f"Currency {curr1.asset_curr} Value {curr1.value_asset_curr} // Currency {curr1.local_curr} Value {curr1.value_local_curr}")
+print(f"Currency {curr2.asset_curr} Value {curr2.value_asset_curr} // Currency {curr2.local_curr} Value {curr2.value_local_curr}")
 
 print(d.get_id())
 print(e.get_id())

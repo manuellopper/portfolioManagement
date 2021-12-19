@@ -1,6 +1,65 @@
+system_local_currency = "EUR"
+
+def get_sys_local_currency():
+  return system_local_currency
+
+def set_sys_local_currency(currency):
+  if is_currency_valid(currency):
+    system_local_currency = currency
+  else:
+    return "Error" #### !!!!Hay que establecer cómo se retornan cosas
+
+
+def is_currency_valid(currency):
+  return True
+
+
 class Currency:
-  def __init__(self,asset_currency,local_currency):
-    self.dummie=[]
+  def __init__(self,asset_currency,value_asset_currency, local_currency=None, value_local_currency=None ):
+    
+    if is_currency_valid(asset_currency):      
+      self.asset_curr=asset_currency       
+    else:
+      return "Error" #### !!!!Hay que establecer cómo se retornan cosas
+    
+    self.value_asset_curr = value_asset_currency
+
+    if local_currency == None and value_local_currency == None:
+      ## La moneda local es igual que la del activo
+      self.local_curr = asset_currency
+      self.value_local_curr = value_asset_currency
+    elif not (local_currency == None) and value_local_currency == None:
+      if is_currency_valid(local_currency):    
+        self.local_curr = local_currency
+      else:
+        return "Error" #### !!!!Hay que establecer cómo se retornan cosas
+      
+      self.value_local_curr= self.convert(value_asset_currency,asset_currency,local_currency) 
+
+  def isvalid(self,currency_name):
+    ###!! Hay que escribirlo
+    return True 
+
+  def convert(self,value_asset_currency, asset_currency, local_currency):
+    #### !!!!Aquí hay que hacer la conversión
+    return value_asset_currency
+
+  def setValue (self, value, currency ="ASSET"):    
+    if currency.upper()=="ASSET":
+      self.value_asset_curr = value
+    elif currency.upper()=="LOCAL":
+      self.value_local_curr = value
+    else:
+      return "Error" #### !!!!Hay que establecer cómo se retornan cosas
+
+  def getValue (self, value, currency ="ASSET"):    
+    if currency.upper()=="ASSET":
+      return self.value_asset_curr
+    elif currency.upper()=="LOCAL":
+      return self.value_local_curr
+    else:
+      return "Error" #### !!!!Hay que establecer cómo se retornan cosas
+
 
 
 class Portfolio:
