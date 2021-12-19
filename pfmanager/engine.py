@@ -40,10 +40,6 @@ class Currency:
       
       self.value_local_curr= self.convert(value_asset_currency,asset_currency,local_currency) 
 
-  def isvalid(self,currency_name):
-    ###!! Hay que escribirlo
-    return True 
-
   def convert(self,value_asset_currency, asset_currency, local_currency):
     #### !!!!Aquí hay que hacer la conversión
     return value_asset_currency
