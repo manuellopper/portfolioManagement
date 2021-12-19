@@ -1,4 +1,8 @@
+# --------------- Global variables
+
 system_local_currency = "EUR"
+
+# --------------- Global functions
 
 def get_sys_local_currency():
   return system_local_currency
@@ -9,10 +13,10 @@ def set_sys_local_currency(currency):
   else:
     return "Error" #### !!!!Hay que establecer cómo se retornan cosas
 
-
 def is_currency_valid(currency):
   return True
 
+# ---------------- Classes
 
 class Currency:
   def __init__(self,asset_currency,value_asset_currency, local_currency=None, value_local_currency=None ):
@@ -68,19 +72,40 @@ class Portfolio:
     self.assets_list=[]
     self.transactions_list=[]
 
+  def asset_exist(self, symbol=None):
+    for i in Range(len(self.assets_list)):
+      if self.assets_list[i].get_symbol().upper() == symbol.upper():
+        return True    
+    return False
+
+  def add_asset_to_porfolio(self, asset_aux):
+    asset_type = asset_aux.get_asset_type()
+    
+    if asset_type == "Equity":
+      if self.asset_exist(symbol=asset_aux.get_symbol()):
+        return "Error: ya existe"
+      else:
+        self.assets_list.append(asset_aux)
+
+
+
+
 
 class Asset:
   seed_id = [0]
   asset_type="Undertermined"
   
-  def __init__(self,name,currency,pf_father):
+  def __init__(self, name, currency, pf_father):
     self.set_new_id()
-    self.asset_name=name
-    self.currency=currency
+    self.asset_name=name    
     self.portfolio = pf_father
     self.transactions_list=[]
-    #Hay que añadir un argumento que sirva para indicar si se quiere o no que se actualice la lista de activos del porfolio pasado 
-    
+    if is_currency_valid(currency):
+      self.currency=currency
+    else:
+      return "Error" #### !!!!Hay que establecer cómo se retornan cosas
+     
+     
   def set_new_id(self):     
     self.id=int(self.seed_id[0])+1
     self.seed_id[0]=self.id
@@ -88,13 +113,16 @@ class Asset:
   def get_id(self):
     return self.id
 
+  def get_asset_type(self):
+    return self.asset_type
+
 
     
 class AssetEquity(Asset):
 
-  def __init__(self, name, currency, symbol, pf_father, sector=None,market_type=None, size=None, caract=None):
+  def __init__(self, name, currency, symbol, pf_father, sector=None,market_type=None, size=None, caract=None,add_to_porfolio = False):
     # Main information
-    super().__init__(name,currency,pf_father)    
+    super().__init__(name,currency,pf_father)  
     self.asset_type="Equity"
     self.symbol = symbol
     #Asset general information
@@ -104,16 +132,23 @@ class AssetEquity(Asset):
     self.caract=caract
     #Asset internal KPI
     self.curr_shares = 0
-    self.market_value = {currency : 0}
-    self.curr_cost= {currency : 0 }    
-    self.total_dividends = {currency : 0}
-    self.total_taxes= {currency : 0}
-    self.total_commissions = {currency : 0}
+    self.market_value = Currency(currency,0,system_local_currency,0)
+    self.curr_cost= Currency(currency,0,system_local_currency,0)    
+    self.total_dividends = Currency(currency,0,system_local_currency,0)
+    self.total_taxes= Currency(currency,0,system_local_currency,0)
+    self.total_commissions = Currency(currency,0,system_local_currency,0)
     #Auxiliar variables
     self.total_buy_shares =0
     self.total_sell_shares =0 
-    self.total_buy_cost = {currency : 0}
-    self.total_sell_rev = {currency : 0}
+    self.total_buy_cost = Currency(currency,0,system_local_currency,0)
+    self.total_sell_rev = Currency(currency,0,system_local_currency,0)
+
+    ##Add to porfolio if indicated
+    self.portfolio.add_asset_to_porfolio(self)
+
+
+  def get_symbol(self):
+    return self.symbol
 
   
 
