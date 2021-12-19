@@ -73,7 +73,7 @@ class Portfolio:
     self.transactions_list=[]
 
   def asset_exist(self, symbol=None):
-    for i in Range(len(self.assets_list)):
+    for i in range(len(self.assets_list)):
       if self.assets_list[i].get_symbol().upper() == symbol.upper():
         return True    
     return False
@@ -144,7 +144,8 @@ class AssetEquity(Asset):
     self.total_sell_rev = Currency(currency,0,system_local_currency,0)
 
     ##Add to porfolio if indicated
-    self.portfolio.add_asset_to_porfolio(self)
+    if add_to_porfolio == True:
+      self.portfolio.add_asset_to_porfolio(self)
 
 
   def get_symbol(self):
