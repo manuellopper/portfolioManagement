@@ -44,7 +44,7 @@ class Currency:
     #### !!!!Aquí hay que hacer la conversión
     return value_asset_currency
 
-  def setValue (self, value, currency ="ASSET"):    
+  def set_value (self, value, currency ="ASSET"):    
     if currency.upper()=="ASSET":
       self.value_asset_curr = value
     elif currency.upper()=="LOCAL":
@@ -52,13 +52,23 @@ class Currency:
     else:
       return "Error" #### !!!!Hay que establecer cómo se retornan cosas
 
-  def getValue (self, value, currency ="ASSET"):    
+  def get_value (self, currency ="ASSET"):    
     if currency.upper()=="ASSET":
       return self.value_asset_curr
     elif currency.upper()=="LOCAL":
       return self.value_local_curr
     else:
       return "Error" #### !!!!Hay que establecer cómo se retornan cosas
+
+  def get_currency (self, currency ="ASSET"):
+    if currency.upper()=="ASSET":
+      return self.asset_curr
+    elif currency.upper()=="LOCAL":
+      return self.local_curr
+    else:
+      return "Error" #### !!!!Hay que establecer cómo se retornan cosas
+
+#### construir un método para currency que permita sumar y restar
 
 
 
@@ -74,14 +84,23 @@ class Portfolio:
         return True    
     return False
 
-  def add_asset_to_porfolio(self, asset_aux):
+  def add_asset(self, asset_aux, copy_transactions=True):
+    
     asset_type = asset_aux.get_asset_type()
     
     if asset_type == "Equity":
       if self.asset_exist(symbol=asset_aux.get_symbol()):
-        return "Error: ya existe"
+        return "Error: ya existe" ## esto se puede transformar en una fusión.
       else:
         self.assets_list.append(asset_aux)
+        asset_aux.set_portfolio(self)
+        if copy_transactions == True:
+          self.copy_transactions_from_asset(self,asset_aux)
+        
+  def copy_transactions_from_asset(self, asset_aux):
+    self.transactions_list += asset_aux.get_transactions(copy=True)
+    ## !! Aquí habría que ordena la lista de transacciones.. por fecha, por ejemplo
+
 
 
 
@@ -91,7 +110,7 @@ class Asset:
   seed_id = [0]
   asset_type="Undertermined"
   
-  def __init__(self, name, currency, pf_father):
+  def __init__(self, name, currency, pf_father=None):
     self.set_new_id()
     self.asset_name=name    
     self.portfolio = pf_father
@@ -112,11 +131,29 @@ class Asset:
   def get_asset_type(self):
     return self.asset_type
 
+  def get_portfolio(self):
+    return self.porfolio
+
+  def set_portfolio(self, portfolio):
+    if not (type(portfolio) == Portfolio):
+      return "Error"
+    else:
+      self.portfolio=portfolio
+  
+  def get_transactions(self, start = 0, end = len(self.transactions_list), copy = False):
+    
+    if copy == True:
+      return self.transactions_list[start:end].copy()
+    else:
+      return self.transactions_list[start:end]
+
+     
+
 
     
 class AssetEquity(Asset):
 
-  def __init__(self, name, currency, symbol, pf_father, sector=None,market_type=None, size=None, caract=None,add_to_porfolio = False):
+  def __init__(self, name, currency, symbol, pf_father=None, sector=None,market_type=None, size=None, caract=None,add_to_porfolio = True):
     # Main information
     super().__init__(name,currency,pf_father)  
     self.asset_type="Equity"
@@ -140,20 +177,27 @@ class AssetEquity(Asset):
     self.total_sell_rev = Currency(currency,0,system_local_currency,0)
 
     ##Add to porfolio if indicated
-    if add_to_porfolio == True:
-      self.portfolio.add_asset_to_porfolio(self)
+    if add_to_porfolio == True and not(pf_father == None) :
+      self.portfolio.add_asset(self)
 
 
   def get_symbol(self):
     return self.symbol
+
+  def buy(self):
+    pass
 
   
 
     
 class Transaction:
   seed_id = [0]
-  def __init__(self):
+  def __init__(self, asset_currency=system_local_currency,local_currency = system_local_currency):
     self.set_new_id()
+    self.taxes = Currency(asset_currency,0,local_currency,0)
+    self.commissions = Currency(asset_currency,0,local_currency,0)
+    self.gross_cashflow = Currency(asset_currency,0,local_currency,0)
+    self.net_cashflow = Currency(asset_currency,0,local_currency,0)
 
   def set_new_id(self):     
     self.id=int(self.seed_id[0])+1
@@ -162,19 +206,34 @@ class Transaction:
   def get_id(self):
     return self.id
     
-class TransactionBuyEquity(Transaction):
+class TransactionBuy(Transaction):
+  def __init__(self, number, price_per_share, commissions=None, taxes=None):
+    if not( type(price_per_share) == Currency):
+      return "Error"
+
+    super().__init__(price_per_share.get_currency("ASSET"),price_per_share.get_currency("LOCAL"))
+    self.number_of_shares = number
+    self.price_per_share=price_per_share
+    
+    if not( commissions == None ):
+      self.commissions = commissions
+    
+    if not( taxes == None ):
+      self.taxes = taxes
+
+    ######### Actualizar gross cash flow y net cash flow
+
+    
+    
+class TransactionSell(Transaction):
   def __init__(self):
     self.set_new_id()
     
-class TransactionSellEquity(Transaction):
-  def __init__(self):
-    self.set_new_id()
-    
-class TransactionDividendEquity(Transaction):
+class TransactionDividend(Transaction):
   def __init__(self):
     self.set_new_id()
       
-class TransactionDividendWithSharesEquity(Transaction):
+class TransactionDividendWithShares(Transaction):
   def __init__(self):
     self.set_new_id()
   
