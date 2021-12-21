@@ -35,10 +35,15 @@ class Currency:
     elif not (local_currency == None) and value_local_currency == None:
       if is_currency_valid(local_currency):    
         self.local_curr = local_currency
+        self.value_local_curr= self.convert(value_asset_currency,asset_currency,local_currency)
       else:
         return "Error" #### !!!!Hay que establecer cómo se retornan cosas
-      
-      self.value_local_curr= self.convert(value_asset_currency,asset_currency,local_currency) 
+    else:
+      if is_currency_valid(local_currency):    
+        self.local_curr = local_currency
+        self.value_local_curr= value_local_currency
+      else:
+        return "Error" #### !!!!Hay que establecer cómo se retornan cosas    
 
   def __add__(self, other):
 
@@ -46,9 +51,6 @@ class Currency:
   
   def __sub__(self,other):
     return Currency(self.asset_curr,self.value_asset_curr - other.get_value("ASSET"),self.local_curr,self.value_local_curr - other.get_value("LOCAL") )
-
-
-
 
   def convert(self,value_asset_currency, asset_currency, local_currency):
     #### !!!!Aquí hay que hacer la conversión
