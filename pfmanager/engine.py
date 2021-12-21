@@ -40,6 +40,16 @@ class Currency:
       
       self.value_local_curr= self.convert(value_asset_currency,asset_currency,local_currency) 
 
+  def __add__(self, other):
+
+    return Currency(self.asset_curr,self.value_asset_curr + other.get_value("ASSET"),self.local_curr,self.value_local_curr + other.get_value("LOCAL") )
+  
+  def __sub__(self,other):
+    return Currency(self.asset_curr,self.value_asset_curr - other.get_value("ASSET"),self.local_curr,self.value_local_curr - other.get_value("LOCAL") )
+
+
+
+
   def convert(self,value_asset_currency, asset_currency, local_currency):
     #### !!!!Aquí hay que hacer la conversión
     return value_asset_currency
