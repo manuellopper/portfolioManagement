@@ -206,10 +206,12 @@ class Transaction:
   seed_id = [0]
   def __init__(self, asset_currency=system_local_currency,local_currency = system_local_currency):
     self.set_new_id()
-    self.taxes = Currency(asset_currency,0,local_currency,0)
-    self.commissions = Currency(asset_currency,0,local_currency,0)
-    self.gross_cashflow = Currency(asset_currency,0,local_currency,0)
-    self.net_cashflow = Currency(asset_currency,0,local_currency,0)
+    self.asset_currency=asset_currency
+    self.local_currency=local_currency
+    self.taxes = Currency(self.asset_currency,0,self.local_currency,0)
+    self.commissions = Currency(self.asset_currency,0,self.local_currency,0)
+    self.gross_cashflow = Currency(self.asset_currency,0,self.local_currency,0)
+    self.net_cashflow = Currency(self.asset_currency,0,self.local_currency,0)
 
   def set_new_id(self):     
     self.id=int(self.seed_id[0])+1
