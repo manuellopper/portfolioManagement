@@ -129,8 +129,11 @@ class Portfolio:
           self.copy_transactions_from_asset(self,asset_aux)
         
   def copy_transactions_from_asset(self, asset_aux):
-    self.transactions_list += asset_aux.get_transactions(copy=True)
+    self.transactions_list.append(asset_aux.get_transactions(copy=True))
     ## !! Aquí habría que ordena la lista de transacciones.. por fecha, por ejemplo
+  
+  def add_transaction(self, transaction_aux):
+    self.transaction_list.append(transaction_aux)
 
 
 
@@ -163,7 +166,7 @@ class Asset:
     return self.asset_type
 
   def get_portfolio(self):
-    return self.porfolio
+    return self.portfolio
 
   def set_portfolio(self, portfolio):
     if not (type(portfolio) == Portfolio):
@@ -178,9 +181,13 @@ class Asset:
     else:
       return self.transactions_list[start:end]
   
-  def add_transaction(self, transaction_aux):
+  def add_transaction(self, transaction_aux, add_to_porfolio = True):
     self.transactions_list.append(transaction_aux)
     transaction_aux.set_asset(self)
+    
+    if add_to_porfolio == True and not(self.portfolio == None):
+      self.portfolio.add_transaction(transaction_aux)
+
 
      
 
@@ -252,6 +259,25 @@ class AssetEquity(Asset):
     if not(commissions ==0 ):
       self.total_commissions = self.total_commisions + commissions
 
+  def shares_as_dividend(self,number,price_per_share,commissions=0, taxes=0):
+    
+    if (not( type(price_per_share) == Currency)) or (not(commissions == 0) and not(type(commissions) == Currency)) or (not(taxes == 0) and not(type(taxes) == Currency)):
+      return "Error"
+    
+    transact = TransactionDividendWithShares(number,price_per_share,commisions,taxes,self)
+    self.add_transaction(transact)
+
+    self.curr_shares += number
+    self.total_buy_shares += number
+    self.curr_cost = self.curr_cost + number * price_per_share
+    self.total_buy_cost = self.total_buy_cost + number * price_per_share
+
+    if not( taxes == 0):
+      self.total_taxes = self.taxes + taxes
+    
+    if not(commissions ==0 ):
+      self.total_commissions = self.total_commisions + commissions
+
   
 
     
@@ -301,9 +327,6 @@ class TransactionBuy(Transaction):
     self.gross_cashflow = (-number) * price_per_share
     self.net_cashflow = self.gross_cashflow - self.commissions - self.taxes
 
-    
-
-    
 
     
     
