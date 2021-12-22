@@ -240,7 +240,28 @@ class AssetEquity(Asset):
     self.total_commissions = self.total_commisions + commissions
 
   def register_sell(self, transaction_aux):
-    pass
+    
+    number= transaction_aux.get_number()
+    rev_per_share= transaction_aux.get_rev_per_share()
+    commissions= transaction_aux.get_commissions()
+    taxes=transaction_aux.get_taxes()
+
+    if self.curr_shares < number:
+      return "Error: no se puede compar más de lo que hay"
+    
+
+    ## Calcular el underlying cost
+    ## calcular el beneficio en función del underlying cost y actualizarlo en la transacción 
+    # de las transsacciones buy actualizar las buy_closed
+    self.add_transaction(transaction_aux)
+
+    self.curr_shares -= number
+    self.total_sell_shares += number
+    # self.curr_cost = self.curr_cost + number * price_per_share
+    self.total_sell_rev = self.total_sell_rev + number * price_per_share
+
+    self.total_taxes = self.taxes + taxes  
+    self.total_commissions = self.total_commisions + commissions
 
 
   def register_dividend(self,transaction_aux):
@@ -285,6 +306,9 @@ class AssetEquity(Asset):
       return "Error"
   
   def get_current_shares(self): return self.curr_shares
+
+  def underlying_cost(sel,number):
+    pass
 
   
 class Transaction:
@@ -345,16 +369,16 @@ class TransactionBuy(Transaction):
 
   
 class TransactionSell(Transaction):
-  def __init__(self, number, price_per_share, commissions=0, taxes=0, date_transaction = date.today()):
+  def __init__(self, number, rev_per_share, commissions=0, taxes=0, date_transaction = date.today()):
     
-    if (not( type(price_per_share) == Currency)) or (not(commissions == 0) and not(type(commissions) == Currency)) or (not(taxes == 0) and not(type(taxes) == Currency)):
+    if (not( type(rev_per_share) == Currency)) or (not(commissions == 0) and not(type(commissions) == Currency)) or (not(taxes == 0) and not(type(taxes) == Currency)):
       return "Error"
 
-    super().__init__(price_per_share.get_currency("ASSET"),price_per_share.get_currency("LOCAL"), date_transaction)
+    super().__init__(rev_per_share.get_currency("ASSET"),rev_per_share.get_currency("LOCAL"), date_transaction)
 
    
     self.number_of_shares = number
-    self.price_per_share=price_per_share
+    self.rev_per_share=rev_per_share
     self.operation_benefit = None  # El beneficio se establece cuando se registra la operación
     
     if not( commissions == 0 ):
@@ -367,7 +391,13 @@ class TransactionSell(Transaction):
 
   def get_number(self): return self.number_of_shares
 
-  def get_price_per_share(self): return self.price_per_share
+  def get_rev_per_share(self): return self.rev_per_share
+
+  def set_operation_benefit(self, benefit):
+    if not(type(benefit)==Currency):
+      return "Error"
+    
+    self.operation_benefit=benefit
     
 class TransactionDividend(Transaction):
   def __init__(self, dividends, commissions=0, taxes=0, date_transaction = date.today()):
