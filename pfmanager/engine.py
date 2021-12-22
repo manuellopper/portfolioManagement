@@ -239,6 +239,10 @@ class AssetEquity(Asset):
     self.total_taxes = self.taxes + taxes  
     self.total_commissions = self.total_commisions + commissions
 
+  def register_sell(self, transaction_aux):
+    pass
+
+
   def register_dividend(self,transaction_aux):
     
     commissions= transaction_aux.get_commissions()
@@ -279,6 +283,8 @@ class AssetEquity(Asset):
       self.register_shares_as_dividend(transaction_aux)
     else:
       return "Error"
+  
+  def get_current_shares(self): return self.curr_shares
 
   
 class Transaction:
@@ -288,7 +294,8 @@ class Transaction:
     self.set_new_id()
     self.asset_currency=asset_currency
     self.local_currency=local_currency
-    self.porfolio = None
+    self.portfolio_father = None
+    self.asset_father = None
     self.date = date_transaction
     self.taxes = Currency(self.asset_currency,0,self.local_currency,0)
     self.commissions = Currency(self.asset_currency,0,self.local_currency,0)
@@ -309,7 +316,7 @@ class Transaction:
 
   def get_date(self): return self.date
 
-  def set_portfolio(self, pf): self.portfolio = pf 
+  def set_portfolio(self, pf): self.portfolio_father = pf 
 
    
 class TransactionBuy(Transaction):
@@ -338,8 +345,29 @@ class TransactionBuy(Transaction):
 
   
 class TransactionSell(Transaction):
-  def __init__(self):
-    self.set_new_id()
+  def __init__(self, number, price_per_share, commissions=0, taxes=0, date_transaction = date.today()):
+    
+    if (not( type(price_per_share) == Currency)) or (not(commissions == 0) and not(type(commissions) == Currency)) or (not(taxes == 0) and not(type(taxes) == Currency)):
+      return "Error"
+
+    super().__init__(price_per_share.get_currency("ASSET"),price_per_share.get_currency("LOCAL"), date_transaction)
+
+   
+    self.number_of_shares = number
+    self.price_per_share=price_per_share
+    self.operation_benefit = None  # El beneficio se establece cuando se registra la operación
+    
+    if not( commissions == 0 ):
+      self.commissions = commissions
+    
+    if not( taxes == 0 ):
+      self.taxes = taxes
+    self.gross_cashflow = number * price_per_share
+    self.net_cashflow = self.gross_cashflow - self.commissions - self.taxes
+
+  def get_number(self): return self.number_of_shares
+
+  def get_price_per_share(self): return self.price_per_share
     
 class TransactionDividend(Transaction):
   def __init__(self, dividends, commissions=0, taxes=0, date_transaction = date.today()):
