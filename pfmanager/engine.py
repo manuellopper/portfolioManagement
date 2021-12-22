@@ -308,7 +308,7 @@ class AssetEquity(Asset):
 
   def underlying_cost(self,number):  pass
 
-  def update_buy_closed(self, number)
+  def update_buy_closed(self, number): pass
 
   
 class Transaction:
