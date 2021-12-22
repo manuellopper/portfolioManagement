@@ -1,3 +1,6 @@
+from datetime import datetime
+from datetime import date
+
 # --------------- Global variables
 
 system_local_currency = "EUR"
@@ -102,7 +105,6 @@ class Currency:
 
 
 
-
 class Portfolio:
   def __init__(self,name):
     self.pf_name=name
@@ -133,11 +135,19 @@ class Portfolio:
     ## !! Aquí habría que ordena la lista de transacciones.. por fecha, por ejemplo
   
   def add_transaction(self, transaction_aux):
-    self.transaction_list.append(transaction_aux)
+    
+    transaction_aux.set_portfolio(self)
+
+    if transaction_aux.get_date() >= self.transactions_list[len(self.transactions_list)-1].get_date():
+      self.transactions_list.append(transaction_aux)
+    else:
+      self.transaction_list.sort(key=self.get_transaction_date)  
+
+  def get_transaction_date(self, trans): return trans.get_date()
 
 
 class Asset:
-  seed_id = [0]
+  
   asset_type="Undertermined"
   
   def __init__(self, name, currency):
@@ -149,20 +159,14 @@ class Asset:
       self.currency=currency
     else:
       return "Error" #### !!!!Hay que establecer cómo se retornan cosas
-     
-     
-  def set_new_id(self):     
-    self.id=int(self.seed_id[0])+1
-    self.seed_id[0]=self.id
+       
+  def set_new_id(self): self.id=datetime.timestamp(datetime.now())    
   
-  def get_id(self):
-    return self.id
+  def get_id(self): return self.id
 
-  def get_asset_type(self):
-    return self.asset_type
+  def get_asset_type(self): return self.asset_type
 
-  def get_portfolio(self):
-    return self.portfolio
+  def get_portfolio(self): return self.portfolio
 
   def set_portfolio(self, portfolio):
     if not (type(portfolio) == Portfolio):
@@ -178,12 +182,17 @@ class Asset:
       return self.transactions_list[start:end]
   
   def add_transaction(self, transaction_aux, add_to_porfolio = True):
-    self.transactions_list.append(transaction_aux)
+    
     transaction_aux.set_asset(self)
+    if transaction_aux.get_date() >= self.transactions_list[len(self.transactions_list)-1].get_date():
+      self.transactions_list.append(transaction_aux)
+    else:
+      self.transaction_list.sort(key=self.get_transaction_date)  
     
     if add_to_porfolio == True and not(self.portfolio == None):
       self.portfolio.add_transaction(transaction_aux)
     
+  def get_transaction_date(self,trans): return trans.get_date()
 
    
 class AssetEquity(Asset):
@@ -211,11 +220,9 @@ class AssetEquity(Asset):
     self.total_buy_cost = Currency(currency,0,system_local_currency,0)
     self.total_sell_rev = Currency(currency,0,system_local_currency,0)
 
+  def get_symbol(self): return self.symbol
 
-  def get_symbol(self):
-    return self.symbol
-
-  def regiser_buy(self,transaction_aux):
+  def register_buy(self,transaction_aux):
     
     number= transaction_aux.get_number()
     price_per_share= transaction_aux.get_price_per_share()
@@ -232,38 +239,33 @@ class AssetEquity(Asset):
     self.total_taxes = self.taxes + taxes  
     self.total_commissions = self.total_commisions + commissions
 
-  def dividend(self,dividends, commissions=0, taxes=0):
+  def register_dividend(self,transaction_aux):
     
-    if (not( type(dividends) == Currency)) or (not(commissions == 0) and not(type(commissions) == Currency)) or (not(taxes == 0) and not(type(taxes) == Currency)):
-      return "Error"
-    
-    transact = TransactionDividend(dividends, commissions, taxes, self)
-    self.add_transaction(transact)
+    commissions= transaction_aux.get_commissions()
+    taxes=transaction_aux.get_taxes()
+    dividends=transaction_aux.get_dividends()
+  
+    self.add_transaction(transaction_aux)
 
-    if not( taxes == 0):
-      self.total_taxes = self.taxes + taxes
-    
-    if not(commissions ==0 ):
-      self.total_commissions = self.total_commisions + commissions
+    self.total_taxes = self.taxes + taxes    
+    self.total_commissions = self.total_commisions + commissions
 
-  def shares_as_dividend(self,number,price_per_share,commissions=0, taxes=0):
+  def register_shares_as_dividend(self,transaction_aux):
     
-    if (not( type(price_per_share) == Currency)) or (not(commissions == 0) and not(type(commissions) == Currency)) or (not(taxes == 0) and not(type(taxes) == Currency)):
-      return "Error"
-    
-    transact = TransactionSharesAsDividend(number,price_per_share,commisions,taxes,self)
-    self.add_transaction(transact)
+    number= transaction_aux.get_number()
+    price_per_share= transaction_aux.get_price_per_share()
+    commissions= transaction_aux.get_commissions()
+    taxes=transaction_aux.get_taxes()
+
+    self.add_transaction(transaction_aux)
 
     self.curr_shares += number
     self.total_buy_shares += number
     self.curr_cost = self.curr_cost + number * price_per_share
     self.total_buy_cost = self.total_buy_cost + number * price_per_share
 
-    if not( taxes == 0):
-      self.total_taxes = self.taxes + taxes
-    
-    if not(commissions ==0 ):
-      self.total_commissions = self.total_commisions + commissions
+    self.total_taxes = self.taxes + taxes  
+    self.total_commissions = self.total_commisions + commissions
 
   def register_transaction(self, transaction_aux):
     
@@ -279,45 +281,48 @@ class AssetEquity(Asset):
       return "Error"
 
   
-
-    
 class Transaction:
-  seed_id = [0]
-  def __init__(self, asset_currency=system_local_currency,local_currency = system_local_currency,asset_father=None):
+  
+  def __init__(self, asset_currency=system_local_currency,local_currency = system_local_currency, date_transaction = date.today()):
+        
     self.set_new_id()
     self.asset_currency=asset_currency
     self.local_currency=local_currency
+    self.porfolio = None
+    self.date = date_transaction
     self.taxes = Currency(self.asset_currency,0,self.local_currency,0)
     self.commissions = Currency(self.asset_currency,0,self.local_currency,0)
     self.gross_cashflow = Currency(self.asset_currency,0,self.local_currency,0)
-    self.net_cashflow = Currency(self.asset_currency,0,self.local_currency,0)
-    self.asset_father = asset_father
+    self.net_cashflow = Currency(self.asset_currency,0,self.local_currency,0)    
     
+  def set_new_id(self): self.id=datetime.timestamp(datetime.now())
 
-  def set_new_id(self):     
-    self.id=int(self.seed_id[0])+1
-    self.seed_id[0]=self.id
-
-  def get_id(self):
-    return self.id
+  def get_id(self): return self.id
 
   def set_asset(self, asset_aux):
     ## comprobar si es algún tipo de asset.. es decir si el typo es hijo de Asset
     self.asset_father=asset_aux
 
+  def get_commissions(self): return self.commissions
 
-  
-    
+  def get_taxes(self): return self.taxes
+
+  def get_date(self): return self.date
+
+  def set_portfolio(self, pf): self.portfolio = pf 
+
+   
 class TransactionBuy(Transaction):
-  def __init__(self, number, price_per_share, commissions=0, taxes=0, asset_father=None):
+  def __init__(self, number, price_per_share, commissions=0, taxes=0, date_transaction = date.today()):
     
     if (not( type(price_per_share) == Currency)) or (not(commissions == 0) and not(type(commissions) == Currency)) or (not(taxes == 0) and not(type(taxes) == Currency)):
       return "Error"
 
-    super().__init__(price_per_share.get_currency("ASSET"),price_per_share.get_currency("LOCAL"),asset_father)
+    super().__init__(price_per_share.get_currency("ASSET"),price_per_share.get_currency("LOCAL"), date_transaction)
     self.number_of_shares = number
     self.price_per_share=price_per_share
-    
+    self.buy_closed=0
+
     if not( commissions == 0 ):
       self.commissions = commissions
     
@@ -331,24 +336,18 @@ class TransactionBuy(Transaction):
 
   def get_price_per_share(self): return self.price_per_share
 
-  def get_commissions(self): return self.commissions
-
-  def get_taxes(self): return self.taxes
-
-
-    
-    
+  
 class TransactionSell(Transaction):
   def __init__(self):
     self.set_new_id()
     
 class TransactionDividend(Transaction):
-  def __init__(self, dividends, commissions=0, taxes=0, asset_father=None):
+  def __init__(self, dividends, commissions=0, taxes=0, date_transaction = date.today()):
     
     if (not( type(dividends) == Currency)) or (not(commissions == 0) and not(type(commissions) == Currency)) or (not(taxes == 0) and not(type(taxes) == Currency)):
       return "Error"
 
-    super().__init__(dividends.get_currency("ASSET"),dividends.get_currency("LOCAL"),asset_father)
+    super().__init__(dividends.get_currency("ASSET"),dividends.get_currency("LOCAL"),date_transaction)
 
     self.dividends=dividends
     
@@ -360,9 +359,31 @@ class TransactionDividend(Transaction):
     
     self.gross_cashflow = dividends
     self.net_cashflow = self.gross_cashflow - self.commissions - self.taxes
+
+  def get_dividends(self): return self.dividends
     
       
 class TransactionSharesAsDividend(Transaction):
-  def __init__(self):
-    self.set_new_id()
+  def __init__(self, number, price_per_share, commissions=0, taxes=0, date_transaction = date.today()):
+    
+    if (not( type(price_per_share) == Currency)) or (not(commissions == 0) and not(type(commissions) == Currency)) or (not(taxes == 0) and not(type(taxes) == Currency)):
+      return "Error"
+
+    super().__init__(price_per_share.get_currency("ASSET"),price_per_share.get_currency("LOCAL"), date_transaction)
+    self.number_of_shares = number
+    self.price_per_share=price_per_share
+    self.buy_closed=0
+    
+    if not( commissions == 0 ):
+      self.commissions = commissions
+    
+    if not( taxes == 0 ):
+      self.taxes = taxes
+    
+    self.gross_cashflow = (-number) * price_per_share
+    self.net_cashflow = self.gross_cashflow - self.commissions - self.taxes
+  
+  def get_number(self): return self.number_of_shares
+
+  def get_price_per_share(self): return self.price_per_share
   
