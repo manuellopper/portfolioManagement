@@ -132,16 +132,15 @@ class Portfolio:
         
   def copy_transactions_from_asset(self, asset_aux):
     self.transactions_list.append(asset_aux.get_transactions(copy=True))
-    ## !! Aquí habría que ordena la lista de transacciones.. por fecha, por ejemplo
+    self.transactions_list.sort(key=self.get_transaction_date)
+  
   
   def add_transaction(self, transaction_aux):
     
     transaction_aux.set_portfolio(self)
-
-    if transaction_aux.get_date() >= self.transactions_list[len(self.transactions_list)-1].get_date():
-      self.transactions_list.append(transaction_aux)
-    else:
-      self.transaction_list.sort(key=self.get_transaction_date)  
+    self.transactions_list.append(transaction_aux)
+    if transaction_aux.get_date() < self.transactions_list[len(self.transactions_list)-1].get_date():
+      self.transactions_list.sort(key=self.get_transaction_date)  
 
   def get_transaction_date(self, trans): return trans.get_date()
 
