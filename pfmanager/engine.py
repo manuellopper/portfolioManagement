@@ -249,10 +249,9 @@ class AssetEquity(Asset):
     if self.curr_shares < number:
       return "Error: no se puede compar más de lo que hay"
     
-
-    ## Calcular el underlying cost
-    ## calcular el beneficio en función del underlying cost y actualizarlo en la transacción 
-    # de las transsacciones buy actualizar las buy_closed
+    u_cost = self.underlying_cost(number)
+    transaction_aux.set_operation_benefit(number * rev_per_share - u_cost)    
+    self.update_buy_closed(number) # de las transsacciones buy actualizar las buy_closed
     self.add_transaction(transaction_aux)
 
     self.curr_shares -= number
@@ -307,8 +306,9 @@ class AssetEquity(Asset):
   
   def get_current_shares(self): return self.curr_shares
 
-  def underlying_cost(sel,number):
-    pass
+  def underlying_cost(self,number):  pass
+
+  def update_buy_closed(self, number)
 
   
 class Transaction:
