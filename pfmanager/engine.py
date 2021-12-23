@@ -111,7 +111,7 @@ class Portfolio:
     self.assets_list=[]
     self.transactions_list=[]
 
-  def asset_exist(self, symbol=None):
+  def asset_exist(self, symbol=None, id=None):
     for i in range(len(self.assets_list)):
       if self.assets_list[i].get_symbol().upper() == symbol.upper():
         return True    
@@ -133,9 +133,8 @@ class Portfolio:
   def copy_transactions_from_asset(self, asset_aux):
     self.transactions_list.append(asset_aux.get_transactions(copy=True))
     self.transactions_list.sort(key=self.get_transaction_date)
-  
-  
-  def add_transaction(self, transaction_aux):
+    
+  def register_transaction(self, transaction_aux):
     
     transaction_aux.set_portfolio(self)
     self.transactions_list.append(transaction_aux)
@@ -143,6 +142,9 @@ class Portfolio:
       self.transactions_list.sort(key=self.get_transaction_date)  
 
   def get_transaction_date(self, trans): return trans.get_date()
+
+  def get_asset(self, symbol=None):
+    pass
 
 
 class Asset:
@@ -184,16 +186,7 @@ class Asset:
       return self.transactions_list[start:end].copy()
     else:
       return self.transactions_list[start:end]
-  
-  def add_transaction(self, transaction_aux, add_to_porfolio = True):
-    
-    transaction_aux.set_asset(self)
-    self.transactions_list.append(transaction_aux)
-    self.transaction_list.sort(key=self.get_transaction_date)  
-    
-    if add_to_porfolio == True and not(self.portfolio == None):
-      self.portfolio.add_transaction(transaction_aux)
-    
+   
   def get_transaction_date(self,trans): return trans.get_date()
 
    
@@ -224,49 +217,41 @@ class AssetEquity(Asset):
 
   def get_symbol(self): return self.symbol
 
-   def register_sell(self, transaction_aux):
+  def register_transaction(self, transaction_aux, add_to_porfolio = True):
     
-    number= transaction_aux.get_number()
-    rev_per_share= transaction_aux.get_rev_per_share()
-    commissions= transaction_aux.get_commissions()
-    taxes=transaction_aux.get_taxes()
-
-    if self.curr_shares < number:
-      return "Error: no se puede compar más de lo que hay"
+    if not (transaction_aux == TransactionBuy or transaction_aux == TransactionSell or transaction_aux== TransactionDividend or transaction_aux == TransactionSharesAsDividend):
+      return "Error: tipo pasado no es correcto"
     
-    self.add_transaction(transaction_aux)
-
-    self.curr_shares -= number
-    self.total_sell_shares += number
-    # self.curr_cost = self.curr_cost + number * price_per_share
-    self.total_sell_rev = self.total_sell_rev + number * price_per_share
-
-   
-
-  def register_transaction(self, transaction_aux):
+    id = transaction_aux.get_id()
+    transaction_aux.set_asset(self)
+    self.transactions_list.append(transaction_aux)
+    self.transaction_list.sort(key=self.get_transaction_date)  
     
     if type(transaction_aux == TransactionBuy):
       number = transaction_aux.get_number()
       self.curr_shares += number
       self.total_buy_shares += number      
       self.total_buy_cost = self.total_buy_cost + number * transaction_aux.get_price_per_share()
+      self.process_buy_sell_transactions()
     elif type(transaction_aux == TransactionSell):
       number = transaction_aux.get_number()
       self.curr_shares -= number
       self.total_sell_shares += number    
       self.total_sell_rev = self.total_sell_rev + number * transaction_aux.get_rev_per_share()
+      self.process_buy_sell_transactions()
     elif type(transaction_aux == TransactionDividend):
       self.total_dividends += transaction_aux.get_dividends()
-    elif type(transaction_aux == TransactionSharesAsDividend):
+    else:
       self.curr_shares += number
       self.total_buy_shares += number      
       self.total_buy_cost = self.total_buy_cost + number * transaction_aux.get_price_per_share()
-    else:
-      return "Error"
-  
-    self.add_transaction(transaction_aux)  
+      self.process_buy_sell_transactions()
+      
     self.total_taxes = self.taxes + transaction_aux.get_taxes() 
     self.total_commissions = self.total_commisions + transaction_aux.get_commissions()
+    
+    if add_to_porfolio == True and not(self.portfolio == None):
+      self.portfolio.register_transaction(self.get_transactions(id)) 
   
   def get_current_shares(self): return self.curr_shares
 
@@ -274,10 +259,13 @@ class AssetEquity(Asset):
     buy_list = [ transaction for transaction in transactions_list if ( type(transaction)==TransactionBuy or type(transaction)==TransactionSharesAsDividend )]
     sell_list = [ transaction for transaction in transactions_list if type(transaction)==TransactionSell ]
     
+    self.curr_cost = Currency(self.currency,0,get_sys_local_currency(),0)
+
     for buy_oper in buy_list:
       buy_oper.set_buy_closed(0) #primero borro las variables buy_closed de todas las operacoines buy
-      self.
-
+      self.curr_cost = self.curr_cost + buy_oper.get_price_per_share() * buy_oper.get_number()
+    
+  
     for sell_oper in sell_list:
       num_sell = sell_oper.get_number()
       remaining_sell = num_sell
@@ -301,11 +289,7 @@ class AssetEquity(Asset):
       
       sell_oper.set_underlying_cost(underlying_cost)
       sell_oper.set_operation_benefit(sell_oper.get_rev_per_share()*sell_oper.get_number()-underlying_cost)
-
-
-
-      
-
+      self.curr_cost = self.curr_cost - underlying_cost
 
   
 class Transaction:
@@ -338,8 +322,6 @@ class Transaction:
   def get_date(self): return self.date
 
   def set_portfolio(self, pf): self.portfolio_father = pf 
-
-
 
 
    
@@ -462,4 +444,12 @@ class TransactionSharesAsDividend(Transaction):
   def get_number(self): return self.number_of_shares
 
   def get_price_per_share(self): return self.price_per_share
+
+  def get_buy_closed(self) return self.buy_closed
+
+  def set_buy_closed(self,number_closed):
+    if not(number_closed == int):
+      return "Error"
+    
+    self.buy_closed = number_closed
   
