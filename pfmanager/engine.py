@@ -112,10 +112,21 @@ class Portfolio:
     self.transactions_list=[]
 
   def asset_exist(self, symbol=None, id=None):
-    for i in range(len(self.assets_list)):
-      if self.assets_list[i].get_symbol().upper() == symbol.upper():
-        return True    
-    return False
+
+    if symbol == None and id == None:
+     return "Error: se debe indicar un identificador del activo (id o símbolo)"
+    elif not(symbol == None) and not(id == None):
+      return "Error: se debe indicar sólo uno de los parámetros symbol o id. No está permitido los dos"
+    elif not(symbol == None):
+      for asset_aux in self.assets_list:
+        if asset_aux.get_symbol().upper() == symbol.upper():
+          return True, asset_aux   
+      return False, None
+    else:
+      for asset_aux in self.assets_list:
+        if asset_aux.get_id() == id:
+          return True , asset_aux   
+      return False, None
 
   def register_asset(self, asset_aux, copy_transactions=True):
     
@@ -143,8 +154,19 @@ class Portfolio:
 
   def get_transaction_date(self, trans): return trans.get_date()
 
-  def get_asset(self, symbol=None):
-    pass
+  def get_asset(self, symbol=None, id=None):
+    if symbol == None and id == None:
+     return "Error: se debe indicar un identificador del activo (id o símbolo)"
+    elif not(symbol == None) and not(id == None):
+      return "Error: se debe indicar sólo uno de los parámetros symbol o id. No está permitido los dos"
+    elif not(symbol == None):
+      result, asset = self.asset_exist(symbol=symbol)
+      return asset
+    else:
+      result, asset = self.asset_exist(id=id)
+      return asset
+      
+
 
 
 class Asset:
