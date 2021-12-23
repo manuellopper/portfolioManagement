@@ -173,8 +173,13 @@ class Asset:
     else:
       self.portfolio=portfolio
   
-  def get_transactions(self, start = 0, end = len(self.transactions_list), copy = False):
+  def get_transactions(self, start = 0, end = len(self.transactions_list), id = None, copy = False):
     
+    if not(id == None) and type(id) == float:
+      for trans in transactions_list:
+        if trans.get_id() == id:
+          return trans
+
     if copy == True:
       return self.transactions_list[start:end].copy()
     else:
@@ -248,9 +253,9 @@ class AssetEquity(Asset):
     if self.curr_shares < number:
       return "Error: no se puede compar más de lo que hay"
     
-    u_cost = self.underlying_cost(number)
-    transaction_aux.set_operation_benefit(number * rev_per_share - u_cost)    
-    self.update_buy_closed(number) # de las transsacciones buy actualizar las buy_closed
+    #u_cost = self.underlying_cost(number)
+    #transaction_aux.set_operation_benefit(number * rev_per_share - u_cost)    
+    #self.update_buy_closed(number) # de las transsacciones buy actualizar las buy_closed
     self.add_transaction(transaction_aux)
 
     self.curr_shares -= number
@@ -305,9 +310,22 @@ class AssetEquity(Asset):
   
   def get_current_shares(self): return self.curr_shares
 
-  def underlying_cost(self,number):  pass
+  #def underlying_cost(self,number):  pass
 
-  def update_buy_closed(self, number): pass
+  #def update_buy_closed(self, number): pass
+
+  def process_transactions(self):
+    buy_list = [ transaction for transaction in transactions_list if type(transaction)==TransactionBuy ]
+    sell_list = [ transaction for transaction in transactions_list if type(transaction)==TransactionSell ]
+
+    for sell_oper in sell_list:
+      for buy_oper in buy_list:
+        if sell_oper.get_number() > buy_oper.get_number():
+          buy_oper
+      
+      number=sell_oper.get_number()
+      id=sell_oper.get.number()
+
 
   
 class Transaction:
@@ -341,6 +359,9 @@ class Transaction:
 
   def set_portfolio(self, pf): self.portfolio_father = pf 
 
+
+
+
    
 class TransactionBuy(Transaction):
   def __init__(self, number, price_per_share, commissions=0, taxes=0, date_transaction = date.today()):
@@ -366,6 +387,8 @@ class TransactionBuy(Transaction):
 
   def get_price_per_share(self): return self.price_per_share
 
+  def get_buy_closed(self) return self.buy_closed
+
   
 class TransactionSell(Transaction):
   def __init__(self, number, rev_per_share, commissions=0, taxes=0, date_transaction = date.today()):
@@ -377,6 +400,7 @@ class TransactionSell(Transaction):
 
    
     self.number_of_shares = number
+    self.underlying_cost = None # El coste subyacente se establece cuando se registra la operación
     self.rev_per_share=rev_per_share
     self.operation_benefit = None  # El beneficio se establece cuando se registra la operación
     
@@ -397,6 +421,15 @@ class TransactionSell(Transaction):
       return "Error"
     
     self.operation_benefit=benefit
+  
+  def get_number(self) return self.number_of_shares
+
+  def set_underlying_cost(self, uc): 
+    if not(type(uc)==Currency):
+      return "Error"
+    
+    self.underlying_cost=uc
+
     
 class TransactionDividend(Transaction):
   def __init__(self, dividends, commissions=0, taxes=0, date_transaction = date.today()):
