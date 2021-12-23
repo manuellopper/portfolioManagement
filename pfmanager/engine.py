@@ -188,10 +188,8 @@ class Asset:
   def add_transaction(self, transaction_aux, add_to_porfolio = True):
     
     transaction_aux.set_asset(self)
-    if transaction_aux.get_date() >= self.transactions_list[len(self.transactions_list)-1].get_date():
-      self.transactions_list.append(transaction_aux)
-    else:
-      self.transaction_list.sort(key=self.get_transaction_date)  
+    self.transactions_list.append(transaction_aux)
+    self.transaction_list.sort(key=self.get_transaction_date)  
     
     if add_to_porfolio == True and not(self.portfolio == None):
       self.portfolio.add_transaction(transaction_aux)
@@ -253,9 +251,6 @@ class AssetEquity(Asset):
     if self.curr_shares < number:
       return "Error: no se puede compar más de lo que hay"
     
-    #u_cost = self.underlying_cost(number)
-    #transaction_aux.set_operation_benefit(number * rev_per_share - u_cost)    
-    #self.update_buy_closed(number) # de las transsacciones buy actualizar las buy_closed
     self.add_transaction(transaction_aux)
 
     self.curr_shares -= number
@@ -310,21 +305,41 @@ class AssetEquity(Asset):
   
   def get_current_shares(self): return self.curr_shares
 
-  #def underlying_cost(self,number):  pass
-
-  #def update_buy_closed(self, number): pass
-
   def process_transactions(self):
-    buy_list = [ transaction for transaction in transactions_list if type(transaction)==TransactionBuy ]
+    buy_list = [ transaction for transaction in transactions_list if ( type(transaction)==TransactionBuy or type(transaction)==TransactionSharesAsDividend )]
     sell_list = [ transaction for transaction in transactions_list if type(transaction)==TransactionSell ]
+    
+    for buy_oper in buy_list:
+      buy_oper.set_buy_closed(0) #primero borro las variables buy_closed de todas las operacoines buy
+      self.
 
     for sell_oper in sell_list:
-      for buy_oper in buy_list:
-        if sell_oper.get_number() > buy_oper.get_number():
-          buy_oper
+      num_sell = sell_oper.get_number()
+      remaining_sell = num_sell
+      underlying_cost = Currency(self.currency,0,get_sys_local_currency(),0)
+      for buy_oper in buy_list:        
+        remaining_buy=buy_oper.get_number() - buy_oper.get_buy_closed() 
+        if remaining_sell >= remaining_buy:
+          buy_oper.set_buy_closed(buy_oper.get_number())          
+          underlying_cost += buy_oper.get_price_per_share() * remaining_buy
+          remaining_sell -= remaining_buy
+          buy_list.remove(buy_oper)
+          continue
+        elif remaining_sell < remaining_buy:
+          buy_oper.set_buy_closed(buy_oper.get_buy_closed() + remaining_sell)          
+          underlying_cost += buy_oper.get_price_per_share() * remaining_sell
+          remaining_sell = 0
+          break
+        
+      if remaining_sell > 0:
+        return "Error: se está intentando vender más de las acciones en posesión
       
-      number=sell_oper.get_number()
-      id=sell_oper.get.number()
+      sell_oper.set_underlying_cost(underlying_cost)
+      sell_oper.set_operation_benefit(sell_oper.get_rev_per_share()*sell_oper.get_number()-underlying_cost)
+
+
+
+      
 
 
   
@@ -388,6 +403,12 @@ class TransactionBuy(Transaction):
   def get_price_per_share(self): return self.price_per_share
 
   def get_buy_closed(self) return self.buy_closed
+
+  def set_buy_closed(self,number_closed):
+    if not(number_closed == int):
+      return "Error"
+    
+    self.buy_closed = number_closed
 
   
 class TransactionSell(Transaction):
