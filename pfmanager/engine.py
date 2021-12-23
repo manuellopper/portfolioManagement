@@ -224,24 +224,7 @@ class AssetEquity(Asset):
 
   def get_symbol(self): return self.symbol
 
-  def register_buy(self,transaction_aux):
-    
-    number= transaction_aux.get_number()
-    price_per_share= transaction_aux.get_price_per_share()
-    commissions= transaction_aux.get_commissions()
-    taxes=transaction_aux.get_taxes()
-
-    self.add_transaction(transaction_aux)
-
-    self.curr_shares += number
-    self.total_buy_shares += number
-    self.curr_cost = self.curr_cost + number * price_per_share
-    self.total_buy_cost = self.total_buy_cost + number * price_per_share
-
-    self.total_taxes = self.taxes + taxes  
-    self.total_commissions = self.total_commisions + commissions
-
-  def register_sell(self, transaction_aux):
+   def register_sell(self, transaction_aux):
     
     number= transaction_aux.get_number()
     rev_per_share= transaction_aux.get_rev_per_share()
@@ -258,54 +241,36 @@ class AssetEquity(Asset):
     # self.curr_cost = self.curr_cost + number * price_per_share
     self.total_sell_rev = self.total_sell_rev + number * price_per_share
 
-    self.total_taxes = self.taxes + taxes  
-    self.total_commissions = self.total_commisions + commissions
-
-
-  def register_dividend(self,transaction_aux):
-    
-    commissions= transaction_aux.get_commissions()
-    taxes=transaction_aux.get_taxes()
-    dividends=transaction_aux.get_dividends()
-  
-    self.add_transaction(transaction_aux)
-
-    self.total_taxes = self.taxes + taxes    
-    self.total_commissions = self.total_commisions + commissions
-
-  def register_shares_as_dividend(self,transaction_aux):
-    
-    number= transaction_aux.get_number()
-    price_per_share= transaction_aux.get_price_per_share()
-    commissions= transaction_aux.get_commissions()
-    taxes=transaction_aux.get_taxes()
-
-    self.add_transaction(transaction_aux)
-
-    self.curr_shares += number
-    self.total_buy_shares += number
-    self.curr_cost = self.curr_cost + number * price_per_share
-    self.total_buy_cost = self.total_buy_cost + number * price_per_share
-
-    self.total_taxes = self.taxes + taxes  
-    self.total_commissions = self.total_commisions + commissions
+   
 
   def register_transaction(self, transaction_aux):
     
     if type(transaction_aux == TransactionBuy):
-      self.register_buy(transaction_aux)    
+      number = transaction_aux.get_number()
+      self.curr_shares += number
+      self.total_buy_shares += number      
+      self.total_buy_cost = self.total_buy_cost + number * transaction_aux.get_price_per_share()
     elif type(transaction_aux == TransactionSell):
-      self.register_sell(transaction_aux)
+      number = transaction_aux.get_number()
+      self.curr_shares -= number
+      self.total_sell_shares += number    
+      self.total_sell_rev = self.total_sell_rev + number * transaction_aux.get_rev_per_share()
     elif type(transaction_aux == TransactionDividend):
-      self.register_dividend(transaction_aux)
+      self.total_dividends += transaction_aux.get_dividends()
     elif type(transaction_aux == TransactionSharesAsDividend):
-      self.register_shares_as_dividend(transaction_aux)
+      self.curr_shares += number
+      self.total_buy_shares += number      
+      self.total_buy_cost = self.total_buy_cost + number * transaction_aux.get_price_per_share()
     else:
       return "Error"
   
+    self.add_transaction(transaction_aux)  
+    self.total_taxes = self.taxes + transaction_aux.get_taxes() 
+    self.total_commissions = self.total_commisions + transaction_aux.get_commissions()
+  
   def get_current_shares(self): return self.curr_shares
 
-  def process_transactions(self):
+  def process_buy_sell_transactions(self):
     buy_list = [ transaction for transaction in transactions_list if ( type(transaction)==TransactionBuy or type(transaction)==TransactionSharesAsDividend )]
     sell_list = [ transaction for transaction in transactions_list if type(transaction)==TransactionSell ]
     
