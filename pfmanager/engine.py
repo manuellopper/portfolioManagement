@@ -197,12 +197,16 @@ class Asset:
     else:
       self.portfolio=portfolio
   
-  def get_transactions(self, start = 0, end = len(self.transactions_list), id = None, copy = False):
+  def get_transactions(self, start = 0, end = 0, id = None, copy = False):
     
+
     if not(id == None) and type(id) == float:
       for trans in transactions_list:
         if trans.get_id() == id:
           return trans
+
+    if end == 0:
+      end = len(self.transactions_list)
 
     if copy == True:
       return self.transactions_list[start:end].copy()
@@ -307,7 +311,7 @@ class AssetEquity(Asset):
           break
         
       if remaining_sell > 0:
-        return "Error: se está intentando vender más de las acciones en posesión
+        return "Error: se está intentando vender más de las acciones en posesión"
       
       sell_oper.set_underlying_cost(underlying_cost)
       sell_oper.set_operation_benefit(sell_oper.get_rev_per_share()*sell_oper.get_number()-underlying_cost)
@@ -371,7 +375,7 @@ class TransactionBuy(Transaction):
 
   def get_price_per_share(self): return self.price_per_share
 
-  def get_buy_closed(self) return self.buy_closed
+  def get_buy_closed(self): return self.buy_closed
 
   def set_buy_closed(self,number_closed):
     if not(number_closed == int):
@@ -412,7 +416,7 @@ class TransactionSell(Transaction):
     
     self.operation_benefit=benefit
   
-  def get_number(self) return self.number_of_shares
+  def get_number(self): return self.number_of_shares
 
   def set_underlying_cost(self, uc): 
     if not(type(uc)==Currency):
@@ -467,7 +471,7 @@ class TransactionSharesAsDividend(Transaction):
 
   def get_price_per_share(self): return self.price_per_share
 
-  def get_buy_closed(self) return self.buy_closed
+  def get_buy_closed(self): return self.buy_closed
 
   def set_buy_closed(self,number_closed):
     if not(number_closed == int):

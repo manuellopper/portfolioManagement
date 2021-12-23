@@ -2,7 +2,7 @@ import pfmanager.engine as pm
 
 
 pf=pm.Portfolio("Portfolio de Prueba")
-as1=pm.Asset("Telefónica SA","EUR",pf)
+as1=pm.Asset("Telefónica SA","EUR")
 as2=pm.AssetEquity("Iberdrola","EUR","IBR",pf,add_to_porfolio = True)
 d=pm.Transaction()
 e=pm.TransactionBuyEquity()
