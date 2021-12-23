@@ -245,7 +245,8 @@ class AssetEquity(Asset):
 
   def register_transaction(self, transaction_aux, add_to_porfolio = True):
     
-    if not (transaction_aux == TransactionBuy or transaction_aux == TransactionSell or transaction_aux== TransactionDividend or transaction_aux == TransactionSharesAsDividend):
+    type_arg= type(transaction_aux)
+    if not (type_arg == TransactionBuy or type_arg == TransactionSell or type_arg== TransactionDividend or type_arg == TransactionSharesAsDividend):
       return "Error: tipo pasado no es correcto"
     
     id = transaction_aux.get_id()
