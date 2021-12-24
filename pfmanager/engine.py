@@ -252,7 +252,7 @@ class AssetEquity(Asset):
     id = transaction_aux.get_id()
     transaction_aux.set_asset(self)
     self.transactions_list.append(transaction_aux)
-    self.transaction_list.sort(key=self.get_transaction_date)  
+    self.transactions_list.sort(key=self.get_transaction_date)  
     
     if type(transaction_aux == TransactionBuy):
       number = transaction_aux.get_number()
@@ -274,8 +274,8 @@ class AssetEquity(Asset):
       self.total_buy_cost = self.total_buy_cost + number * transaction_aux.get_price_per_share()
       self.process_buy_sell_transactions()
       
-    self.total_taxes = self.taxes + transaction_aux.get_taxes() 
-    self.total_commissions = self.total_commisions + transaction_aux.get_commissions()
+    self.total_taxes = self.total_taxes + transaction_aux.get_taxes() 
+    self.total_commissions = self.total_commissions + transaction_aux.get_commissions()
     
     if add_to_porfolio == True and not(self.portfolio == None):
       self.portfolio.register_transaction(self.get_transactions(id)) 
@@ -283,8 +283,8 @@ class AssetEquity(Asset):
   def get_current_shares(self): return self.curr_shares
 
   def process_buy_sell_transactions(self):
-    buy_list = [ transaction for transaction in transactions_list if ( type(transaction)==TransactionBuy or type(transaction)==TransactionSharesAsDividend )]
-    sell_list = [ transaction for transaction in transactions_list if type(transaction)==TransactionSell ]
+    buy_list = [ transaction for transaction in self.transactions_list if ( type(transaction)==TransactionBuy or type(transaction)==TransactionSharesAsDividend )]
+    sell_list = [ transaction for transaction in self.transactions_list if type(transaction)==TransactionSell ]
     
     self.curr_cost = Currency(self.currency,0,get_sys_local_currency(),0)
 
