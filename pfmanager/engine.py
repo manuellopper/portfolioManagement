@@ -78,6 +78,9 @@ class Currency:
       return "Error"
     else:      
       return Currency(self.asset_curr,self.value_asset_curr * other,self.local_curr,self.value_local_curr * other )
+
+  def __str__ (self):
+    string_aux = self.asset_curr + ": " + str(self.value_asset_curr) +" / " + self.local_curr + ": "+ str(self.value_local_curr)
       
   def set_value (self, value, currency ="ASSET"):    
     if currency.upper()=="ASSET":
@@ -254,7 +257,7 @@ class AssetEquity(Asset):
     self.transactions_list.append(transaction_aux)
     self.transactions_list.sort(key=self.get_transaction_date)  
     
-    if type(transaction_aux == TransactionBuy):
+    if type(transaction_aux) == TransactionBuy:
       number = transaction_aux.get_number()
       self.curr_shares += number
       self.total_buy_shares += number      
@@ -321,6 +324,8 @@ class AssetEquity(Asset):
   
 class Transaction:
   
+  transaction_type="Undefined"
+
   def __init__(self, asset_currency=system_local_currency,local_currency = system_local_currency, date_transaction = date.today()):
         
     self.set_new_id()
@@ -353,6 +358,9 @@ class Transaction:
 
    
 class TransactionBuy(Transaction):
+  
+  transaction_type="BUY"
+  
   def __init__(self, number, price_per_share, commissions=0, taxes=0, date_transaction = date.today()):
     
     if (not( type(price_per_share) == Currency)) or (not(commissions == 0) and not(type(commissions) == Currency)) or (not(taxes == 0) and not(type(taxes) == Currency)):
@@ -386,6 +394,9 @@ class TransactionBuy(Transaction):
 
   
 class TransactionSell(Transaction):
+
+  transaction_type="SELL"
+
   def __init__(self, number, rev_per_share, commissions=0, taxes=0, date_transaction = date.today()):
     
     if (not( type(rev_per_share) == Currency)) or (not(commissions == 0) and not(type(commissions) == Currency)) or (not(taxes == 0) and not(type(taxes) == Currency)):
@@ -404,7 +415,7 @@ class TransactionSell(Transaction):
     
     if not( taxes == 0 ):
       self.taxes = taxes
-    self.gross_cashflow = number * price_per_share
+    self.gross_cashflow = number * rev_per_share
     self.net_cashflow = self.gross_cashflow - self.commissions - self.taxes
 
   def get_number(self): return self.number_of_shares
@@ -427,6 +438,9 @@ class TransactionSell(Transaction):
 
     
 class TransactionDividend(Transaction):
+
+  transaction_type="DIVIDENDS"
+
   def __init__(self, dividends, commissions=0, taxes=0, date_transaction = date.today()):
     
     if (not( type(dividends) == Currency)) or (not(commissions == 0) and not(type(commissions) == Currency)) or (not(taxes == 0) and not(type(taxes) == Currency)):
@@ -449,6 +463,9 @@ class TransactionDividend(Transaction):
     
       
 class TransactionSharesAsDividend(Transaction):
+
+  transaction_type="SHARES AS DIVIDENDS"
+
   def __init__(self, number, price_per_share, commissions=0, taxes=0, date_transaction = date.today()):
     
     if (not( type(price_per_share) == Currency)) or (not(commissions == 0) and not(type(commissions) == Currency)) or (not(taxes == 0) and not(type(taxes) == Currency)):
