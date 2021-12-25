@@ -8,6 +8,7 @@ asset3 = pm.AssetEquity("Apple","USD","AAPL")
 pf.register_asset(asset1)
 pf.register_asset(asset2)
 pf.register_asset(asset3)
+print(len(pf.assets_list))
 
 ### COMPRO 10 ACCIONES DE APPLE POR 10 USD CADA UNA
 

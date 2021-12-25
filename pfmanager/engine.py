@@ -121,6 +121,7 @@ class Portfolio:
     elif not(symbol == None) and not(id == None):
       return "Error: se debe indicar sólo uno de los parámetros symbol o id. No está permitido los dos"
     elif not(symbol == None):
+      print(symbol)
       for asset_aux in self.assets_list:
         if asset_aux.get_symbol().upper() == symbol.upper():
           return True, asset_aux   
@@ -134,27 +135,27 @@ class Portfolio:
   def register_asset(self, asset_aux, copy_transactions=True):
     
     asset_type = asset_aux.get_asset_type()
-    
+
     if asset_type == "Equity":
-      if self.asset_exist(symbol=asset_aux.get_symbol()):
-        print("A")
+      response, r_asset = self.asset_exist(symbol=asset_aux.get_symbol())
+      if response:        
         return "Error: ya existe" ## esto se puede transformar en una fusión.
-      else:
-        print("B")
+      else:        
         self.assets_list.append(asset_aux)
         asset_aux.set_portfolio(self)
         if copy_transactions == True:
-          self.copy_transactions_from_asset(self,asset_aux)
+          self.copy_transactions_from_asset(asset_aux)
         
   def copy_transactions_from_asset(self, asset_aux):
-    self.transactions_list.append(asset_aux.get_transactions(copy=True))
+    
+    self.transactions_list.append(asset_aux.get_transactions(copy=True))   
     self.transactions_list.sort(key=self.get_transaction_date)
     
   def register_transaction(self, transaction_aux):
     
     transaction_aux.set_portfolio(self)
     self.transactions_list.append(transaction_aux)
-    if transaction_aux.get_date() < self.transactions_list[len(self.transactions_list)-1].get_date():
+    if transaction_aux.get_date() < self.transactions_list[len(self.transactions_list)-1].get_date():      
       self.transactions_list.sort(key=self.get_transaction_date)  
 
   def get_transaction_date(self, trans): return trans.get_date()
@@ -165,6 +166,7 @@ class Portfolio:
     elif not(symbol == None) and not(id == None):
       return "Error: se debe indicar sólo uno de los parámetros symbol o id. No está permitido los dos"
     elif not(symbol == None):
+      print("D")
       result, asset = self.asset_exist(symbol=symbol)
       return asset
     else:
