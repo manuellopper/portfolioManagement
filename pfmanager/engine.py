@@ -148,7 +148,7 @@ class Portfolio:
         
   def copy_transactions_from_asset(self, asset_aux):
     
-    self.transactions_list.append(asset_aux.get_transactions(copy=True))   
+    self.transactions_list.extend(asset_aux.get_transactions(copy=True))   
     self.transactions_list.sort(key=self.get_transaction_date)
     
   def register_transaction(self, transaction_aux):
