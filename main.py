@@ -5,6 +5,9 @@ pf=pm.Portfolio("De Giro")
 asset1 = pm.AssetEquity("Telefónica SA","EUR","TEF")
 asset2 = pm.AssetEquity("Medical Properties","USD","MPW")
 asset3 = pm.AssetEquity("Apple","USD","AAPL")
+pf.register_asset(asset1)
+pf.register_asset(asset2)
+pf.register_asset(asset3)
 
 ### COMPRO 10 ACCIONES DE APPLE POR 10 USD CADA UNA
 

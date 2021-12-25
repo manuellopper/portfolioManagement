@@ -137,8 +137,10 @@ class Portfolio:
     
     if asset_type == "Equity":
       if self.asset_exist(symbol=asset_aux.get_symbol()):
+        print("A")
         return "Error: ya existe" ## esto se puede transformar en una fusión.
       else:
+        print("B")
         self.assets_list.append(asset_aux)
         asset_aux.set_portfolio(self)
         if copy_transactions == True:
