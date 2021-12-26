@@ -175,16 +175,16 @@ class AssetEquity(Asset):
     self.caract=caract
     #Asset internal KPI
     self.curr_shares = 0
-    self.market_value = cu.Currency(currency,0,cu.system_local_currency,0)
-    self.curr_cost= cu.Currency(currency,0,cu.system_local_currency,0)    
-    self.total_dividends = cu.Currency(currency,0,cu.system_local_currency,0)
-    self.total_taxes= cu.Currency(currency,0,cu.system_local_currency,0)
-    self.total_commissions = cu.Currency(currency,0,cu.system_local_currency,0)
+    self.market_value = cu.Currency(0,currency,0,cu.system_local_currency)
+    self.curr_cost= cu.Currency(0,currency,0,cu.system_local_currency)    
+    self.total_dividends = cu.Currency(0,currency,0,cu.system_local_currency)
+    self.total_taxes= cu.Currency(0,currency,0,cu.system_local_currency)
+    self.total_commissions = cu.Currency(0,currency,0,cu.system_local_currency)
     #Auxiliar variables
     self.total_buy_shares =0
     self.total_sell_shares =0 
-    self.total_buy_cost = cu.Currency(currency,0,cu.system_local_currency,0)
-    self.total_sell_rev = cu.Currency(currency,0,cu.system_local_currency,0)
+    self.total_buy_cost = cu.Currency(0,currency,0,cu.system_local_currency)
+    self.total_sell_rev = cu.Currency(0,currency,0,cu.system_local_currency)
 
   def get_symbol(self): return self.symbol
 
@@ -231,7 +231,7 @@ class AssetEquity(Asset):
     buy_list = [ transaction for transaction in self.transactions_list if ( type(transaction)==TransactionBuy or type(transaction)==TransactionSharesAsDividend )]
     sell_list = [ transaction for transaction in self.transactions_list if type(transaction)==TransactionSell ]
   
-    self.curr_cost = cu.Currency(self.currency,0,cu.system_local_currency,0)
+    self.curr_cost = cu.Currency(0,self.currency,0,cu.system_local_currency)
     
     for buy_oper in buy_list:
       buy_oper.set_buy_closed(0) #primero borro las variables buy_closed de todas las operacoines buy
@@ -241,7 +241,7 @@ class AssetEquity(Asset):
     for sell_oper in sell_list:
       num_sell = sell_oper.get_number()
       remaining_sell = num_sell      
-      underlying_cost = cu.Currency(self.currency,0,cu.system_local_currency,0)
+      underlying_cost = cu.Currency(0,self.currency,0,cu.system_local_currency)
       for buy_oper in buy_list:        
         remaining_buy=buy_oper.get_number() - buy_oper.get_buy_closed() 
         if remaining_sell >= remaining_buy:          
@@ -276,10 +276,10 @@ class Transaction:
     self.portfolio_father = None
     self.asset_father = None
     self.date = date_transaction
-    self.taxes = cu.Currency(self.asset_currency,0,self.local_currency,0)
-    self.commissions = cu.Currency(self.asset_currency,0,self.local_currency,0)
-    self.gross_cashflow = cu.Currency(self.asset_currency,0,self.local_currency,0)
-    self.net_cashflow = cu.Currency(self.asset_currency,0,self.local_currency,0)    
+    self.taxes = cu.Currency(0,self.asset_currency,0,self.local_currency)
+    self.commissions = cu.Currency(0,self.asset_currency,0,self.local_currency)
+    self.gross_cashflow = cu.Currency(0,self.asset_currency,0,self.local_currency)
+    self.net_cashflow = cu.Currency(0,self.asset_currency,0,self.local_currency)
     
   def set_new_id(self): self.id=datetime.timestamp(datetime.now())
 
