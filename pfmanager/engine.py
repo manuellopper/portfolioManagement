@@ -26,6 +26,50 @@ def convert_currency(value, orig_curr, dest_curr):
   else:
     return "Error"
 
+def imprime_portfolio(pf):
+  
+  for ass_aux in pf.assets_list:
+  
+    print(" ************************************* ")
+  
+    print(ass_aux.get_id(), ass_aux.asset_name, ass_aux.currency, ass_aux.asset_type)
+  
+    print("Número acciones: ",ass_aux.get_current_shares(), "Coste subyacente: ",ass_aux.curr_cost)
+  
+    print("Dividendos: ", ass_aux.total_dividends, "Taxes: ",ass_aux.total_taxes, "Commissions: ", ass_aux.total_commissions )
+
+    print("Total buy shares: ", ass_aux.total_buy_shares, "Total buy cost: ",ass_aux.total_buy_cost)
+
+    print("Total sell shares: ", ass_aux.total_sell_shares, "Total sell rev: ",ass_aux.total_sell_rev)
+
+    transactions_list = ass_aux.get_transactions()
+
+    print("Número de transacciones: ", len(transactions_list))
+
+    for trans_aux in transactions_list:
+      print(" ------- ")
+      print("Id: ", trans_aux.id)
+      print("Tipo: ", trans_aux.transaction_type)
+      print("Fecha: ", trans_aux.date)
+      if trans_aux.transaction_type=="BUY":
+        print("Número: ", trans_aux.number_of_shares)
+        print("Precio por acción: ", trans_aux.price_per_share)
+        print("Cerradas: ", trans_aux.get_buy_closed())
+      elif trans_aux.transaction_type == "SELL":
+        print("Número: ", trans_aux.number_of_shares)
+        print("Ingreso por acción: ", trans_aux.rev_per_share)
+        print("Beneficio: ", trans_aux.operation_benefit)
+      elif trans_aux.transaction_type == "DIVIDENDS":
+        print("Dividendo: ", trans_aux.dividends)
+
+      print("Comisiones: ", trans_aux.commissions)
+      print("Taxes: ", trans_aux.taxes)
+
+      print("Gross cash flow: ", trans_aux.gross_cashflow)
+      print("Net cash flow: ", trans_aux.net_cashflow)
+
+
+
 # ---------------- Classes
 
 class Currency:
@@ -171,8 +215,6 @@ class Portfolio:
     else:
       result, asset = self.asset_exist(id=id)
       return asset
-      
-
 
 
 class Asset:
@@ -478,6 +520,7 @@ class TransactionSharesAsDividend(Transaction):
     self.number_of_shares = number
     self.price_per_share=price_per_share
     self.buy_closed=0
+    self.dividends = number * price_per_share
     
     if not( commissions == 0 ):
       self.commissions = commissions
