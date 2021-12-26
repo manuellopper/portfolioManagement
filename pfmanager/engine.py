@@ -309,13 +309,15 @@ class AssetEquity(Asset):
       for buy_oper in buy_list:        
         remaining_buy=buy_oper.get_number() - buy_oper.get_buy_closed() 
         if remaining_sell >= remaining_buy:
-          buy_oper.set_buy_closed(buy_oper.get_number())          
+          buy_oper.set_buy_closed(buy_oper.get_number())   
+          self.get_transactions(id=buy_oper.get_id()).set_buy_closed(buy_oper.get_number())
           underlying_cost += buy_oper.get_price_per_share() * remaining_buy
           remaining_sell -= remaining_buy
           buy_list.remove(buy_oper)
           continue
         elif remaining_sell < remaining_buy:
-          buy_oper.set_buy_closed(buy_oper.get_buy_closed() + remaining_sell)          
+          buy_oper.set_buy_closed(buy_oper.get_buy_closed() + remaining_sell)    
+          self.get_transactions(id=buy_oper.get_id()).set_buy_closed(buy_oper.get_buy_closed()+remaining_sell)
           underlying_cost += buy_oper.get_price_per_share() * remaining_sell
           remaining_sell = 0
           break
