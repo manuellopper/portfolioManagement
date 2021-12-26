@@ -1,30 +1,7 @@
 from datetime import datetime
 from datetime import date
+from . import currency as cu
 
-# --------------- Global variables
-
-system_local_currency = "EUR"
-
-# --------------- Global functions
-
-def get_sys_local_currency():
-  return system_local_currency
-
-def set_sys_local_currency(currency):
-  if is_currency_valid(currency):
-    system_local_currency = currency
-  else:
-    return "Error" #### !!!!Hay que establecer cómo se retornan cosas
-
-def is_currency_valid(currency):
-  return True
-
-def convert_currency(value, orig_curr, dest_curr):
-    #### !!!!Aquí hay que hacer la conversión
-  if is_currency_valid(orig_curr) and is_currency_valid(dest_curr):
-    return value
-  else:
-    return "Error"
 
 def imprime_portfolio(pf):
   
@@ -71,86 +48,6 @@ def imprime_portfolio(pf):
 
 
 # ---------------- Classes
-
-class Currency:
-  def __init__(self,asset_currency,value_asset_currency, local_currency=None, value_local_currency=None ):
-    
-    if is_currency_valid(asset_currency):      
-      self.asset_curr=asset_currency       
-    else:
-      return "Error" #### !!!!Hay que establecer cómo se retornan cosas
-    
-    self.value_asset_curr = value_asset_currency
-
-    if local_currency == None and value_local_currency == None:
-      ## La moneda local es igual que la del activo
-      self.local_curr = asset_currency
-      self.value_local_curr = value_asset_currency
-    elif not (local_currency == None) and value_local_currency == None:
-      if is_currency_valid(local_currency):    
-        self.local_curr = local_currency
-        self.value_local_curr= convert_currency(value_asset_currency,asset_currency,local_currency)
-      else:
-        return "Error" #### !!!!Hay que establecer cómo se retornan cosas
-    else:
-      if is_currency_valid(local_currency):    
-        self.local_curr = local_currency
-        self.value_local_curr= value_local_currency
-      else:
-        return "Error" #### !!!!Hay que establecer cómo se retornan cosas    
-
-  def __add__(self, other):
-    return Currency(self.asset_curr,self.value_asset_curr + other.get_value("ASSET"),self.local_curr,self.value_local_curr + other.get_value("LOCAL") )
-  
-  def __sub__(self,other):
-    return Currency(self.asset_curr,self.value_asset_curr - other.get_value("ASSET"),self.local_curr,self.value_local_curr - other.get_value("LOCAL") )
-
-  def __mul__(self, other):
-    num_type = type(other)
-    if not (num_type == int or num_type == float or num_type == Currency):
-      return "Error"
-    elif num_type == int or num_type == float:
-      return Currency(self.asset_curr,self.value_asset_curr * other,self.local_curr,self.value_local_curr * other )
-    elif num_type == Currency:
-      return Currency(self.asset_curr,self.value_asset_curr * other.get_value("ASSET"),self.local_curr,self.value_local_curr * other.get_value("LOCAL") )
-    else:
-      return "Error"
-
-  def __rmul__(self, other):
-    num_type = type(other)
-    if not (num_type == int or num_type == float):
-      return "Error"
-    else:      
-      return Currency(self.asset_curr,self.value_asset_curr * other,self.local_curr,self.value_local_curr * other )
-
-  def __str__ (self):
-    string_aux = self.asset_curr + ": " + str(self.value_asset_curr) +" / " + self.local_curr + ": "+ str(self.value_local_curr)
-    return string_aux
-      
-  def set_value (self, value, currency ="ASSET"):    
-    if currency.upper()=="ASSET":
-      self.value_asset_curr = value
-    elif currency.upper()=="LOCAL":
-      self.value_local_curr = value
-    else:
-      return "Error" #### !!!!Hay que establecer cómo se retornan cosas
-
-  def get_value (self, currency ="ASSET"):    
-    if currency.upper()=="ASSET":
-      return self.value_asset_curr
-    elif currency.upper()=="LOCAL":
-      return self.value_local_curr
-    else:
-      return "Error" #### !!!!Hay que establecer cómo se retornan cosas
-
-  def get_currency (self, currency ="ASSET"):
-    if currency.upper()=="ASSET":
-      return self.asset_curr
-    elif currency.upper()=="LOCAL":
-      return self.local_curr
-    else:
-      return "Error" #### !!!!Hay que establecer cómo se retornan cosas
-
 
 
 class Portfolio:
@@ -226,7 +123,7 @@ class Asset:
     self.asset_name=name    
     self.transactions_list=[]
     self.portfolio = None
-    if is_currency_valid(currency):
+    if cu.is_currency_valid(currency):
       self.currency=currency
     else:
       return "Error" #### !!!!Hay que establecer cómo se retornan cosas
@@ -278,16 +175,16 @@ class AssetEquity(Asset):
     self.caract=caract
     #Asset internal KPI
     self.curr_shares = 0
-    self.market_value = Currency(currency,0,system_local_currency,0)
-    self.curr_cost= Currency(currency,0,system_local_currency,0)    
-    self.total_dividends = Currency(currency,0,system_local_currency,0)
-    self.total_taxes= Currency(currency,0,system_local_currency,0)
-    self.total_commissions = Currency(currency,0,system_local_currency,0)
+    self.market_value = cu.Currency(currency,0,cu.system_local_currency,0)
+    self.curr_cost= cu.Currency(currency,0,cu.system_local_currency,0)    
+    self.total_dividends = cu.Currency(currency,0,cu.system_local_currency,0)
+    self.total_taxes= cu.Currency(currency,0,cu.system_local_currency,0)
+    self.total_commissions = cu.Currency(currency,0,cu.system_local_currency,0)
     #Auxiliar variables
     self.total_buy_shares =0
     self.total_sell_shares =0 
-    self.total_buy_cost = Currency(currency,0,system_local_currency,0)
-    self.total_sell_rev = Currency(currency,0,system_local_currency,0)
+    self.total_buy_cost = cu.Currency(currency,0,cu.system_local_currency,0)
+    self.total_sell_rev = cu.Currency(currency,0,cu.system_local_currency,0)
 
   def get_symbol(self): return self.symbol
 
@@ -334,7 +231,7 @@ class AssetEquity(Asset):
     buy_list = [ transaction for transaction in self.transactions_list if ( type(transaction)==TransactionBuy or type(transaction)==TransactionSharesAsDividend )]
     sell_list = [ transaction for transaction in self.transactions_list if type(transaction)==TransactionSell ]
   
-    self.curr_cost = Currency(self.currency,0,system_local_currency,0)
+    self.curr_cost = cu.Currency(self.currency,0,cu.system_local_currency,0)
     
     for buy_oper in buy_list:
       buy_oper.set_buy_closed(0) #primero borro las variables buy_closed de todas las operacoines buy
@@ -344,7 +241,7 @@ class AssetEquity(Asset):
     for sell_oper in sell_list:
       num_sell = sell_oper.get_number()
       remaining_sell = num_sell      
-      underlying_cost = Currency(self.currency,0,system_local_currency,0)
+      underlying_cost = cu.Currency(self.currency,0,cu.system_local_currency,0)
       for buy_oper in buy_list:        
         remaining_buy=buy_oper.get_number() - buy_oper.get_buy_closed() 
         if remaining_sell >= remaining_buy:          
@@ -371,7 +268,7 @@ class Transaction:
   
   transaction_type="Undefined"
 
-  def __init__(self, asset_currency=system_local_currency,local_currency = system_local_currency, date_transaction = date.today()):
+  def __init__(self, asset_currency=cu.system_local_currency,local_currency = cu.system_local_currency, date_transaction = date.today()):
         
     self.set_new_id()
     self.asset_currency=asset_currency
@@ -379,10 +276,10 @@ class Transaction:
     self.portfolio_father = None
     self.asset_father = None
     self.date = date_transaction
-    self.taxes = Currency(self.asset_currency,0,self.local_currency,0)
-    self.commissions = Currency(self.asset_currency,0,self.local_currency,0)
-    self.gross_cashflow = Currency(self.asset_currency,0,self.local_currency,0)
-    self.net_cashflow = Currency(self.asset_currency,0,self.local_currency,0)    
+    self.taxes = cu.Currency(self.asset_currency,0,self.local_currency,0)
+    self.commissions = cu.Currency(self.asset_currency,0,self.local_currency,0)
+    self.gross_cashflow = cu.Currency(self.asset_currency,0,self.local_currency,0)
+    self.net_cashflow = cu.Currency(self.asset_currency,0,self.local_currency,0)    
     
   def set_new_id(self): self.id=datetime.timestamp(datetime.now())
 
@@ -408,7 +305,7 @@ class TransactionBuy(Transaction):
   
   def __init__(self, number, price_per_share, commissions=0, taxes=0, date_transaction = date.today()):
     
-    if (not( type(price_per_share) == Currency)) or (not(commissions == 0) and not(type(commissions) == Currency)) or (not(taxes == 0) and not(type(taxes) == Currency)):
+    if (not( type(price_per_share) == cu.Currency)) or (not(commissions == 0) and not(type(commissions) == cu.Currency)) or (not(taxes == 0) and not(type(taxes) == cu.Currency)):
       return "Error"
 
     super().__init__(price_per_share.get_currency("ASSET"),price_per_share.get_currency("LOCAL"), date_transaction)
@@ -444,7 +341,7 @@ class TransactionSell(Transaction):
 
   def __init__(self, number, rev_per_share, commissions=0, taxes=0, date_transaction = date.today()):
     
-    if (not( type(rev_per_share) == Currency)) or (not(commissions == 0) and not(type(commissions) == Currency)) or (not(taxes == 0) and not(type(taxes) == Currency)):
+    if (not( type(rev_per_share) == cu.Currency)) or (not(commissions == 0) and not(type(commissions) == cu.Currency)) or (not(taxes == 0) and not(type(taxes) == cu.Currency)):
       return "Error"
 
     super().__init__(rev_per_share.get_currency("ASSET"),rev_per_share.get_currency("LOCAL"), date_transaction)
@@ -468,7 +365,7 @@ class TransactionSell(Transaction):
   def get_rev_per_share(self): return self.rev_per_share
 
   def set_operation_benefit(self, benefit):
-    if not(type(benefit)==Currency):
+    if not(type(benefit)==cu.Currency):
       return "Error"
     
     self.operation_benefit=benefit
@@ -476,7 +373,7 @@ class TransactionSell(Transaction):
   def get_number(self): return self.number_of_shares
 
   def set_underlying_cost(self, uc): 
-    if not(type(uc)==Currency):
+    if not(type(uc)==cu.Currency):
       return "Error"
     
     self.underlying_cost=uc
@@ -488,7 +385,7 @@ class TransactionDividend(Transaction):
 
   def __init__(self, dividends, commissions=0, taxes=0, date_transaction = date.today()):
     
-    if (not( type(dividends) == Currency)) or (not(commissions == 0) and not(type(commissions) == Currency)) or (not(taxes == 0) and not(type(taxes) == Currency)):
+    if (not( type(dividends) == cu.Currency)) or (not(commissions == 0) and not(type(commissions) == cu.Currency)) or (not(taxes == 0) and not(type(taxes) == cu.Currency)):
       return "Error"
 
     super().__init__(dividends.get_currency("ASSET"),dividends.get_currency("LOCAL"),date_transaction)
@@ -513,7 +410,7 @@ class TransactionSharesAsDividend(Transaction):
 
   def __init__(self, number, price_per_share, commissions=0, taxes=0, date_transaction = date.today()):
     
-    if (not( type(price_per_share) == Currency)) or (not(commissions == 0) and not(type(commissions) == Currency)) or (not(taxes == 0) and not(type(taxes) == Currency)):
+    if (not( type(price_per_share) == cu.Currency)) or (not(commissions == 0) and not(type(commissions) == cu.Currency)) or (not(taxes == 0) and not(type(taxes) == cu.Currency)):
       return "Error"
 
     super().__init__(price_per_share.get_currency("ASSET"),price_per_share.get_currency("LOCAL"), date_transaction)
