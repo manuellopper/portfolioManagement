@@ -2,6 +2,12 @@ import pfmanager.engine as pm
 import pfmanager.currency as cu
 from datetime import date
 
+curr1=cu.Currency(2.5)
+curr2=cu.Currency(5)
+curr3=curr2+curr1
+print(curr3)
+print(curr3.get_value("ASSET"),curr3.get_currency("ASSET"),curr3.get_value("LOCAL"),curr3.get_currency("LOCAL"))
+
 pf=pm.Portfolio("De Giro")
 pf.register_asset(pm.AssetEquity("Telefónica SA","EUR","TEF"))
 

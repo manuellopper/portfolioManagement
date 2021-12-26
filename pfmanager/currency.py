@@ -25,41 +25,41 @@ def convert_currency(value, orig_curr, dest_curr):
 
 
 
+# ------------ Class Currency use ------------------
+# #
+# ** CASE 1
+# Currency(numero)
+# - value_asset_curr = value_local_curr = número
+# - asset_curr = local_curr = system_local_currency
+# 
+# ** CASE 2
+# Currency(numero, currency, validate=True/False)
+# - value_asset_curr = value_local_curr = número
+# - asset_curr = local_curr = currency -> Es validada o no en función de parámetro "validate"
+# 
+# ** CASE 3
+# Currency(numero1, currency1, convert=currency2, validate=True/False)
+# - value_asset_curr = numero1
+# - asset_curr = currency1 -> Es validada o no en función de parámetro "validate"
+# - local_curr = currency2 -> currency2 puede ser get_sys_local_currency() -> Es validada o no en función de parámetro "validate"
+# - value_local_curr = conversión de currency1 a currency2 de la unidades de moneda indicadas por numero1
+# 
+# ** CASE 4
+# Curency(numero1, currency1, numero2, validate=True/False)
+# - value_asset_curr = numero1
+# - value_local_curr = numero2
+# - asset_curr = currency1 -> Es validada o no en función de parámetro "validate"
+# - local_curr = system_local_currency
+# si system_local_currency == a currency1 pero numero2 es distinto de numero1 entonces error
+#
+# ** CASE 5
+# Curency(numero1, currency1, numero2, currency2, validate=True/False)
+# - value_asset_curr = numero1
+# - asset_curr = currency1 -> Es validada o no en función de parámetro "validate"
+# - local_curr = currency2 -> Es validada o no en función de parámetro "validate"
+# - value_local_curr= numero 2
+
 class Currency:
-
-
-** CASE 1
-Currency(numero)
-- value_asset_curr = value_local_curr = número
-- asset_curr = local_curr = system_local_currency
-
-** CASE 2
-Currency(numero, currency, validate=True/False)
-- value_asset_curr = value_local_curr = número
-- asset_curr = local_curr = currency -> Es validada o no en función de parámetro "validate"
-
-** CASE 3
-Currency(numero1, currency1, convert=currency2, validate=True/False)
-- value_asset_curr = numero1
-- asset_curr = currency1 -> Es validada o no en función de parámetro "validate"
-- local_curr = currency2 -> currency2 puede ser get_sys_local_currency() -> Es validada o no en función de parámetro "validate"
-- value_local_curr = conversión de currency1 a currency2 de la unidades de moneda indicadas por numero1
-
-** CASE 4
-Curency(numero1, currency1, numero2, validate=True/False)
-- value_asset_curr = numero1
-- value_local_curr = numero2
-- asset_curr = currency1 -> Es validada o no en función de parámetro "validate"
-- local_curr = system_local_currency
-si system_local_currency == a currency1 pero numero2 es distinto de numero1 entonces error
-
-** CASE 5
-Curency(numero1, currency1, numero2, currency2, validate=True/False)
-- value_asset_curr = numero1
-- asset_curr = currency1 -> Es validada o no en función de parámetro "validate"
-- local_curr = currency2 -> Es validada o no en función de parámetro "validate"
-- value_local_curr= numero 2
-
 
   def __init__(self,value_asset_currency, asset_currency=None, value_local_currency=None, local_currency=None, convert=None, validate=False ):
     
@@ -122,23 +122,23 @@ Curency(numero1, currency1, numero2, currency2, validate=True/False)
   def __add__(self, other):
     if not (self.asset_curr.upper() == other.asset_curr.upper() ) or (self.local_curr.upper() == other.local_curr.upper() ):
       return "Error: las currencies deben coincidir para ser sumadas"
-    return Currency(self.asset_curr,self.value_asset_curr + other.get_value("ASSET"),self.local_curr,self.value_local_curr + other.get_value("LOCAL") )
+    return Currency(self.value_asset_curr + other.get_value("ASSET"), self.asset_curr,self.value_local_curr + other.get_value("LOCAL"),self.local_curr )
   
   def __sub__(self,other):
 
     if not (self.asset_curr.upper() == other.asset_curr.upper() ) or (self.local_curr.upper() == other.local_curr.upper() ):
       return "Error: las currencies deben coincidir para ser sumadas"
       
-    return Currency(self.asset_curr,self.value_asset_curr - other.get_value("ASSET"),self.local_curr,self.value_local_curr - other.get_value("LOCAL") )
+    return Currency(self.value_asset_curr - other.get_value("ASSET"), self.asset_curr,self.value_local_curr - other.get_value("LOCAL"),self.local_curr )
 
   def __mul__(self, other):
     num_type = type(other)
     if not (num_type == int or num_type == float or num_type == Currency):
       return "Error"
     elif num_type == int or num_type == float:
-      return Currency(self.asset_curr,self.value_asset_curr * other,self.local_curr,self.value_local_curr * other )
+      return Currency(self.value_asset_curr * other,self.asset_curr, self.value_local_curr * other, self.local_curr )
     elif num_type == Currency:
-      return Currency(self.asset_curr,self.value_asset_curr * other.get_value("ASSET"),self.local_curr,self.value_local_curr * other.get_value("LOCAL") )
+      return Currency(self.value_asset_curr * other.get_value("ASSET"),self.asset_curr,self.value_local_curr * other.get_value("LOCAL"), self.local_curr )
     else:
       return "Error"
 
@@ -147,7 +147,7 @@ Curency(numero1, currency1, numero2, currency2, validate=True/False)
     if not (num_type == int or num_type == float):
       return "Error"
     else:      
-      return Currency(self.asset_curr,self.value_asset_curr * other,self.local_curr,self.value_local_curr * other )
+      return Currency(self.value_asset_curr * other,self.asset_curr,self.value_local_curr * other,self.local_curr )
 
   def __str__ (self):
     string_aux = str(self.value_asset_curr) + " " + self.asset_curr
