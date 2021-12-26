@@ -251,7 +251,6 @@ class AssetEquity(Asset):
 
   def register_transaction(self, transaction_aux, add_to_porfolio = True):
     
-    print("registrando transacción")
     type_arg= type(transaction_aux)
     if not (type_arg == TransactionBuy or type_arg == TransactionSell or type_arg== TransactionDividend or type_arg == TransactionSharesAsDividend):
       return "Error: tipo pasado no es correcto"
@@ -302,16 +301,15 @@ class AssetEquity(Asset):
   
     for sell_oper in sell_list:
       num_sell = sell_oper.get_number()
-      remaining_sell = num_sell
+      remaining_sell = num_sell      
       underlying_cost = Currency(self.currency,0,system_local_currency,0)
       for buy_oper in buy_list:        
         remaining_buy=buy_oper.get_number() - buy_oper.get_buy_closed() 
         if remaining_sell >= remaining_buy:          
-          buy_oper.set_buy_closed(buy_oper.get_number())      
-          
+          buy_oper.set_buy_closed(buy_oper.get_number())           
           underlying_cost += buy_oper.get_price_per_share() * remaining_buy
           remaining_sell -= remaining_buy
-          buy_list.remove(buy_oper)
+          #buy_list.remove(buy_oper)
           continue
         elif remaining_sell < remaining_buy:          
           buy_oper.set_buy_closed(buy_oper.get_buy_closed() + remaining_sell)            
