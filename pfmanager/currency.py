@@ -120,13 +120,13 @@ class Currency:
 
 
   def __add__(self, other):
-    if not (self.asset_curr.upper() == other.asset_curr.upper() ) or (self.local_curr.upper() == other.local_curr.upper() ):
+    if not (self.asset_curr.upper() == other.asset_curr.upper() ) and (self.local_curr.upper() == other.local_curr.upper() ):
       return "Error: las currencies deben coincidir para ser sumadas"
     return Currency(self.value_asset_curr + other.get_value("ASSET"), self.asset_curr,self.value_local_curr + other.get_value("LOCAL"),self.local_curr )
   
   def __sub__(self,other):
 
-    if not (self.asset_curr.upper() == other.asset_curr.upper() ) or (self.local_curr.upper() == other.local_curr.upper() ):
+    if not (self.asset_curr.upper() == other.asset_curr.upper() ) and (self.local_curr.upper() == other.local_curr.upper() ):
       return "Error: las currencies deben coincidir para ser sumadas"
       
     return Currency(self.value_asset_curr - other.get_value("ASSET"), self.asset_curr,self.value_local_curr - other.get_value("LOCAL"),self.local_curr )
