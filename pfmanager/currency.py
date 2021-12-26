@@ -120,9 +120,15 @@ Curency(numero1, currency1, numero2, currency2, validate=True/False)
 
 
   def __add__(self, other):
+    if not (self.asset_curr.upper() == other.asset_curr.upper() ) or (self.local_curr.upper() == other.local_curr.upper() ):
+      return "Error: las currencies deben coincidir para ser sumadas"
     return Currency(self.asset_curr,self.value_asset_curr + other.get_value("ASSET"),self.local_curr,self.value_local_curr + other.get_value("LOCAL") )
   
   def __sub__(self,other):
+
+    if not (self.asset_curr.upper() == other.asset_curr.upper() ) or (self.local_curr.upper() == other.local_curr.upper() ):
+      return "Error: las currencies deben coincidir para ser sumadas"
+      
     return Currency(self.asset_curr,self.value_asset_curr - other.get_value("ASSET"),self.local_curr,self.value_local_curr - other.get_value("LOCAL") )
 
   def __mul__(self, other):
@@ -149,27 +155,39 @@ Curency(numero1, currency1, numero2, currency2, validate=True/False)
       string_aux = string_aux + " / " + str(self.value_local_curr) + " " + self.local_curr    
     return string_aux
       
-  def set_value (self, value, currency ="ASSET"):    
-    if currency.upper()=="ASSET":
+  def set_value (self, value, currency =None):    
+
+    if not (type(value)== int or type(value)== float):
+      return "Error: el valor debe ser un numero"
+      
+    if currency == None and self.local_curr.upper() == self.asset_curr.upper():
+      self.value_local_curr = value
+      self.value_asset_curr = value
+    elif currency.upper()=="ASSET":
       self.value_asset_curr = value
     elif currency.upper()=="LOCAL":
       self.value_local_curr = value
     else:
-      return "Error" #### !!!!Hay que establecer cómo se retornan cosas
+      return "Error: argumentos no válidos" #### !!!!Hay que establecer cómo se retornan cosas
 
-  def get_value (self, currency ="ASSET"):    
-    if currency.upper()=="ASSET":
+  def get_value (self, currency =None):    
+
+    if currency == None and self.local_curr.upper() == self.asset_curr.upper():
+      return self.value_asset_curr
+    elif currency.upper()=="ASSET":
       return self.value_asset_curr
     elif currency.upper()=="LOCAL":
       return self.value_local_curr
     else:
-      return "Error" #### !!!!Hay que establecer cómo se retornan cosas
+      return "Error: argumentos no válidos" #### !!!!Hay que establecer cómo se retornan cosas
 
-  def get_currency (self, currency ="ASSET"):
+  def get_currency (self, currency =None):
+    if currency == None and self.local_curr.upper() == self.asset_curr.upper():
+      return self.asset_curr
     if currency.upper()=="ASSET":
       return self.asset_curr
     elif currency.upper()=="LOCAL":
       return self.local_curr
     else:
-      return "Error" #### !!!!Hay que establecer cómo se retornan cosas
+      return "Error: argumentos no válidos" #### !!!!Hay que establecer cómo se retornan cosas
 
