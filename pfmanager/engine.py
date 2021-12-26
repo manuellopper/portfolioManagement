@@ -121,8 +121,7 @@ class Portfolio:
      return "Error: se debe indicar un identificador del activo (id o símbolo)"
     elif not(symbol == None) and not(id == None):
       return "Error: se debe indicar sólo uno de los parámetros symbol o id. No está permitido los dos"
-    elif not(symbol == None):
-      print(symbol)
+    elif not(symbol == None):      
       for asset_aux in self.assets_list:
         if asset_aux.get_symbol().upper() == symbol.upper():
           return True, asset_aux   
@@ -167,7 +166,6 @@ class Portfolio:
     elif not(symbol == None) and not(id == None):
       return "Error: se debe indicar sólo uno de los parámetros symbol o id. No está permitido los dos"
     elif not(symbol == None):
-      print("D")
       result, asset = self.asset_exist(symbol=symbol)
       return asset
     else:
@@ -253,6 +251,7 @@ class AssetEquity(Asset):
 
   def register_transaction(self, transaction_aux, add_to_porfolio = True):
     
+    print("registrando transacción")
     type_arg= type(transaction_aux)
     if not (type_arg == TransactionBuy or type_arg == TransactionSell or type_arg== TransactionDividend or type_arg == TransactionSharesAsDividend):
       return "Error: tipo pasado no es correcto"
@@ -268,13 +267,13 @@ class AssetEquity(Asset):
       self.total_buy_shares += number      
       self.total_buy_cost = self.total_buy_cost + number * transaction_aux.get_price_per_share()
       self.process_buy_sell_transactions()
-    elif type(transaction_aux == TransactionSell):
+    elif type(transaction_aux) == TransactionSell:
       number = transaction_aux.get_number()
       self.curr_shares -= number
       self.total_sell_shares += number    
       self.total_sell_rev = self.total_sell_rev + number * transaction_aux.get_rev_per_share()
       self.process_buy_sell_transactions()
-    elif type(transaction_aux == TransactionDividend):
+    elif type(transaction_aux) == TransactionDividend:
       self.total_dividends += transaction_aux.get_dividends()
     else:
       self.curr_shares += number
@@ -295,8 +294,7 @@ class AssetEquity(Asset):
     sell_list = [ transaction for transaction in self.transactions_list if type(transaction)==TransactionSell ]
   
     self.curr_cost = Currency(self.currency,0,system_local_currency,0)
-    print(self.curr_cost)
-
+    
     for buy_oper in buy_list:
       buy_oper.set_buy_closed(0) #primero borro las variables buy_closed de todas las operacoines buy
       self.curr_cost = self.curr_cost + buy_oper.get_price_per_share() * buy_oper.get_number()
@@ -308,16 +306,15 @@ class AssetEquity(Asset):
       underlying_cost = Currency(self.currency,0,system_local_currency,0)
       for buy_oper in buy_list:        
         remaining_buy=buy_oper.get_number() - buy_oper.get_buy_closed() 
-        if remaining_sell >= remaining_buy:
-          buy_oper.set_buy_closed(buy_oper.get_number())   
-          self.get_transactions(id=buy_oper.get_id()).set_buy_closed(buy_oper.get_number())
+        if remaining_sell >= remaining_buy:          
+          buy_oper.set_buy_closed(buy_oper.get_number())      
+          
           underlying_cost += buy_oper.get_price_per_share() * remaining_buy
           remaining_sell -= remaining_buy
           buy_list.remove(buy_oper)
           continue
-        elif remaining_sell < remaining_buy:
-          buy_oper.set_buy_closed(buy_oper.get_buy_closed() + remaining_sell)    
-          self.get_transactions(id=buy_oper.get_id()).set_buy_closed(buy_oper.get_buy_closed()+remaining_sell)
+        elif remaining_sell < remaining_buy:          
+          buy_oper.set_buy_closed(buy_oper.get_buy_closed() + remaining_sell)            
           underlying_cost += buy_oper.get_price_per_share() * remaining_sell
           remaining_sell = 0
           break
@@ -395,7 +392,7 @@ class TransactionBuy(Transaction):
   def get_buy_closed(self): return self.buy_closed
 
   def set_buy_closed(self,number_closed):
-    if not(number_closed == int):
+    if not(type(number_closed) == int):
       return "Error"
     
     self.buy_closed = number_closed
