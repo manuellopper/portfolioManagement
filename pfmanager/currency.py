@@ -27,7 +27,7 @@ def convert_currency(value, orig_curr, dest_curr):
 
 class Currency:
 
-"""
+
 ** CASE 1
 Currency(numero)
 - value_asset_curr = value_local_curr = número
@@ -59,7 +59,7 @@ Curency(numero1, currency1, numero2, currency2, validate=True/False)
 - asset_curr = currency1 -> Es validada o no en función de parámetro "validate"
 - local_curr = currency2 -> Es validada o no en función de parámetro "validate"
 - value_local_curr= numero 2
-"""
+
 
   def __init__(self,value_asset_currency, asset_currency=None, value_local_currency=None, local_currency=None, convert=None, validate=False ):
     
