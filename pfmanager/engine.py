@@ -81,6 +81,7 @@ class Currency:
 
   def __str__ (self):
     string_aux = self.asset_curr + ": " + str(self.value_asset_curr) +" / " + self.local_curr + ": "+ str(self.value_local_curr)
+    return string_aux
       
   def set_value (self, value, currency ="ASSET"):    
     if currency.upper()=="ASSET":
@@ -208,7 +209,7 @@ class Asset:
     
 
     if not(id == None) and type(id) == float:
-      for trans in transactions_list:
+      for trans in self.transactions_list:
         if trans.get_id() == id:
           return trans
 
@@ -285,15 +286,16 @@ class AssetEquity(Asset):
     self.total_commissions = self.total_commissions + transaction_aux.get_commissions()
     
     if add_to_porfolio == True and not(self.portfolio == None):
-      self.portfolio.register_transaction(self.get_transactions(id)) 
+      self.portfolio.register_transaction(self.get_transactions(id=id)) 
   
   def get_current_shares(self): return self.curr_shares
 
   def process_buy_sell_transactions(self):
     buy_list = [ transaction for transaction in self.transactions_list if ( type(transaction)==TransactionBuy or type(transaction)==TransactionSharesAsDividend )]
     sell_list = [ transaction for transaction in self.transactions_list if type(transaction)==TransactionSell ]
-    
-    self.curr_cost = Currency(self.currency,0,get_sys_local_currency(),0)
+  
+    self.curr_cost = Currency(self.currency,0,system_local_currency,0)
+    print(self.curr_cost)
 
     for buy_oper in buy_list:
       buy_oper.set_buy_closed(0) #primero borro las variables buy_closed de todas las operacoines buy
@@ -303,7 +305,7 @@ class AssetEquity(Asset):
     for sell_oper in sell_list:
       num_sell = sell_oper.get_number()
       remaining_sell = num_sell
-      underlying_cost = Currency(self.currency,0,get_sys_local_currency(),0)
+      underlying_cost = Currency(self.currency,0,system_local_currency,0)
       for buy_oper in buy_list:        
         remaining_buy=buy_oper.get_number() - buy_oper.get_buy_closed() 
         if remaining_sell >= remaining_buy:
