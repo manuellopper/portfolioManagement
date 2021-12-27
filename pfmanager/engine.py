@@ -1,5 +1,6 @@
 from datetime import datetime
 from datetime import date
+from datetime import timedelta
 from . import currency as cu
 
 
@@ -45,7 +46,11 @@ def imprime_portfolio(pf):
       print("Gross cash flow: ", trans_aux.gross_cashflow)
       print("Net cash flow: ", trans_aux.net_cashflow)
 
+def fetch_asking_user(symbol, date):
+  print("Introduzca el valor de mercado de ",symbol," : ")
+  return float(input())
 
+  
 
 # ---------------- Classes
 
@@ -119,14 +124,21 @@ class Asset:
   asset_type="Undertermined"
   
   def __init__(self, name, currency):
-    self.set_new_id()
-    self.asset_name=name    
-    self.transactions_list=[]
-    self.portfolio = None
+    
     if cu.is_currency_valid(currency):
       self.currency=currency
     else:
       return "Error" #### !!!!Hay que establecer cómo se retornan cosas
+    
+    self.set_new_id()
+    self.asset_name=name    
+    self.transactions_list=[]
+    self.portfolio = None
+    self.last_current_market_value = cu.Currency(0,self.currency, 0, cu.get_sys_local_currency())    
+    self.last_market_value_fetch_date = date(1500,1,1) ## fecha muy antigua
+    self.max_days_validity_mvalue = timedelta(days=1)
+    self.fetch_value_method = fetch_asking_user
+    
        
   def set_new_id(self): self.id=datetime.timestamp(datetime.now())    
   
@@ -144,7 +156,6 @@ class Asset:
   
   def get_transactions(self, start = 0, end = 0, id = None, copy = False):
     
-
     if not(id == None) and type(id) == float:
       for trans in self.transactions_list:
         if trans.get_id() == id:
@@ -159,6 +170,39 @@ class Asset:
       return self.transactions_list[start:end]
    
   def get_transaction_date(self,trans): return trans.get_date()
+
+  def update_current_market_value(self):
+    
+    if (date.today() - self.max_days_validity_mvalue) > self.last_market_value_fetch_date:
+      value = self.fetch_value(date.today())
+      if not (type(value) == int or type(value) == float):
+        return "Error: valor capturado no válido"
+      self.last_current_market_value = value
+      self.last_market_value_fetch_date = date.today()
+      return self.last_current_market_value
+
+  def fetch_value(self, value_date = None):
+    if value_date == None:
+      value_date = date.today()
+
+    return self.fetch_value_method(self.symbol)
+   
+  
+  def set_fetch_value_method(self, method, test=True):
+    
+    if test == True:
+      temp_value = method(self.symbol, date.today())
+      if not(type(temp_value) == int or type(temp_value) == float ):
+        return "Error: el test no ha salido bien"
+
+    self.fetch_value_method = method
+
+  def set_max_days_validity_mvalue(days):
+    if not (type(days)== int):
+      return "Error: tipo diferente al esperado"
+    self.max_days_validity_mvalue = timedelta(days=days)
+
+
 
    
 class AssetEquity(Asset):
