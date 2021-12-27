@@ -185,7 +185,7 @@ class Asset:
     if value_date == None:
       value_date = date.today()
 
-    return self.fetch_value_method(self.symbol)
+    return self.fetch_value_method(self.symbol, value_date)
    
   
   def set_fetch_value_method(self, method, test=True):
