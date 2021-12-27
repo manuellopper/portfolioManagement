@@ -10,15 +10,23 @@ def imprime_portfolio(pf):
   
     print(" ************************************* ")
   
-    print(ass_aux.get_id(), ass_aux.asset_name, ass_aux.currency, ass_aux.asset_type)
+    print("Id: ",ass_aux.get_id(),)
+    print("Nombre: ", ass_aux.asset_name)
+    print("Tipo de activo: ", ass_aux.asset_type)
+    print("Moneda del activo: ", ass_aux.currency)  
+    print("Número acciones: ",ass_aux.get_current_shares())
+    print("Valor de mercado: ", ass_aux.last_market_value)
+    print("Coste subyacente: ",ass_aux.curr_cost)
   
-    print("Número acciones: ",ass_aux.get_current_shares(), "Coste subyacente: ",ass_aux.curr_cost)
-  
-    print("Dividendos: ", ass_aux.total_dividends, "Taxes: ",ass_aux.total_taxes, "Commissions: ", ass_aux.total_commissions )
+    print("\nTotal Dividendos: ", ass_aux.total_dividends)
+    print("Total Impuestos: ",ass_aux.total_taxes)
+    print("Total comisiones: ", ass_aux.total_commissions )
 
-    print("Total buy shares: ", ass_aux.total_buy_shares, "Total buy cost: ",ass_aux.total_buy_cost)
+    print("\nTotal buy shares: ", ass_aux.total_buy_shares)
+    print("Total buy cost: ",ass_aux.total_buy_cost)
 
-    print("Total sell shares: ", ass_aux.total_sell_shares, "Total sell rev: ",ass_aux.total_sell_rev)
+    print("Total sell shares: ", ass_aux.total_sell_shares)
+    print("Total sell rev: ",ass_aux.total_sell_rev)
 
     transactions_list = ass_aux.get_transactions()
 
@@ -47,7 +55,7 @@ def imprime_portfolio(pf):
       print("Net cash flow: ", trans_aux.net_cashflow)
 
 def fetch_asking_user(symbol, date):
-  print("Introduzca el valor de mercado de ",symbol," : ")
+  print("Introduzca el valor de mercado unitario ",symbol," : ")
   return float(input())
 
   
@@ -134,7 +142,8 @@ class Asset:
     self.asset_name=name    
     self.transactions_list=[]
     self.portfolio = None
-    self.last_current_market_value = cu.Currency(0,self.currency, 0, cu.get_sys_local_currency())    
+    self.last_market_value = cu.Currency(0,self.currency, 0, cu.get_sys_local_currency()) 
+    self.last_market_value_per_share = cu.Currency(0,self.currency, 0, cu.get_sys_local_currency()) 
     self.last_market_value_fetch_date = date(1500,1,1) ## fecha muy antigua
     self.max_days_validity_mvalue = timedelta(days=1)
     self.fetch_value_method = fetch_asking_user
@@ -170,16 +179,6 @@ class Asset:
       return self.transactions_list[start:end]
    
   def get_transaction_date(self,trans): return trans.get_date()
-
-  def update_current_market_value(self):
-    
-    if (date.today() - self.max_days_validity_mvalue) > self.last_market_value_fetch_date:
-      value = self.fetch_value(date.today())
-      if not (type(value) == int or type(value) == float):
-        return "Error: valor capturado no válido"
-      self.last_current_market_value = value
-      self.last_market_value_fetch_date = date.today()
-      return self.last_current_market_value
 
   def fetch_value(self, value_date = None):
     if value_date == None:
@@ -219,7 +218,7 @@ class AssetEquity(Asset):
     self.caract=caract
     #Asset internal KPI
     self.curr_shares = 0
-    self.market_value = cu.Currency(0,currency,0,cu.system_local_currency)
+    #self.last_market_value = cu.Currency(0,currency,0,cu.system_local_currency)
     self.curr_cost= cu.Currency(0,currency,0,cu.system_local_currency)    
     self.total_dividends = cu.Currency(0,currency,0,cu.system_local_currency)
     self.total_taxes= cu.Currency(0,currency,0,cu.system_local_currency)
@@ -268,6 +267,8 @@ class AssetEquity(Asset):
     
     if add_to_porfolio == True and not(self.portfolio == None):
       self.portfolio.register_transaction(self.get_transactions(id=id)) 
+
+    self.update_market_value()
   
   def get_current_shares(self): return self.curr_shares
 
@@ -306,6 +307,19 @@ class AssetEquity(Asset):
       sell_oper.set_underlying_cost(underlying_cost)
       sell_oper.set_operation_benefit(sell_oper.get_rev_per_share()*sell_oper.get_number()-underlying_cost)
       self.curr_cost = self.curr_cost - underlying_cost
+
+  def update_market_value(self):
+    
+    if (date.today() - self.max_days_validity_mvalue) > self.last_market_value_fetch_date:
+      value = self.fetch_value(date.today())
+      if not (type(value) == int or type(value) == float):
+        return "Error: valor capturado no válido"
+      self.last_market_value_per_share= value
+      self.last_market_value = value * self.curr_shares
+      self.last_market_value_fetch_date = date.today()
+      return self.last_market_value
+    else:
+      self.last_market_value = self.last_market_value_per_share * self.curr_shares
 
   
 class Transaction:
