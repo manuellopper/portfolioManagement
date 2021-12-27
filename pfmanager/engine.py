@@ -54,8 +54,8 @@ def imprime_portfolio(pf):
       print("Gross cash flow: ", trans_aux.gross_cashflow)
       print("Net cash flow: ", trans_aux.net_cashflow)
 
-def fetch_asking_user(symbol, date):
-  print("Introduzca el valor de mercado unitario ",symbol," : ")
+def fetch_asking_user(symbol, date_ask):
+  print("Introduzca el valor unitario de ",symbol," en la fecha ",date_ask, " : ")
   return float(input())
 
   
@@ -147,6 +147,9 @@ class Asset:
     self.last_market_value_fetch_date = date(1500,1,1) ## fecha muy antigua
     self.max_days_validity_mvalue = timedelta(days=1)
     self.fetch_value_method = fetch_asking_user
+    self.current_gain=cu.Currency(0,self.currency, 0, cu.get_sys_local_currency())
+    self.currency_gain=cu.Currency(0,self.currency, 0, cu.get_sys_local_currency())
+    self.asset_pot_gain=cu.Currency(0,self.currency, 0, cu.get_sys_local_currency())
     
        
   def set_new_id(self): self.id=datetime.timestamp(datetime.now())    
@@ -269,6 +272,7 @@ class AssetEquity(Asset):
       self.portfolio.register_transaction(self.get_transactions(id=id)) 
 
     self.update_market_value()
+    self.update_asset_kpi()
   
   def get_current_shares(self): return self.curr_shares
 
@@ -309,18 +313,30 @@ class AssetEquity(Asset):
       self.curr_cost = self.curr_cost - underlying_cost
 
   def update_market_value(self):
+
     
     if (date.today() - self.max_days_validity_mvalue) > self.last_market_value_fetch_date:
       value = self.fetch_value(date.today())
       if not (type(value) == int or type(value) == float):
         return "Error: valor capturado no válido"
-      self.last_market_value_per_share= value
-      self.last_market_value = value * self.curr_shares
+
       self.last_market_value_fetch_date = date.today()
+      resul=cu.Currency(0,self.currency,0,cu.get_sys_local_currency())
+      resul.set_value(value,"ASSET")
+      if not(self.currency == cu.get_sys_local_currency()):
+        resul.set_value(cu.convert_currency(value,self.currency,cu.get_sys_local_currency(),self.last_market_value_fetch_date),"LOCAL")
+      else:
+        resul.set_value(value,"LOCAL")
+        
+      self.last_market_value_per_share.set_value(value, "ASSET")
+      self.last_market_value = value * self.curr_shares
+      
       return self.last_market_value
     else:
       self.last_market_value = self.last_market_value_per_share * self.curr_shares
-
+    
+  def update_asset_kpi(self):
+    pass
   
 class Transaction:
   

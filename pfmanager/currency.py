@@ -1,3 +1,5 @@
+from datetime import date
+
 # --------------- Global variables
 
 system_local_currency = "EUR"
@@ -16,7 +18,7 @@ def set_sys_local_currency(currency):
 def is_currency_valid(currency):
   return True
 
-def convert_currency(value, orig_curr, dest_curr):
+def convert_currency(value, orig_curr, dest_curr, date_convert=date.today()):
     #### !!!!Aquí hay que hacer la conversión
   if is_currency_valid(orig_curr) and is_currency_valid(dest_curr):
     return value
