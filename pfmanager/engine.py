@@ -231,6 +231,7 @@ class AssetEquity(Asset):
     self.total_sell_shares =0 
     self.total_buy_cost = cu.Currency(0,currency,0,cu.system_local_currency)
     self.total_sell_rev = cu.Currency(0,currency,0,cu.system_local_currency)
+    self.total_sell_benefit= cu.Currency(0,currency,0,cu.system_local_currency)
 
   def get_symbol(self): return self.symbol
 
@@ -268,11 +269,12 @@ class AssetEquity(Asset):
     self.total_taxes = self.total_taxes + transaction_aux.get_taxes() 
     self.total_commissions = self.total_commissions + transaction_aux.get_commissions()
     
+    self.update_asset_kpis()
+    
     if add_to_porfolio == True and not(self.portfolio == None):
       self.portfolio.register_transaction(self.get_transactions(id=id)) 
 
-    self.update_market_value()
-    self.update_asset_kpi()
+    
   
   def get_current_shares(self): return self.curr_shares
 
@@ -281,6 +283,7 @@ class AssetEquity(Asset):
     sell_list = [ transaction for transaction in self.transactions_list if type(transaction)==TransactionSell ]
   
     self.curr_cost = cu.Currency(0,self.currency,0,cu.system_local_currency)
+    self.total_sell_benefit= cu.Currency(0,self.currency,0,cu.system_local_currency)
     
     for buy_oper in buy_list:
       buy_oper.set_buy_closed(0) #primero borro las variables buy_closed de todas las operacoines buy
@@ -310,6 +313,7 @@ class AssetEquity(Asset):
       
       sell_oper.set_underlying_cost(underlying_cost)
       sell_oper.set_operation_benefit(sell_oper.get_rev_per_share()*sell_oper.get_number()-underlying_cost)
+      self.total_sell_benefit= self.total_sell_benefit + sell_oper.get_rev_per_share()*sell_oper.get_number()-underlying_cost
       self.curr_cost = self.curr_cost - underlying_cost
 
   def update_market_value(self):
@@ -328,15 +332,24 @@ class AssetEquity(Asset):
       else:
         resul.set_value(value,"LOCAL")
         
-      self.last_market_value_per_share.set_value(value, "ASSET")
-      self.last_market_value = value * self.curr_shares
+      self.last_market_value_per_share = resul
+      self.last_market_value = resul * self.curr_shares
       
       return self.last_market_value
     else:
       self.last_market_value = self.last_market_value_per_share * self.curr_shares
+      return self.last_market_value
     
-  def update_asset_kpi(self):
-    pass
+  def update_asset_kpis(self):
+
+    self.update_market_value()
+    self.current_gain= self.total_sell_benefit + self.total_dividends - self.total_taxes - self.total_commissions
+   
+    self.asset_pot_gain= self.last_market_value - self.curr_cost
+    
+      
+      
+    
   
 class Transaction:
   
