@@ -269,7 +269,7 @@ class AssetEquity(Asset):
     self.total_taxes = self.total_taxes + transaction_aux.get_taxes() 
     self.total_commissions = self.total_commissions + transaction_aux.get_commissions()
     
-    self.update_asset_kpis()
+    self.update_asset()
     
     if add_to_porfolio == True and not(self.portfolio == None):
       self.portfolio.register_transaction(self.get_transactions(id=id)) 
@@ -311,9 +311,24 @@ class AssetEquity(Asset):
       if remaining_sell > 0:
         return "Error: se está intentando vender más de las acciones en posesión"
       
-      sell_oper.set_underlying_cost(underlying_cost)
-      sell_oper.set_operation_benefit(sell_oper.get_rev_per_share()*sell_oper.get_number()-underlying_cost)
-      self.total_sell_benefit= self.total_sell_benefit + sell_oper.get_rev_per_share()*sell_oper.get_number()-underlying_cost
+      #update underlying cost
+      sell_oper.set_underlying_cost(underlying_cost) 
+      
+      #update operation benefit
+      operation_benefit=sell_oper.get_rev_per_share()*sell_oper.get_number()-underlying_cost
+      sell_oper.set_operation_benefit(operation_benefit)
+      
+      #calculate and update currency benefits for this transaction
+      buy_x_rate = underlying_cost.get_value("ASSET") / underlying_cost.get_value("LOCAL")
+      sell_x_rate = sell_oper.get_revenue_per_share().get_value("ASSET") / sell_oper.get_revenue_per_share().get_value("LOCAL")
+
+      unitary = buy_x_rate / sell_x_rate
+
+
+      #update total benefits for selling operations
+      self.total_sell_benefit= self.total_sell_benefit + operation_benefit
+
+      #Substract this operation underlying cost from de total asset current cost
       self.curr_cost = self.curr_cost - underlying_cost
 
   def update_market_value(self):
@@ -340,7 +355,7 @@ class AssetEquity(Asset):
       self.last_market_value = self.last_market_value_per_share * self.curr_shares
       return self.last_market_value
     
-  def update_asset_kpis(self):
+  def update_asset(self):
 
     self.update_market_value()
     self.current_gain= self.total_sell_benefit + self.total_dividends - self.total_taxes - self.total_commissions
@@ -437,8 +452,11 @@ class TransactionSell(Transaction):
     self.number_of_shares = number
     self.underlying_cost = None # El coste subyacente se establece cuando se registra la operación
     self.rev_per_share=rev_per_share
-    self.operation_benefit = None  # El beneficio se establece cuando se registra la operación
-    
+    self.operation_benefit = cu.Curency(0,self.asset_currency,0,self.local_currency)  # El beneficio se establece cuando se registra la operación
+    self.currency_benefit = cu.Curency(0,self.asset_currency,0,self.local_currency)
+    self.product_benefit = cu.Curency(0,self.asset_currency,0,self.local_currency)
+
+
     if not( commissions == 0 ):
       self.commissions = commissions
     
@@ -456,6 +474,18 @@ class TransactionSell(Transaction):
       return "Error"
     
     self.operation_benefit=benefit
+  
+  def set_currency_benefit(self,benefit):
+    if not(type(benefit)==cu.Currency):
+      return "Error"
+    
+    self.currency_benefit=benefit
+
+  def set_product_benefit(self,benefit):
+    if not(type(benefit)==cu.Currency):
+      return "Error"
+    
+    self.product_benefit=benefit  
   
   def get_number(self): return self.number_of_shares
 
