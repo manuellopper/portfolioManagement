@@ -395,16 +395,18 @@ class AssetEquity(Asset):
     self.current_product_benefit = self.current_benefit - self.current_currency_benefit
 
     # Update potential benefits (total, currency, product)
-    self.pot_benefit= self.last_market_value - self.curr_cost
 
-    buy_x_rate = self.curr_cost.get_value("ASSET") / self.curr_cost.get_value("LOCAL")
-    potsell_x_rate = self.last_market_value.get_value("ASSET") / self.last_market_value.get_value("LOCAL")
+    if self.curr_shares > 0:
+      self.pot_benefit= self.last_market_value - self.curr_cost
 
-    value = (buy_x_rate / potsell_x_rate - 1) * self.curr_cost.get_value("LOCAL")
-    self.pot_currency_benefit.set_value(0,"ASSET")
-    self.pot_currency_benefit.set_value(value,"LOCAL")
+      buy_x_rate = self.curr_cost.get_value("ASSET") / self.curr_cost.get_value("LOCAL")
+      potsell_x_rate = self.last_market_value.get_value("ASSET") / self.last_market_value.get_value("LOCAL")
 
-    self.pot_product_benefit= self.pot_benefit - self.pot_currency_benefit
+      value = (buy_x_rate / potsell_x_rate - 1) * self.curr_cost.get_value("LOCAL")
+      self.pot_currency_benefit.set_value(0,"ASSET")
+      self.pot_currency_benefit.set_value(value,"LOCAL")
+
+      self.pot_product_benefit= self.pot_benefit - self.pot_currency_benefit
    
    
     
