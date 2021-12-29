@@ -17,6 +17,14 @@ def imprime_portfolio(pf):
     print("Número acciones: ",ass_aux.get_current_shares())
     print("Valor de mercado: ", ass_aux.last_market_value)
     print("Coste subyacente: ",ass_aux.curr_cost)
+
+    print("\n* G/P Potenciales: ", ass_aux.pot_benefit)
+    print("\tG/P del producto: ", ass_aux.pot_product_benefit)
+    print("\tG/P del tipo de cambio: ", ass_aux.pot_currency_benefit)
+
+    print("\n* G/P Obtenidas: ", ass_aux.current_benefit)
+    print("\tG/P del producto: ", ass_aux.current_product_benefit)
+    print("\tG/P del tipo de cambio: ", ass_aux.current_currency_benefit)
   
     print("\nTotal Dividendos: ", ass_aux.total_dividends)
     print("Total Impuestos: ",ass_aux.total_taxes)
@@ -133,24 +141,37 @@ class Asset:
   
   def __init__(self, name, currency):
     
+    #General variables (currency, id, name, portfolio and transactions list)
     if cu.is_currency_valid(currency):
       self.currency=currency
     else:
       return "Error" #### !!!!Hay que establecer cómo se retornan cosas
-    
+
     self.set_new_id()
     self.asset_name=name    
     self.transactions_list=[]
     self.portfolio = None
+    
+    ## Market value variables
     self.last_market_value = cu.Currency(0,self.currency, 0, cu.get_sys_local_currency()) 
-    self.last_market_value_per_share = cu.Currency(0,self.currency, 0, cu.get_sys_local_currency()) 
+    self.last_market_value_unitary = cu.Currency(0,self.currency, 0, cu.get_sys_local_currency()) 
+
+    ## Fetch market value variables
     self.last_market_value_fetch_date = date(1500,1,1) ## fecha muy antigua
     self.max_days_validity_mvalue = timedelta(days=1)
     self.fetch_value_method = fetch_asking_user
-    self.current_gain=cu.Currency(0,self.currency, 0, cu.get_sys_local_currency())
-    self.currency_gain=cu.Currency(0,self.currency, 0, cu.get_sys_local_currency())
-    self.asset_pot_gain=cu.Currency(0,self.currency, 0, cu.get_sys_local_currency())
     
+    ## Current benefit variables (total, product, currency)
+    self.current_benefit=cu.Currency(0,self.currency, 0, cu.get_sys_local_currency())
+    self.current_currency_benefit=cu.Currency(0,self.currency, 0, cu.get_sys_local_currency())
+    self.current_product_benefit=cu.Currency(0,self.currency, 0, cu.get_sys_local_currency())
+    
+    # Potential benefit variables (total, product, currency)
+    self.pot_benefit=cu.Currency(0,self.currency, 0, cu.get_sys_local_currency())
+    self.pot_currency_benefit = cu.Currency(0,self.currency, 0, cu.get_sys_local_currency())
+    self.pot_product_benefit = cu.Currency(0,self.currency, 0, cu.get_sys_local_currency())
+
+ 
        
   def set_new_id(self): self.id=datetime.timestamp(datetime.now())    
   
@@ -316,14 +337,18 @@ class AssetEquity(Asset):
       
       #update operation benefit
       operation_benefit=sell_oper.get_rev_per_share()*sell_oper.get_number()-underlying_cost
-      sell_oper.set_operation_benefit(operation_benefit)
+      sell_oper.operation_benefit = operation_benefit
       
       #calculate and update currency benefits for this transaction
       buy_x_rate = underlying_cost.get_value("ASSET") / underlying_cost.get_value("LOCAL")
-      sell_x_rate = sell_oper.get_revenue_per_share().get_value("ASSET") / sell_oper.get_revenue_per_share().get_value("LOCAL")
+      sell_x_rate = sell_oper.get_rev_per_share().get_value("ASSET") / sell_oper.get_rev_per_share().get_value("LOCAL")
 
-      unitary = buy_x_rate / sell_x_rate
+      curr_benefit = (buy_x_rate / sell_x_rate - 1) *underlying_cost.get_value("LOCAL")
+      sell_oper.currency_benefit.set_value(curr_benefit,"LOCAL")
+      sell_oper.currency_benefit.set_value(0,"ASSET")
 
+      #update product benefit (total benefit - currency benefit)
+      sell_oper.product_benefit = sell_oper.operation_benefit - sell_oper.currency_benefit
 
       #update total benefits for selling operations
       self.total_sell_benefit= self.total_sell_benefit + operation_benefit
@@ -347,23 +372,41 @@ class AssetEquity(Asset):
       else:
         resul.set_value(value,"LOCAL")
         
-      self.last_market_value_per_share = resul
+      self.last_market_value_unitary = resul
       self.last_market_value = resul * self.curr_shares
       
       return self.last_market_value
     else:
-      self.last_market_value = self.last_market_value_per_share * self.curr_shares
+      self.last_market_value = self.last_market_value_unitary * self.curr_shares
       return self.last_market_value
     
   def update_asset(self):
 
     self.update_market_value()
-    self.current_gain= self.total_sell_benefit + self.total_dividends - self.total_taxes - self.total_commissions
-   
-    self.asset_pot_gain= self.last_market_value - self.curr_cost
     
-      
-      
+    ## Update current benefits (total, currency, product)
+    self.current_benefit= self.total_sell_benefit + self.total_dividends - self.total_taxes - self.total_commissions
+
+    self.current_currency_benefit = cu.Currency(0,self.currency,0,cu.get_sys_local_currency())
+    for trans_aux in self.transactions_list:
+      if trans_aux.transaction_type == "SELL":
+        self.current_currency_benefit += trans_aux.currency_benefit
+    
+    self.current_product_benefit = self.current_benefit - self.current_currency_benefit
+
+    # Update potential benefits (total, currency, product)
+    self.pot_benefit= self.last_market_value - self.curr_cost
+
+    buy_x_rate = self.curr_cost.get_value("ASSET") / self.curr_cost.get_value("LOCAL")
+    potsell_x_rate = self.last_market_value.get_value("ASSET") / self.last_market_value.get_value("LOCAL")
+
+    value = (buy_x_rate / potsell_x_rate - 1) * self.curr_cost.get_value("LOCAL")
+    self.pot_currency_benefit.set_value(0,"ASSET")
+    self.pot_currency_benefit.set_value(value,"LOCAL")
+
+    self.pot_product_benefit= self.pot_benefit - self.pot_currency_benefit
+   
+   
     
   
 class Transaction:
@@ -452,9 +495,9 @@ class TransactionSell(Transaction):
     self.number_of_shares = number
     self.underlying_cost = None # El coste subyacente se establece cuando se registra la operación
     self.rev_per_share=rev_per_share
-    self.operation_benefit = cu.Curency(0,self.asset_currency,0,self.local_currency)  # El beneficio se establece cuando se registra la operación
-    self.currency_benefit = cu.Curency(0,self.asset_currency,0,self.local_currency)
-    self.product_benefit = cu.Curency(0,self.asset_currency,0,self.local_currency)
+    self.operation_benefit = cu.Currency(0,self.asset_currency,0,self.local_currency)  # El beneficio se establece cuando se registra la operación
+    self.currency_benefit = cu.Currency(0,self.asset_currency,0,self.local_currency)
+    self.product_benefit = cu.Currency(0,self.asset_currency,0,self.local_currency)
 
 
     if not( commissions == 0 ):
