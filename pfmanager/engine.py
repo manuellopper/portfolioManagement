@@ -5,12 +5,20 @@ from . import currency as cu
 
 
 def imprime_portfolio(pf):
-  
+  print(" \n **************************** ") 
+  print("NOMBRE DEL PORTFOLIO: ",pf.pf_name)
+  print("\n* G/P Potenciales: ", pf.pot_benefit)
+  print("\tG/P del producto: ", pf.pot_product_benefit)
+  print("\tG/P del tipo de cambio: ", pf.pot_currency_benefit)
+
+  print("\n* G/P Obtenidas: ", pf.current_benefit)
+  print("\tG/P del producto: ", pf.current_product_benefit)
+  print("\tG/P del tipo de cambio: ", pf.current_currency_benefit)
+
   for ass_aux in pf.assets_list:
-  
-    print(" ************************************* ")
-  
-    print("Id: ",ass_aux.get_id(),)
+
+    print(" \n ********* ACTIVO ******************* ")  
+    print("Id: ",ass_aux.get_id())
     print("Nombre: ", ass_aux.asset_name)
     print("Tipo de activo: ", ass_aux.asset_type)
     print("Moneda del activo: ", ass_aux.currency)  
@@ -73,9 +81,21 @@ def fetch_asking_user(symbol, date_ask):
 
 class Portfolio:
   def __init__(self,name):
+    
+    ## General variables
     self.pf_name=name
-    self.assets_list=[]
+    self.assets_list=[] 
     self.transactions_list=[]
+
+    ## Total Current benefit variables
+    self.current_benefit = 0
+    self.current_currency_benefit = 0
+    self.current_product_benefit = 0
+
+    ## Total potential benefit variables
+    self.pot_benefit = 0
+    self.pot_currency_benefit = 0
+    self.pot_product_benefit = 0
 
   def asset_exist(self, symbol=None, id=None):
 
@@ -107,6 +127,8 @@ class Portfolio:
         asset_aux.set_portfolio(self)
         if copy_transactions == True:
           self.copy_transactions_from_asset(asset_aux)
+    
+    self.update_portfolio(update_assets=True)
         
   def copy_transactions_from_asset(self, asset_aux):
     
@@ -119,6 +141,8 @@ class Portfolio:
     self.transactions_list.append(transaction_aux)
     if transaction_aux.get_date() < self.transactions_list[len(self.transactions_list)-1].get_date():      
       self.transactions_list.sort(key=self.get_transaction_date)  
+
+    self.update_portfolio()
 
   def get_transaction_date(self, trans): return trans.get_date()
 
@@ -133,6 +157,35 @@ class Portfolio:
     else:
       result, asset = self.asset_exist(id=id)
       return asset
+  
+  def update_portfolio(self, update_assets=False):
+
+    ## Initialize benefit variables
+    self.current_benefit = 0
+    self.current_currency_benefit = 0
+    self.current_product_benefit = 0
+    self.pot_benefit = 0
+    self.pot_currency_benefit = 0
+    self.pot_product_benefit = 0
+    
+    for asset_aux in self.assets_list:
+      if update_assets == True:
+        asset_aux.update_asset()
+      
+      self.current_benefit += asset_aux.current_benefit.get_value("LOCAL")
+      self.current_currency_benefit += asset_aux.current_currency_benefit.get_value("LOCAL")
+      self.current_product_benefit += asset_aux.current_product_benefit.get_value("LOCAL")
+      self.pot_benefit += asset_aux.pot_benefit.get_value("LOCAL")
+      self.pot_currency_benefit += asset_aux.pot_currency_benefit.get_value("LOCAL")
+      self.pot_product_benefit += asset_aux.pot_product_benefit.get_value("LOCAL")
+
+  ## aquí faltaría meter otras transacciones asociadas solo al potfolio como ingresos o retiradas, comisiones de cuenta, etc
+
+      
+    
+
+
+
 
 
 class Asset:
