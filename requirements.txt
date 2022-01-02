@@ -7,5 +7,5 @@ yfinance==0.1.68
 requests >= 2.14.2
 investpy==1.0.7
 beautifulsoup4==4.10.0
-lxml==versión 4.7.1
+lxml>=versión 4.6.0
 
