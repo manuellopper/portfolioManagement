@@ -203,6 +203,7 @@ class Asset:
     self.set_new_id()
     self.asset_name=name    
     self.transactions_list=[]
+    self.account = None
     self.portfolio = None
     
     ## Market value variables
@@ -309,7 +310,7 @@ class AssetEquity(Asset):
 
   def get_symbol(self): return self.symbol
 
-  def register_transaction(self, transaction_aux, add_to_porfolio = True):
+  def register_transaction(self, transaction_aux, register_records = True):
     
     type_arg= type(transaction_aux)
     if not (type_arg == TransactionBuy or type_arg == TransactionSell or type_arg== TransactionDividend or type_arg == TransactionSharesAsDividend):
@@ -345,8 +346,10 @@ class AssetEquity(Asset):
     
     self.update_asset()
     
-    if add_to_porfolio == True and not(self.portfolio == None):
-      self.portfolio.register_transaction(self.get_transactions(id=id)) 
+    if (register_records == True) and (self.portfolio is not None):
+      if self.portfolio.account is not None:
+        transaction_aux.generate_records(self.portfolio.account)
+         
 
     
   
@@ -497,6 +500,8 @@ class Transaction:
 
   def set_portfolio(self, pf): self.portfolio_father = pf 
 
+  def generate_records(self, acc_aux): pass
+
 
    
 class TransactionBuy(Transaction):
@@ -533,6 +538,9 @@ class TransactionBuy(Transaction):
       return "Error"
     
     self.buy_closed = number_closed
+
+  def generate_records(self, acc_aux):
+    pass
 
   
 class TransactionSell(Transaction):
@@ -592,6 +600,9 @@ class TransactionSell(Transaction):
       return "Error"
     
     self.underlying_cost=uc
+  
+  def generate_records(self, acc_aux):
+    pass
 
     
 class TransactionDividend(Transaction):
@@ -617,6 +628,9 @@ class TransactionDividend(Transaction):
     self.net_cashflow = self.gross_cashflow - self.commissions - self.taxes
 
   def get_dividends(self): return self.dividends
+
+  def generate_records(self, acc_aux):
+    pass
     
       
 class TransactionSharesAsDividend(Transaction):
@@ -655,3 +669,117 @@ class TransactionSharesAsDividend(Transaction):
     
     self.buy_closed = number_closed
   
+  def generate_records(self, acc_aux):
+    pass
+  
+
+class Account:
+  def __init__ (self, name):
+    
+    self.name= name
+    self.list_of_portfolios = []
+    self.list_of_records = []
+    self.balance = {cu.system_local_currency: 0} # Se inicia sólo con la currency local del sistema
+
+  def register_portfolio(self , pf , generate_records = True):
+    if type(pf) is not Portfolio:
+      return "Error: tipo no válido"
+
+    if pf in self.list_of_portfolios:
+      return "Ya se encuentra registrado"
+    
+    self.list_of_porfolios.append(pf)
+    pf.account=self
+
+    if generate_records == True:
+      for asset_aux in pf.assets_list:
+        for trans_aux in asset_aux.transactions_list:
+          trans_aux.generate_records(self) 
+
+  
+  def register_record(self, rec):
+    
+    ## rec puede ser un objeto de tipo Record o bien una lista de objetos de tipo Record
+
+    if type(rec) == list:
+      if type(rec[0]) is not Record:
+        return "Error:tipos no válidos"      
+      self.list_of_records.extend(rec)
+    elif type(rec) == Record:
+      self.list_of_records.append(rec)
+    else:
+      return "Error: tipo no válido"
+
+    
+    self.list_of_records.sort(key=self.get_record_date)
+
+    ## para los registros que tengan igual date se ordena por id de los mismos (el id es un timestamp)
+    start_index=None
+    end_index=None
+    for i in range(0,len(self.list_of_records)):        
+      if i == 0:
+        continue
+      if self.list_of_records[i].record_time == self.list_of_records[i-1].record_time:
+        if start_index == None:
+          start_index=i-1          
+        end_index=i+1
+      else:
+        if not( start_index == None ):
+          list_aux = self.list_of_records[start_index:end_index].copy()
+          list_aux.sort(key=get_record_id)
+          self.list_of_records[start_index:end_index]=list_aux
+          start_index = None
+          end_index= None
+      
+      if i == (len(self.list_of_records)-1) and not (start_index==None):
+        list_aux = self.list_of_records[start_index:end_index].copy()
+        list_aux.sort(key=get_record_id)
+        self.list_of_records[start_index:end_index]=list_aux
+        start_index = None
+        end_index= None
+
+    # se actualiza el balance
+    keys= self.balance.keys()
+    for key in keys:
+      self.balance[key]=0
+    
+    for rec_aux in self.list_of_records:
+      curr=rec_aux.currency
+
+      if curr not in keys:
+        self.balance[curr]=0
+        keys=self.balance.keys()
+
+      rec_aux.prev_balance = self.balance[curr]
+      self.balance[curr]+=rec_aux.cash_flow
+      rec_aux.result_balance = self.balance[curr]
+
+
+  def get_record_date(self, rec): return rec.record_time
+
+  def get_record_id(self, rec): return rec.id
+
+
+
+
+
+
+
+class Record:
+  def __init__(self,cash_flow, rec_type="Undetermined", curr = cu.system_local_currency , desc = "", ass_trans = None, rec_time = datetime.now() ):
+    
+    self.id = self.set_new_id()
+    self.record_type = rec_type
+    self.record_time = rec_time
+    self.currency = curr
+    self.prev_balance = 0
+    self.result_balance = 0
+    self.cash_flow = cash_flow
+    self.description = desc
+    self.associated_transaction = as_trans
+
+  def set_new_id(self): self.id=datetime.timestamp(datetime.now())
+
+
+
+
