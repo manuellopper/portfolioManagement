@@ -541,8 +541,26 @@ class TransactionBuy(Transaction):
     self.buy_closed = number_closed
 
   def generate_records(self, acc_aux):
-    pass
 
+    records_list = []
+    gross_cash_flow= self.number_of_shares* self.price_per_share
+    if not( gross_cash_flow.get_currency("ASSET") == gross_cash_flow.get_currency("LOCAL") ):
+      #hay que registrar cambio de divisa
+      #primero hay que quitar de la divisa local
+      records_list.append(Record(-gross_cash_flow.get_value("LOCAL"),curr=gross_cash_flow.get_currency("LOCAL"),assoc_trans=self, rec_time=self.date,rec_type="Money exchange"))
+      #sumamos a la divisa del activo 
+      records_list.append(Record(gross_cash_flow.get_value("ASSET"),curr=gross_cash_flow.get_currency("ASSET"),assoc_trans=self, rec_time=self.date,rec_type="Money exchange"))
+
+    #se deduce de la moneda del activo el importe bruto a comprar
+    records_list.append(Record(-gross_cash_flow.get_value("ASSET"),curr=gross_cash_flow.get_currency("ASSET"),assoc_trans=self, rec_time=self.date,rec_type="Buy"))
+
+    if not( self.commisions == 0):
+      #restamos las comisiones en la moneda local
+      records_list.append(Record(-self.commissions.get_value("LOCAL"),curr=self.commissions.get_currency("LOCAL"),assoc_trans=self, rec_time=self.date,rec_type="Commissions"))
+
+    acc_aux.register_record(records_list)
+
+  
   
 class TransactionSell(Transaction):
 
@@ -603,7 +621,25 @@ class TransactionSell(Transaction):
     self.underlying_cost=uc
   
   def generate_records(self, acc_aux):
-    pass
+    
+    records_list = []
+    gross_cash_flow= self.number_of_shares* self.rev_per_share
+
+    #se incrementa de la moneda del activo el importe de la venta
+    records_list.append(Record(gross_cash_flow.get_value("ASSET"),curr=gross_cash_flow.get_currency("ASSET"),assoc_trans=self, rec_time=self.date,rec_type="Sell"))
+
+    if not( gross_cash_flow.get_currency("ASSET") == gross_cash_flow.get_currency("LOCAL") ):
+      #hay que registrar cambio de divisa
+      #primero hay que quitar de la moneda del activo
+      records_list.append(Record(-gross_cash_flow.get_value("ASSET"),curr=gross_cash_flow.get_currency("ASSET"),assoc_trans=self, rec_time=self.date,rec_type="Money exchange"))
+      #sumamos a la divisa local
+      records_list.append(Record(gross_cash_flow.get_value("LOCAL"),curr=gross_cash_flow.get_currency("LOCAL"),assoc_trans=self, rec_time=self.date,rec_type="Money exchange"))
+
+    if not( self.commisions == 0):
+      #restamos las comisiones de la moneda local
+      records_list.append(Record(-self.commissions.get_value("LOCAL"),curr=self.commissions.get_currency("LOCAL"),assoc_trans=self, rec_time=self.date,rec_type="Commissions"))
+
+    acc_aux.register_record(records_list)
 
     
 class TransactionDividend(Transaction):
@@ -631,7 +667,35 @@ class TransactionDividend(Transaction):
   def get_dividends(self): return self.dividends
 
   def generate_records(self, acc_aux):
-    pass
+    records_list = []
+    gross_cash_flow= self.dividends
+
+    #se incrementa de la moneda del activo el importe del dividendo
+    records_list.append(Record(gross_cash_flow.get_value("ASSET"),curr=gross_cash_flow.get_currency("ASSET"),assoc_trans=self, rec_time=self.date,rec_type="Dividend"))
+
+    ## se decrementa en la moneda del activo el importe de la retención
+    if not( self.taxes == 0):
+      #restamos la retención de la moneda del activo
+      records_list.append(Record(-self.taxes.get_value("ASSET"),curr=self.taxes.get_currency("ASSET"),assoc_trans=self, rec_time=self.date,rec_type="Taxes"))
+      
+      net_cash_flow= gross_cash_flow - self.taxes
+    else:
+      net_cash_flow= gross_cash_flow
+    
+
+    if not( net_cash_flow.get_currency("ASSET") == net_cash_flow.get_currency("LOCAL") ):
+      #hay que registrar cambio de divisa
+      #primero hay que quitar de la moneda del activo
+      records_list.append(Record(-net_cash_flow.get_value("ASSET"),curr=net_cash_flow.get_currency("ASSET"),assoc_trans=self, rec_time=self.date,rec_type="Money exchange"))
+      #sumamos a la divisa local
+      records_list.append(Record(net_cash_flow.get_value("LOCAL"),curr=net_cash_flow.get_currency("LOCAL"),assoc_trans=self, rec_time=self.date,rec_type="Money exchange"))
+      
+
+    if not( self.commisions == 0):
+      #restamos las comisiones de la moneda local
+      records_list.append(Record(-self.commissions.get_value("LOCAL"),curr=self.commissions.get_currency("LOCAL"),assoc_trans=self, rec_time=self.date,rec_type="Commissions"))
+
+    acc_aux.register_record(records_list)
     
       
 class TransactionSharesAsDividend(Transaction):
@@ -767,7 +831,7 @@ class Account:
 
 
 class Record:
-  def __init__(self,cash_flow, rec_type="Undetermined", curr = cu.system_local_currency , desc = "", ass_trans = None, rec_time = datetime.now() ):
+  def __init__(self,cash_flow, rec_type="Undetermined", curr = cu.system_local_currency , desc = "", assoc_trans = None, rec_time = datetime.now() ):
     
     self.id = self.set_new_id()
     self.record_type = rec_type
