@@ -86,6 +86,7 @@ class Portfolio:
     self.pf_name=name
     self.assets_list=[] 
     self.transactions_list=[]
+    self.account = None
 
     ## Total Current benefit variables
     self.current_benefit = 0
@@ -114,7 +115,7 @@ class Portfolio:
           return True , asset_aux   
       return False, None
 
-  def register_asset(self, asset_aux, copy_transactions=True):
+  def register_asset(self, asset_aux, register_records=True):
     
     asset_type = asset_aux.get_asset_type()
 
@@ -125,8 +126,9 @@ class Portfolio:
       else:        
         self.assets_list.append(asset_aux)
         asset_aux.set_portfolio(self)
-        if copy_transactions == True:
-          self.copy_transactions_from_asset(asset_aux)
+        if register_records == True and self.account is not None:
+          for trans_aux in asset_aux.transactions_list:
+            trans_aux.generate_records(self.account)
     
     self.update_portfolio(update_assets=True)
         
@@ -202,8 +204,7 @@ class Asset:
 
     self.set_new_id()
     self.asset_name=name    
-    self.transactions_list=[]
-    self.account = None
+    self.transactions_list=[]    
     self.portfolio = None
     
     ## Market value variables
