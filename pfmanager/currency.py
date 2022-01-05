@@ -57,7 +57,7 @@ class Currency:
 
   def __init__(self,value_asset_currency, asset_currency=None, value_local_currency=None, local_currency=None, convert=None, validate=True ):
     
-    if not (type(value_asset_currency) == int or type(value_asset_currency) == float):
+    if not (isinstance(value_asset_currency, int) or isinstance(value_asset_currency, float)):
       return "Error: tipo de la variable pasada no es correcto"
    
     if asset_currency == None and value_local_currency==None and local_currency == None:
@@ -89,7 +89,7 @@ class Currency:
       ## CASE 4
       if validate == True and not(Currency.is_currency_valid(asset_currency)):
         return "Error: la currency no se ha encontrado"
-      if not (type(value_local_currency) == int or type(value_local_currency) == float):
+      if not (isinstance(value_local_currency, int) or isinstance(value_local_currency, float)):
         return "Error: tipo de la variable pasada no es correcto"
       if system_local_currency.upper() == asset_currency.upper() and not(value_asset_currency == value_local_currency):
         return "Error: parametros incoherentes"      
@@ -102,7 +102,7 @@ class Currency:
       ## CASE 5
       if validate == True and ( not(Currency.is_currency_valid(asset_currency)) or not(Currency.is_currency_valid(local_currency) ) ):
         return "Error: la currency no se ha encontrado"
-      if not (type(value_local_currency) == int or type(value_local_currency) == float):
+      if not (isinstance(value_local_currency, int) or isinstance(value_local_currency, float)):
         return "Error: tipo de la variable pasada no es correcto"
       self.value_asset_curr=value_asset_currency
       self.value_local_curr=value_local_currency
@@ -125,20 +125,19 @@ class Currency:
       
     return Currency(self.value_asset_curr - other.get_value("ASSET"), self.asset_curr,self.value_local_curr - other.get_value("LOCAL"),self.local_curr )
 
-  def __mul__(self, other):
-    num_type = type(other)
-    if not (num_type == int or num_type == float or num_type == Currency):
+  def __mul__(self, other):    
+    if not (isinstance(other, int) or isinstance(other, float) or isinstance(other, Currency)):      
       return "Error"
-    elif num_type == int or num_type == float:
+    elif isinstance(other, int) or isinstance(other, float):      
       return Currency(self.value_asset_curr * other,self.asset_curr, self.value_local_curr * other, self.local_curr )
-    elif num_type == Currency:
+    elif isinstance(other, Currency):      
       return Currency(self.value_asset_curr * other.get_value("ASSET"),self.asset_curr,self.value_local_curr * other.get_value("LOCAL"), self.local_curr )
     else:
       return "Error"
 
   def __rmul__(self, other):
-    num_type = type(other)
-    if not (num_type == int or num_type == float):
+    
+    if not (isinstance(other, int) or isinstance(other, float)):
       return "Error"
     else:      
       return Currency(self.value_asset_curr * other,self.asset_curr,self.value_local_curr * other,self.local_curr )
@@ -150,8 +149,8 @@ class Currency:
     return string_aux
       
   def set_value (self, value, currency =None):    
-
-    if not (type(value)== int or type(value)== float):
+    
+    if not (isinstance(value, int) or isinstance(value, float)):      
       return "Error: el valor debe ser un numero"
       
     if currency == None and self.local_curr.upper() == self.asset_curr.upper():
@@ -204,7 +203,7 @@ class Currency:
     if not (len(data) > 0):
       return "Error: no se encuentran datos"
   
-    return data.iloc[len(data)-1].at["Close"]
+    return value * data.iloc[len(data)-1].at["Close"]
   
 
   
@@ -216,3 +215,4 @@ class Currency:
       return True
     else:
       return False
+

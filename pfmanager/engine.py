@@ -6,6 +6,7 @@ import yfinance as yf
 
 
 
+
 def imprime_portfolio(pf):
   print(" \n **************************** ") 
   print("NOMBRE DEL PORTFOLIO: ",pf.pf_name)
@@ -95,17 +96,18 @@ def fetch_asking_user(symbol, date_ask):
   print("Introduzca el valor unitario de ",symbol," en la fecha ",date_ask, " : ")
   return float(input())
 
+def fetch_yahoofin(symbol, date_ask):  
+  print("Introduzca el valor unitario de ",symbol," en la fecha ",date_ask, " : ")
+  return float(input())
 
 def yahoofin_validation(symbol):
   print(symbol)
   try:
     val = yf.Ticker(symbol)
     print(val)
-    sym = val.info["symbol"]
-    print("válido")
+    sym = val.info["symbol"]    
     return True
-  except:
-    print("no valido")
+  except:    
     return False
   
   
@@ -235,10 +237,8 @@ class Asset:
     
     #General variables (currency, id, name, portfolio and transactions list)
     if cu.Currency.is_currency_valid(currency):
-      self.currency=currency
-      print("currency valida")
-    else:
-      print("currency no valida")
+      self.currency=currency      
+    else:      
       return "Error" #### !!!!Hay que establecer cómo se retornan cosas
     
     self.set_new_id()
@@ -469,13 +469,13 @@ class AssetEquity(Asset):
       resul=cu.Currency(0,self.currency,0,cu.get_sys_local_currency())
       resul.set_value(value,"ASSET")
       if not(self.currency == cu.get_sys_local_currency()):
-        resul.set_value(cu.Currency.convert_currency(value,self.currency,cu.get_sys_local_currency(),self.last_market_value_fetch_date),"LOCAL")
+        convert=cu.Currency.convert_currency(value,self.currency,cu.get_sys_local_currency(),self.last_market_value_fetch_date) 
+        resul.set_value(convert,"LOCAL")
       else:
-        resul.set_value(value,"LOCAL")
-        
-      self.last_market_value_unitary = resul
-      self.last_market_value = resul * self.curr_shares
+        resul.set_value(value,"LOCAL")      
       
+      self.last_market_value_unitary = resul
+      self.last_market_value = resul * self.curr_shares      
       return self.last_market_value
     else:
       self.last_market_value = self.last_market_value_unitary * self.curr_shares
