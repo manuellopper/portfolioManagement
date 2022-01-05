@@ -3,6 +3,9 @@ import pfmanager.currency as cu
 from datetime import date
 
 pf=pm.Portfolio("De Giro")
+acc=pm.Account("Cuenta de accciones")
+acc.register_portfolio(pf)
+
 asset1 = pm.AssetEquity("Telefónica SA","EUR","TEF")
 asset2 = pm.AssetEquity("Medical Properties","USD","MPW")
 asset3 = pm.AssetEquity("Apple","USD","AAPL")

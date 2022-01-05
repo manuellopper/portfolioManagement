@@ -70,6 +70,25 @@ def imprime_portfolio(pf):
       print("Gross cash flow: ", trans_aux.gross_cashflow)
       print("Net cash flow: ", trans_aux.net_cashflow)
 
+  print(" ********** CUENTA ASOCIADA A PORTFOLIO *********")
+  print("Nombre: ", pf.account.name)
+  keys = pf.account.balance.keys()
+  for key in keys:
+    print("Balance en ",key,": ",pf.account.balance[key]," ",key)
+  
+  for record_aux in pf.account.list_of_records:
+    print("--------------")
+    print("Id: ",record_aux.id, " - Tipo: ",record_aux.record_type)
+    print("Fecha: ",record_aux.record_time)
+    print("Moneda: ",record_aux.currency)
+    print("Saldo anterior: ", record_aux.prev_balance," ", record_aux.currency)
+    print("Flujo de caja: ", record_aux.cash_flow , " ", record_aux.currency)
+    print("Saldo Posterior: ", record_aux.result_balance," ", record_aux.currency)
+
+
+
+
+
 def fetch_asking_user(symbol, date_ask):
   print("Introduzca el valor unitario de ",symbol," en la fecha ",date_ask, " : ")
   return float(input())
@@ -554,10 +573,13 @@ class TransactionBuy(Transaction):
     #se deduce de la moneda del activo el importe bruto a comprar
     records_list.append(Record(-gross_cash_flow.get_value("ASSET"),curr=gross_cash_flow.get_currency("ASSET"),assoc_trans=self, rec_time=self.date,rec_type="Buy"))
 
-    if not( self.commisions == 0):
+    if not( self.commissions == 0):
       #restamos las comisiones en la moneda local
       records_list.append(Record(-self.commissions.get_value("LOCAL"),curr=self.commissions.get_currency("LOCAL"),assoc_trans=self, rec_time=self.date,rec_type="Commissions"))
 
+    for a in records_list:
+      print(a.currency, " ",a.cash_flow)
+      print(a.id)
     acc_aux.register_record(records_list)
 
   
@@ -635,7 +657,7 @@ class TransactionSell(Transaction):
       #sumamos a la divisa local
       records_list.append(Record(gross_cash_flow.get_value("LOCAL"),curr=gross_cash_flow.get_currency("LOCAL"),assoc_trans=self, rec_time=self.date,rec_type="Money exchange"))
 
-    if not( self.commisions == 0):
+    if not( self.commissions == 0):
       #restamos las comisiones de la moneda local
       records_list.append(Record(-self.commissions.get_value("LOCAL"),curr=self.commissions.get_currency("LOCAL"),assoc_trans=self, rec_time=self.date,rec_type="Commissions"))
 
@@ -691,7 +713,7 @@ class TransactionDividend(Transaction):
       records_list.append(Record(net_cash_flow.get_value("LOCAL"),curr=net_cash_flow.get_currency("LOCAL"),assoc_trans=self, rec_time=self.date,rec_type="Money exchange"))
       
 
-    if not( self.commisions == 0):
+    if not( self.commissions == 0):
       #restamos las comisiones de la moneda local
       records_list.append(Record(-self.commissions.get_value("LOCAL"),curr=self.commissions.get_currency("LOCAL"),assoc_trans=self, rec_time=self.date,rec_type="Commissions"))
 
@@ -753,7 +775,7 @@ class Account:
     if pf in self.list_of_portfolios:
       return "Ya se encuentra registrado"
     
-    self.list_of_porfolios.append(pf)
+    self.list_of_portfolios.append(pf)
     pf.account=self
 
     if generate_records == True:
@@ -781,6 +803,7 @@ class Account:
     ## para los registros que tengan igual date se ordena por id de los mismos (el id es un timestamp)
     start_index=None
     end_index=None
+    list_aux=[]
     for i in range(0,len(self.list_of_records)):        
       if i == 0:
         continue
@@ -791,14 +814,16 @@ class Account:
       else:
         if not( start_index == None ):
           list_aux = self.list_of_records[start_index:end_index].copy()
-          list_aux.sort(key=get_record_id)
+          list_aux.sort(key=self.get_record_id)
           self.list_of_records[start_index:end_index]=list_aux
           start_index = None
           end_index= None
       
       if i == (len(self.list_of_records)-1) and not (start_index==None):
         list_aux = self.list_of_records[start_index:end_index].copy()
-        list_aux.sort(key=get_record_id)
+        for a in list_aux:
+          print(a.cash_flow)
+        list_aux.sort(key=self.get_record_id)
         self.list_of_records[start_index:end_index]=list_aux
         start_index = None
         end_index= None
@@ -833,7 +858,7 @@ class Account:
 class Record:
   def __init__(self,cash_flow, rec_type="Undetermined", curr = cu.system_local_currency , desc = "", assoc_trans = None, rec_time = datetime.now() ):
     
-    self.id = self.set_new_id()
+    self.set_new_id()
     self.record_type = rec_type
     self.record_time = rec_time
     self.currency = curr
@@ -841,9 +866,11 @@ class Record:
     self.result_balance = 0
     self.cash_flow = cash_flow
     self.description = desc
-    self.associated_transaction = as_trans
+    self.associated_transaction = assoc_trans
 
-  def set_new_id(self): self.id=datetime.timestamp(datetime.now())
+  def set_new_id(self): 
+    self.id=datetime.timestamp(datetime.now())
+    
 
 
 
