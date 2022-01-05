@@ -3,6 +3,9 @@ import pfmanager.currency as cu
 from datetime import date
 
 
+c=cu.Currency(1,"EUR",convert="USD")
+print(c)
+
 pf=pm.Portfolio("De Giro")
 acc=pm.Account("Cuenta de accciones")
 acc.register_portfolio(pf)

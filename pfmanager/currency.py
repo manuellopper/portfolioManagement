@@ -1,4 +1,5 @@
 from datetime import date
+from datetime import timedelta
 import investpy as inv
 import pandas as pd
 
@@ -198,7 +199,7 @@ class Currency:
 
     curr_symbol= orig_curr + "/" + dest_curr
 
-    data=inv.get_currency_cross_historical_data(curr_symbol, from_date=date_convert-10, to_date=date_convert)
+    data=inv.get_currency_cross_historical_data(curr_symbol, from_date=(date_convert-timedelta(days=10)).strftime("%d/%m/%Y"), to_date=date_convert.strftime("%d/%m/%Y"))
 
     if not (len(data) > 0):
       return "Error: no se encuentran datos"
@@ -210,8 +211,8 @@ class Currency:
 
   @staticmethod
   def is_currency_valid(currency):
-    list_of_currencies = inv.get_available_currencies()
-    if currency in list_of_currencies:
+    list_of_currencies = inv.get_available_currencies() 
+    if currency in list_of_currencies:      
       return True
     else:
       return False

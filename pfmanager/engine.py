@@ -4,6 +4,7 @@ from datetime import timedelta
 from . import currency as cu
 
 
+
 def imprime_portfolio(pf):
   print(" \n **************************** ") 
   print("NOMBRE DEL PORTFOLIO: ",pf.pf_name)
