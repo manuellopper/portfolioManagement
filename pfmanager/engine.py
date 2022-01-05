@@ -2,6 +2,8 @@ from datetime import datetime
 from datetime import date
 from datetime import timedelta
 from . import currency as cu
+import yfinance as yf
+
 
 
 
@@ -93,6 +95,23 @@ def imprime_portfolio(pf):
 def fetch_asking_user(symbol, date_ask):
   print("Introduzca el valor unitario de ",symbol," en la fecha ",date_ask, " : ")
   return float(input())
+
+def fetch_yahoofin(symbol, date_ask):  
+  print("Introduzca el valor unitario de ",symbol," en la fecha ",date_ask, " : ")
+  return float(input())
+
+def yahoofin_validation(symbol):
+  print(symbol)
+  try:
+    val = yf.Ticker(symbol)
+    print(val)
+    sym = val.info["symbol"]    
+    return True
+  except:    
+    return False
+  
+  
+
 
   
 
@@ -218,10 +237,10 @@ class Asset:
     
     #General variables (currency, id, name, portfolio and transactions list)
     if cu.Currency.is_currency_valid(currency):
-      self.currency=currency
-    else:
+      self.currency=currency      
+    else:      
       return "Error" #### !!!!Hay que establecer cómo se retornan cosas
-
+    
     self.set_new_id()
     self.asset_name=name    
     self.transactions_list=[]    
@@ -298,18 +317,23 @@ class Asset:
   def set_max_days_validity_mvalue(days):
     if not (type(days)== int):
       return "Error: tipo diferente al esperado"
-    self.max_days_validity_mvalue = timedelta(days=days)
+    self.max_days_validity_mvalue = timedelta(days=1)
 
 
 
    
 class AssetEquity(Asset):
 
-  def __init__(self, name, currency, symbol, sector=None,market_type=None, size=None, caract=None):
+  def __init__(self, name, currency, symbol, validate=True,validation_method=yahoofin_validation, sector=None,market_type=None, size=None, caract=None):
     # Main information
     super().__init__(name,currency)  
     self.asset_type="Equity"
-    self.symbol = symbol
+    self.validation_method=validation_method
+    if validate == True:
+      if self.validation_method(symbol):
+        self.symbol = symbol
+      else:
+        return "Error: símbolo no válido"
     #Asset general information
     self.sector=sector
     self.market_type=market_type
@@ -445,13 +469,13 @@ class AssetEquity(Asset):
       resul=cu.Currency(0,self.currency,0,cu.get_sys_local_currency())
       resul.set_value(value,"ASSET")
       if not(self.currency == cu.get_sys_local_currency()):
-        resul.set_value(cu.Currency.convert_currency(value,self.currency,cu.get_sys_local_currency(),self.last_market_value_fetch_date),"LOCAL")
+        convert=cu.Currency.convert_currency(value,self.currency,cu.get_sys_local_currency(),self.last_market_value_fetch_date) 
+        resul.set_value(convert,"LOCAL")
       else:
-        resul.set_value(value,"LOCAL")
-        
-      self.last_market_value_unitary = resul
-      self.last_market_value = resul * self.curr_shares
+        resul.set_value(value,"LOCAL")      
       
+      self.last_market_value_unitary = resul
+      self.last_market_value = resul * self.curr_shares      
       return self.last_market_value
     else:
       self.last_market_value = self.last_market_value_unitary * self.curr_shares

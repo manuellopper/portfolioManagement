@@ -8,7 +8,7 @@ pf=pm.Portfolio("De Giro")
 acc=pm.Account("Cuenta de accciones")
 acc.register_portfolio(pf)
 
-asset1 = pm.AssetEquity("Telefónica SA","EUR","TEF")
+asset1 = pm.AssetEquity("Telefónica SA","EUR","TEF.MC")
 asset2 = pm.AssetEquity("Medical Properties","USD","MPW")
 asset3 = pm.AssetEquity("Apple","USD","AAPL")
 pf.register_asset(asset1)
@@ -28,7 +28,7 @@ pf.get_asset(symbol="AAPL").register_transaction(tr1)
 tr2 = pm.TransactionBuy(20,cu.Currency(50),cu.Currency(2.5),date_transaction=date(2020,8,4) )
 
 
-pf.get_asset(symbol="TEF").register_transaction(tr2)
+pf.get_asset(symbol="TEF.MC").register_transaction(tr2)
 
 ### COMPRO 9 ACCIONES DE MEDICAL PROPERTIES POR 9 USD CADA UNA
 
