@@ -54,7 +54,7 @@ def set_sys_local_currency(currency):
 
 class Currency:
 
-  def __init__(self,value_asset_currency, asset_currency=None, value_local_currency=None, local_currency=None, convert=None, validate=False ):
+  def __init__(self,value_asset_currency, asset_currency=None, value_local_currency=None, local_currency=None, convert=None, validate=True ):
     
     if not (type(value_asset_currency) == int or type(value_asset_currency) == float):
       return "Error: tipo de la variable pasada no es correcto"
@@ -68,7 +68,7 @@ class Currency:
 
     elif not(asset_currency == None) and value_local_currency == None and local_currency == None and convert == None:
       ## CASE 2
-      if validate == True and not(is_currency_valid(asset_currency)):
+      if validate == True and not(Currency.is_currency_valid(asset_currency)):
         return "Error: la currency no se ha encontrado"
       self.value_asset_curr = value_asset_currency
       self.value_local_curr = value_asset_currency
@@ -77,7 +77,7 @@ class Currency:
     
     elif not(asset_currency == None) and value_local_currency == None and local_currency == None and not (convert == None) :
       ## CASE 3
-      if validate == True and ( not(is_currency_valid(asset_currency)) or not(is_currency_valid(convert) ) ):
+      if validate == True and ( not(Currency.is_currency_valid(asset_currency)) or not(Currency.is_currency_valid(convert) ) ):
         return "Error: la currency no se ha encontrado"
       self.value_asset_curr = value_asset_currency
       self.asset_curr = asset_currency      
@@ -86,7 +86,7 @@ class Currency:
     
     elif not(asset_currency == None) and not(value_local_currency) == None and local_currency == None:
       ## CASE 4
-      if validate == True and not(is_currency_valid(asset_currency)):
+      if validate == True and not(Currency.is_currency_valid(asset_currency)):
         return "Error: la currency no se ha encontrado"
       if not (type(value_local_currency) == int or type(value_local_currency) == float):
         return "Error: tipo de la variable pasada no es correcto"
@@ -99,7 +99,7 @@ class Currency:
     
     elif not(asset_currency == None) and not(value_local_currency) == None and not(local_currency == None):
       ## CASE 5
-      if validate == True and ( not(is_currency_valid(asset_currency)) or not(is_currency_valid(local_currency) ) ):
+      if validate == True and ( not(Currency.is_currency_valid(asset_currency)) or not(Currency.is_currency_valid(local_currency) ) ):
         return "Error: la currency no se ha encontrado"
       if not (type(value_local_currency) == int or type(value_local_currency) == float):
         return "Error: tipo de la variable pasada no es correcto"
@@ -187,23 +187,23 @@ class Currency:
   @staticmethod
   def convert_currency(value, orig_curr, dest_curr, date_convert=date.today()):
     #### !!!!Aquí hay que hacer la conversión
-  if not( Currency.is_currency_valid(orig_curr) and Currency.is_currency_valid(dest_curr)):
-    return "Error: alguna de las monedas no es válida"
+    if not( Currency.is_currency_valid(orig_curr) and Currency.is_currency_valid(dest_curr)):
+      return "Error: alguna de las monedas no es válida"
 
-  if not isinstance(date_convert, date):
-    return "Error: no se ha pasado una fecha válida"
+    if not isinstance(date_convert, date):
+      return "Error: no se ha pasado una fecha válida"
 
-  if date_convert > date.today():
-    return "Error: la fecha no puede ser mayor que el día de hoy" 
+    if date_convert > date.today():
+      return "Error: la fecha no puede ser mayor que el día de hoy" 
 
-  curr_symbol= orig_curr + "/" + dest_curr
+    curr_symbol= orig_curr + "/" + dest_curr
 
-  data=inv.get_currency_cross_historical_data(curr_symbol, from_date=date_convert-10, to_date=date_convert)
+    data=inv.get_currency_cross_historical_data(curr_symbol, from_date=date_convert-10, to_date=date_convert)
 
-  if not (len(data) > 0):
-    return "Error: no se encuentran datos"
+    if not (len(data) > 0):
+      return "Error: no se encuentran datos"
   
-  return data.iloc[len(data)-1].at["Close"]
+    return data.iloc[len(data)-1].at["Close"]
   
 
   
@@ -211,7 +211,7 @@ class Currency:
   @staticmethod
   def is_currency_valid(currency):
     list_of_currencies = inv.get_available_currencies()
-    if currency is in list_of_currencies:
+    if currency in list_of_currencies:
       return True
     else:
       return False
