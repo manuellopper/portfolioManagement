@@ -577,9 +577,7 @@ class TransactionBuy(Transaction):
       #restamos las comisiones en la moneda local
       records_list.append(Record(-self.commissions.get_value("LOCAL"),curr=self.commissions.get_currency("LOCAL"),assoc_trans=self, rec_time=self.date,rec_type="Commissions"))
 
-    for a in records_list:
-      print(a.currency, " ",a.cash_flow)
-      print(a.id)
+    
     acc_aux.register_record(records_list)
 
   
@@ -820,9 +818,7 @@ class Account:
           end_index= None
       
       if i == (len(self.list_of_records)-1) and not (start_index==None):
-        list_aux = self.list_of_records[start_index:end_index].copy()
-        for a in list_aux:
-          print(a.cash_flow)
+        list_aux = self.list_of_records[start_index:end_index].copy()        
         list_aux.sort(key=self.get_record_id)
         self.list_of_records[start_index:end_index]=list_aux
         start_index = None

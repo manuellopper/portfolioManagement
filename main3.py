@@ -4,7 +4,11 @@ from datetime import date
 
 
 pf=pm.Portfolio("De Giro")
+acc=pm.Account("Cuenta de accciones")
+acc.register_portfolio(pf)
+
 pf.register_asset(pm.AssetEquity("Telefónica SA","EUR","TEF"))
+
 
 
 tr1 = pm.TransactionBuy(10,cu.Currency(100),cu.Currency(2.5),date_transaction=date(2020,5,3) )
