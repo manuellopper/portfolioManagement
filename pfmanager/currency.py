@@ -82,7 +82,7 @@ class Currency:
       self.value_asset_curr = value_asset_currency
       self.asset_curr = asset_currency      
       self.local_curr = convert
-      self.value_local_curr= convert_currency(value_asset_currency,asset_currency,convert)
+      self.value_local_curr= Currency.convert_currency(value_asset_currency,asset_currency,convert)
     
     elif not(asset_currency == None) and not(value_local_currency) == None and local_currency == None:
       ## CASE 4

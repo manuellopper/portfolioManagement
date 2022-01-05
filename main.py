@@ -1,3 +1,5 @@
+# en la shell hay que hacer "python3 -m pip install -r requirements.txt" para que se instalen todos los módulos que son necesarios
+
 import pfmanager.engine as pm
 import pfmanager.currency as cu
 from datetime import date
