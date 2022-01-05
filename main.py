@@ -50,5 +50,6 @@ tr5 = pm.TransactionSell(10,cu.Currency(110,"USD",100,"EUR"),cu.Currency(2,"USD"
 
 pf.get_asset(symbol="AAPL").register_transaction(tr5)
 
+pf.update_portfolio( update_assets=True)
 ## Imprimo todo
 pm.imprime_portfolio(pf)

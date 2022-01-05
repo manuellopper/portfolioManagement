@@ -203,7 +203,7 @@ class Currency:
     if not (len(data) > 0):
       return "Error: no se encuentran datos"
   
-    return value * data.iloc[len(data)-1].at["Close"]
+    return float(value * data.iloc[len(data)-1].at["Close"])
   
 
   

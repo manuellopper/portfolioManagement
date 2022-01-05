@@ -97,14 +97,15 @@ def fetch_asking_user(symbol, date_ask):
   return float(input())
 
 def fetch_yahoofin(symbol, date_ask):  
-  print("Introduzca el valor unitario de ",symbol," en la fecha ",date_ask, " : ")
-  return float(input())
+  stock = yf.Ticker(symbol)
+  hist=stock.history(start=(date_ask-timedelta(days=10)).strftime("%Y-%m-%d"))
+  value = hist.iloc[len(hist)-1].at["Close"]  
+  return float(value)
+  
 
-def yahoofin_validation(symbol):
-  print(symbol)
+def yahoofin_validation(symbol):  
   try:
-    val = yf.Ticker(symbol)
-    print(val)
+    val = yf.Ticker(symbol)    
     sym = val.info["symbol"]    
     return True
   except:    
@@ -253,7 +254,7 @@ class Asset:
     ## Fetch market value variables
     self.last_market_value_fetch_date = date(1500,1,1) ## fecha muy antigua
     self.max_days_validity_mvalue = timedelta(days=1)
-    self.fetch_value_method = fetch_asking_user
+    self.fetch_value_method = fetch_yahoofin
     
     ## Current benefit variables (total, product, currency)
     self.current_benefit=cu.Currency(0,self.currency, 0, cu.get_sys_local_currency())
@@ -394,6 +395,8 @@ class AssetEquity(Asset):
     if (register_records == True) and (self.portfolio is not None):
       if self.portfolio.account is not None:
         transaction_aux.generate_records(self.portfolio.account)
+    
+    self.portfolio.update_portfolio()
          
 
     
@@ -508,7 +511,15 @@ class AssetEquity(Asset):
       self.pot_currency_benefit.set_value(value,"LOCAL")
 
       self.pot_product_benefit= self.pot_benefit - self.pot_currency_benefit
-   
+    else:
+      self.pot_benefit.set_value(0,"LOCAL")
+      self.pot_benefit.set_value(0,"ASSET")
+      self.pot_currency_benefit.set_value(0,"LOCAL")
+      self.pot_currency_benefit.set_value(0,"ASSET")
+      self.pot_product_benefit.set_value(0,"LOCAL")
+      self.pot_product_benefit.set_value(0,"ASSET")
+    
+  
    
     
   
