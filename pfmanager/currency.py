@@ -1,4 +1,6 @@
 from datetime import date
+import investpy as inv
+import pandas as pd
 
 # --------------- Global variables
 
@@ -10,21 +12,10 @@ def get_sys_local_currency():
   return system_local_currency
 
 def set_sys_local_currency(currency):
-  if is_currency_valid(currency):
+  if Currency.is_currency_valid(currency):
     system_local_currency = currency
   else:
     return "Error" #### !!!!Hay que establecer cómo se retornan cosas
-
-def is_currency_valid(currency):
-  return True
-
-def convert_currency(value, orig_curr, dest_curr, date_convert=date.today()):
-    #### !!!!Aquí hay que hacer la conversión
-  if is_currency_valid(orig_curr) and is_currency_valid(dest_curr):
-    return value
-  else:
-    return "Error"
-
 
 
 # ------------ Class Currency use ------------------
@@ -193,3 +184,34 @@ class Currency:
     else:
       return "Error: argumentos no válidos" #### !!!!Hay que establecer cómo se retornan cosas
 
+  @staticmethod
+  def convert_currency(value, orig_curr, dest_curr, date_convert=date.today()):
+    #### !!!!Aquí hay que hacer la conversión
+  if not( Currency.is_currency_valid(orig_curr) and Currency.is_currency_valid(dest_curr)):
+    return "Error: alguna de las monedas no es válida"
+
+  if not isinstance(date_convert, date):
+    return "Error: no se ha pasado una fecha válida"
+
+  if date_convert > date.today():
+    return "Error: la fecha no puede ser mayor que el día de hoy" 
+
+  curr_symbol= orig_curr + "/" + dest_curr
+
+  data=inv.get_currency_cross_historical_data(curr_symbol, from_date=date_convert-10, to_date=date_convert)
+
+  if not (len(data) > 0):
+    return "Error: no se encuentran datos"
+  
+  return data.iloc[len(data)-1].at["Close"]
+  
+
+  
+
+  @staticmethod
+  def is_currency_valid(currency):
+    list_of_currencies = inv.get_available_currencies()
+    if currency is in list_of_currencies:
+      return True
+    else:
+      return False

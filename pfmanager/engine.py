@@ -216,7 +216,7 @@ class Asset:
   def __init__(self, name, currency):
     
     #General variables (currency, id, name, portfolio and transactions list)
-    if cu.is_currency_valid(currency):
+    if cu.Currency.is_currency_valid(currency):
       self.currency=currency
     else:
       return "Error" #### !!!!Hay que establecer cómo se retornan cosas
@@ -444,7 +444,7 @@ class AssetEquity(Asset):
       resul=cu.Currency(0,self.currency,0,cu.get_sys_local_currency())
       resul.set_value(value,"ASSET")
       if not(self.currency == cu.get_sys_local_currency()):
-        resul.set_value(cu.convert_currency(value,self.currency,cu.get_sys_local_currency(),self.last_market_value_fetch_date),"LOCAL")
+        resul.set_value(cu.Currency.convert_currency(value,self.currency,cu.get_sys_local_currency(),self.last_market_value_fetch_date),"LOCAL")
       else:
         resul.set_value(value,"LOCAL")
         
