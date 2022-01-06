@@ -3,6 +3,7 @@ from datetime import date
 from datetime import timedelta
 from . import currency as cu
 import yfinance as yf
+import pandas as pd
 
 
 
@@ -127,7 +128,7 @@ class Portfolio:
     self.assets_list=[] 
     self.transactions_list=[]
     self.account = None
-
+    
     ## Total Current benefit variables
     self.current_benefit = 0
     self.current_currency_benefit = 0
@@ -137,6 +138,9 @@ class Portfolio:
     self.pot_benefit = 0
     self.pot_currency_benefit = 0
     self.pot_product_benefit = 0
+
+    #information variables
+    self.assets_info_df =[]
 
   def asset_exist(self, symbol=None, id=None):
 
@@ -209,6 +213,11 @@ class Portfolio:
     self.pot_benefit = 0
     self.pot_currency_benefit = 0
     self.pot_product_benefit = 0
+    self.assets_info_df = []
+
+    aux_data=[]
+    data_index=[]
+    data_columns=["Name","Shares","Market Value","TOTAL BENEFIT", "POTENCIAL BENEFIT", "P.B. relative", "Pot. Currency Benefit","Pot. Product Benefit","CURRENT BENEFIT", "Curr. Currency Benefit", "Curr. Product Benefit"]
     
     for asset_aux in self.assets_list:
       if update_assets == True:
@@ -220,6 +229,35 @@ class Portfolio:
       self.pot_benefit += asset_aux.pot_benefit.get_value("LOCAL")
       self.pot_currency_benefit += asset_aux.pot_currency_benefit.get_value("LOCAL")
       self.pot_product_benefit += asset_aux.pot_product_benefit.get_value("LOCAL")
+    
+      #Actualizamos el dataframe con la lista de los activos
+      if asset_aux.curr_cost.get_value("LOCAL") == 0:
+        pot_benefit_relative = 0
+      else:
+        pot_benefit_relative = asset_aux.pot_benefit.get_value("LOCAL") / asset_aux.curr_cost.get_value("LOCAL")
+
+      data_index.append(asset_aux.symbol)
+
+      aux_data.append([
+        asset_aux.asset_name,
+        asset_aux.curr_shares,        
+        asset_aux.last_market_value.get_value("LOCAL"),       
+        asset_aux.pot_benefit.get_value("LOCAL") + asset_aux.current_benefit.get_value("LOCAL"),
+        asset_aux.pot_benefit.get_value("LOCAL"),
+        pot_benefit_relative,
+        asset_aux.pot_currency_benefit.get_value("LOCAL"),
+        asset_aux.pot_product_benefit.get_value("LOCAL"),
+        asset_aux.current_benefit.get_value("LOCAL"),
+        asset_aux.current_currency_benefit.get_value("LOCAL"),
+        asset_aux.current_product_benefit.get_value("LOCAL")
+      ])
+
+    self.assets_info_df = pd.DataFrame(aux_data, columns=data_columns, index=data_index)
+
+
+      
+      
+
 
   ## aquí faltaría meter otras transacciones asociadas solo al potfolio como ingresos o retiradas, comisiones de cuenta, etc
 
