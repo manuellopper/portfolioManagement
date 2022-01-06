@@ -563,7 +563,7 @@ class AssetEquity(Asset):
       self.pot_product_benefit.set_value(0,"ASSET")
     
   
-  def get_asset_info_dataframe():
+  def get_asset_info_dataframe(self):
     index_titles=["Name","Type","Currency","Num. of shares","Market value","Underlying cost","TOTAL P/L","POTENTIAL P/L","- Pot. product P/L","- Pot. currency P/L", "CURRENT P/L","- Curr. product P/L","- Curr. currency P/L","Dividends","Commissions","Taxes"]
 
     data= [
