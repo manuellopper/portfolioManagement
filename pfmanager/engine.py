@@ -223,13 +223,7 @@ class Portfolio:
       self.current_product_benefit += asset_aux.current_product_benefit.get_value("LOCAL")
       self.pot_benefit += asset_aux.pot_benefit.get_value("LOCAL")
       self.pot_currency_benefit += asset_aux.pot_currency_benefit.get_value("LOCAL")
-      self.pot_product_benefit += asset_aux.pot_product_benefit.get_value("LOCAL")
-    
-      #Actualizamos el dataframe con la lista de los activos
-      if asset_aux.curr_cost.get_value("LOCAL") == 0:
-        pot_benefit_relative = 0
-      else:
-        pot_benefit_relative = asset_aux.pot_benefit.get_value("LOCAL") / asset_aux.curr_cost.get_value("LOCAL")
+      self.pot_product_benefit += asset_aux.pot_product_benefit.get_value("LOCAL")     
 
         
 
@@ -237,6 +231,12 @@ class Portfolio:
     aux_data=[]
     data_index=[]
     data_columns=["Name","Shares","Market Value","TOTAL BENEFIT", "POTENCIAL BENEFIT", "P.B. relative", "Pot. Currency Benefit","Pot. Product Benefit","CURRENT BENEFIT", "Curr. Currency Benefit", "Curr. Product Benefit"]
+
+    #Actualizamos el dataframe con la lista de los activos
+    if asset_aux.curr_cost.get_value("LOCAL") == 0:
+      pot_benefit_relative = 0
+    else:
+      pot_benefit_relative = asset_aux.pot_benefit.get_value("LOCAL") / asset_aux.curr_cost.get_value("LOCAL")
 
     for asset_aux in self.assets_list:
       data_index.append(asset_aux.symbol)
