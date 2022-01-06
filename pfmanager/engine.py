@@ -563,29 +563,29 @@ class AssetEquity(Asset):
       self.pot_product_benefit.set_value(0,"ASSET")
     
   
-   def get_asset_info_dataframe():
-     index_titles=["Name","Type","Currency","Num. of shares","Market value","Underlying cost","TOTAL P/L","POTENTIAL P/L","- Pot. product P/L","- Pot. currency P/L", "CURRENT P/L","- Curr. product P/L","- Curr. currency P/L","Dividends","Commissions","Taxes"]
+  def get_asset_info_dataframe():
+    index_titles=["Name","Type","Currency","Num. of shares","Market value","Underlying cost","TOTAL P/L","POTENTIAL P/L","- Pot. product P/L","- Pot. currency P/L", "CURRENT P/L","- Curr. product P/L","- Curr. currency P/L","Dividends","Commissions","Taxes"]
 
-     data= [
-       self.asset_name,
-       self.asset_type,
-       self.currency,
-       self.curr_shares,
-       self.last_market_value.get_value("LOCAL"),
-       self.curr_cost.get_value("LOCAL"),
-       self.pot_benefit.get_value("LOCAL") + self.current_benefit.get_value("LOCAL"),
-       self.pot_benefit.get_value("LOCAL"),
-       self.pot_product_benefit.get_value("LOCAL"),
-       self.pot_currency_benefit.get_value("LOCAL"),
-       self.current_benefit.get_value("LOCAL"),
-       self.current_product_benefit.get_value("LOCAL"),
-       self.current_currency_benefit.get_value("LOCAL"),
-       self.total_dividends.get_value("LOCAL"),
-       self.total_commissions.get_value("LOCAL"),
-       self.total_taxes.get_value("LOCAL")
-     ]
+    data= [
+      self.asset_name,
+      self.asset_type,
+      self.currency,
+      self.curr_shares,
+      self.last_market_value.get_value("LOCAL"),
+      self.curr_cost.get_value("LOCAL"),
+      self.pot_benefit.get_value("LOCAL") + self.current_benefit.get_value("LOCAL"),
+      self.pot_benefit.get_value("LOCAL"),
+      self.pot_product_benefit.get_value("LOCAL"),
+      self.pot_currency_benefit.get_value("LOCAL"),
+      self.current_benefit.get_value("LOCAL"),
+      self.current_product_benefit.get_value("LOCAL"),
+      self.current_currency_benefit.get_value("LOCAL"),
+      self.total_dividends.get_value("LOCAL"),
+      self.total_commissions.get_value("LOCAL"),
+      self.total_taxes.get_value("LOCAL")
+    ]
 
-     return pd.DataFrame(data,index=index_titles,columns=["Valores"])
+    return pd.DataFrame(data,index=index_titles,columns=["Valores"])
   
      
     
