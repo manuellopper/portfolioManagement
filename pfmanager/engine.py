@@ -139,8 +139,7 @@ class Portfolio:
     self.pot_currency_benefit = 0
     self.pot_product_benefit = 0
 
-    #information variables
-    self.assets_info_df =[]
+  
 
   def asset_exist(self, symbol=None, id=None):
 
@@ -213,11 +212,7 @@ class Portfolio:
     self.pot_benefit = 0
     self.pot_currency_benefit = 0
     self.pot_product_benefit = 0
-    self.assets_info_df = []
-
-    aux_data=[]
-    data_index=[]
-    data_columns=["Name","Shares","Market Value","TOTAL BENEFIT", "POTENCIAL BENEFIT", "P.B. relative", "Pot. Currency Benefit","Pot. Product Benefit","CURRENT BENEFIT", "Curr. Currency Benefit", "Curr. Product Benefit"]
+        
     
     for asset_aux in self.assets_list:
       if update_assets == True:
@@ -236,6 +231,14 @@ class Portfolio:
       else:
         pot_benefit_relative = asset_aux.pot_benefit.get_value("LOCAL") / asset_aux.curr_cost.get_value("LOCAL")
 
+        
+
+  def get_assets_info_dataframe(self):
+    aux_data=[]
+    data_index=[]
+    data_columns=["Name","Shares","Market Value","TOTAL BENEFIT", "POTENCIAL BENEFIT", "P.B. relative", "Pot. Currency Benefit","Pot. Product Benefit","CURRENT BENEFIT", "Curr. Currency Benefit", "Curr. Product Benefit"]
+
+    for asset_aux in self.assets_list:
       data_index.append(asset_aux.symbol)
 
       aux_data.append([
@@ -252,7 +255,10 @@ class Portfolio:
         asset_aux.current_product_benefit.get_value("LOCAL")
       ])
 
-    self.assets_info_df = pd.DataFrame(aux_data, columns=data_columns, index=data_index)
+    return pd.DataFrame(aux_data, columns=data_columns, index=data_index)
+
+
+
 
 
       
@@ -839,6 +845,7 @@ class Account:
     self.list_of_portfolios = []
     self.list_of_records = []
     self.balance = {cu.system_local_currency: 0} # Se inicia sólo con la currency local del sistema
+    
 
   def register_portfolio(self , pf , generate_records = True):
     if type(pf) is not Portfolio:
@@ -859,44 +866,51 @@ class Account:
   def register_record(self, rec):
     
     ## rec puede ser un objeto de tipo Record o bien una lista de objetos de tipo Record
+    if len(self.list_of_records) > 0:
+      last_record_date = self.list_of_records[len(self.list_of_records)-1].record_time
+    else:
+      last_record_date= date(1500,1,1)
+
 
     if type(rec) == list:
       if type(rec[0]) is not Record:
         return "Error:tipos no válidos"      
       self.list_of_records.extend(rec)
+      records_date=rec[0].record_time
     elif type(rec) == Record:
       self.list_of_records.append(rec)
+      records_date=rec.record_time
     else:
       return "Error: tipo no válido"
 
-    
-    self.list_of_records.sort(key=self.get_record_date)
+    if last_record_date > records_date:
+      self.list_of_records.sort(key=self.get_record_date)
 
-    ## para los registros que tengan igual date se ordena por id de los mismos (el id es un timestamp)
-    start_index=None
-    end_index=None
-    list_aux=[]
-    for i in range(0,len(self.list_of_records)):        
-      if i == 0:
-        continue
-      if self.list_of_records[i].record_time == self.list_of_records[i-1].record_time:
-        if start_index == None:
-          start_index=i-1          
-        end_index=i+1
-      else:
-        if not( start_index == None ):
-          list_aux = self.list_of_records[start_index:end_index].copy()
+      ## para los registros que tengan igual date se ordena por id de los mismos (el id es un timestamp)
+      start_index=None
+      end_index=None
+      list_aux=[]
+      for i in range(0,len(self.list_of_records)):        
+        if i == 0:
+          continue
+        if self.list_of_records[i].record_time == self.list_of_records[i-1].record_time:
+          if start_index == None:
+            start_index=i-1          
+          end_index=i+1
+        else:
+          if not( start_index == None ):
+            list_aux = self.list_of_records[start_index:end_index].copy()
+            list_aux.sort(key=self.get_record_id)
+            self.list_of_records[start_index:end_index]=list_aux
+            start_index = None
+            end_index= None
+      
+        if i == (len(self.list_of_records)-1) and not (start_index==None):
+          list_aux = self.list_of_records[start_index:end_index].copy()        
           list_aux.sort(key=self.get_record_id)
           self.list_of_records[start_index:end_index]=list_aux
           start_index = None
           end_index= None
-      
-      if i == (len(self.list_of_records)-1) and not (start_index==None):
-        list_aux = self.list_of_records[start_index:end_index].copy()        
-        list_aux.sort(key=self.get_record_id)
-        self.list_of_records[start_index:end_index]=list_aux
-        start_index = None
-        end_index= None
 
     # se actualiza el balance
     keys= self.balance.keys()
@@ -913,6 +927,26 @@ class Account:
       rec_aux.prev_balance = self.balance[curr]
       self.balance[curr]+=rec_aux.cash_flow
       rec_aux.result_balance = self.balance[curr]
+    
+  def get_list_of_records_dataframe(self):
+    col_titles=["Date","Currency","Prev. Balance","Cash Flow", "Next Balance","Type","Description"] 
+    record_data =[]
+
+    for record_aux in self.list_of_records:
+      record_data.append([
+        record_aux.record_time,
+        record_aux.currency,
+        record_aux.prev_balance,
+        record_aux.cash_flow,
+        record_aux.result_balance,
+        record_aux.record_type,
+        record_aux.description
+      ])
+
+    return pd.DataFrame(record_data,columns=col_titles)
+
+
+
 
 
   def get_record_date(self, rec): return rec.record_time
