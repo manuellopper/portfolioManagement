@@ -98,10 +98,13 @@ def fetch_asking_user(symbol, date_ask):
   return float(input())
 
 def fetch_yahoofin(symbol, date_ask):  
-  stock = yf.Ticker(symbol)
-  hist=stock.history(start=(date_ask-timedelta(days=10)).strftime("%Y-%m-%d"))
-  value = hist.iloc[len(hist)-1].at["Close"]  
-  return float(value)
+  try:
+    stock = yf.Ticker(symbol)
+    hist=stock.history(start=(date_ask-timedelta(days=10)).strftime("%Y-%m-%d"))
+    value = hist.iloc[len(hist)-1].at["Close"]  
+    return float(value)
+  except:
+    return 0.0
   
 
 def yahoofin_validation(symbol):  
@@ -160,6 +163,7 @@ class Portfolio:
 
   def register_asset(self, asset_aux, register_records=True):
     
+    asset_aux.update_asset()
     asset_type = asset_aux.get_asset_type()
 
     if asset_type == "Equity":
@@ -173,7 +177,7 @@ class Portfolio:
           for trans_aux in asset_aux.transactions_list:
             trans_aux.generate_records(self.account)
     
-    self.update_portfolio(update_assets=True)
+    self.update_portfolio()
         
   def copy_transactions_from_asset(self, asset_aux):
     
@@ -285,6 +289,7 @@ class Asset:
     else:      
       return "Error" #### !!!!Hay que establecer cómo se retornan cosas
     
+    self.validated=False
     self.set_new_id()
     self.asset_name=name    
     self.transactions_list=[]    
@@ -371,13 +376,16 @@ class AssetEquity(Asset):
   def __init__(self, name, currency, symbol, validate=True,validation_method=yahoofin_validation, sector=None,market_type=None, size=None, caract=None):
     # Main information
     super().__init__(name,currency)  
-    self.asset_type="Equity"
-    self.validation_method=validation_method
     if validate == True:
       if self.validation_method(symbol):
         self.symbol = symbol
+        self.validated = True
       else:
+        self.validated = False
         return "Error: símbolo no válido"
+    self.asset_type="Equity"
+    self.validation_method=validation_method
+    
     #Asset general information
     self.sector=sector
     self.market_type=market_type
