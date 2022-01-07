@@ -377,15 +377,17 @@ class AssetEquity(Asset):
     # Main information
     super().__init__(name,currency)  
     self.validation_method=validation_method
-    
+
     if validate == True:
-      if self.validation_method(symbol):
-        self.symbol = symbol
+      if self.validation_method(symbol):        
         self.validated = True
       else:
         self.validated = False
         return "Error: símbolo no válido"
+    else:
+      self.validated = False
     
+    self.symbol = symbol
     self.asset_type="Equity"
     
     
@@ -517,26 +519,31 @@ class AssetEquity(Asset):
   def update_market_value(self):
 
     
-    if (date.today() - self.max_days_validity_mvalue) > self.last_market_value_fetch_date:
-      value = self.fetch_value(date.today())
-      if not (type(value) == int or type(value) == float):
-        return "Error: valor capturado no válido"
+    if self.validated:
+      if (date.today() - self.max_days_validity_mvalue) > self.last_market_value_fetch_date:
+        value = self.fetch_value(date.today())
+        if not (type(value) == int or type(value) == float):
+          return "Error: valor capturado no válido"
 
-      self.last_market_value_fetch_date = date.today()
-      resul=cu.Currency(0,self.currency,0,cu.get_sys_local_currency())
-      resul.set_value(value,"ASSET")
-      if not(self.currency == cu.get_sys_local_currency()):
-        convert=cu.Currency.convert_currency(value,self.currency,cu.get_sys_local_currency(),self.last_market_value_fetch_date) 
-        resul.set_value(convert,"LOCAL")
-      else:
-        resul.set_value(value,"LOCAL")      
+        self.last_market_value_fetch_date = date.today()
+        resul=cu.Currency(0,self.currency,0,cu.get_sys_local_currency())
+        resul.set_value(value,"ASSET")
+        if not(self.currency == cu.get_sys_local_currency()):
+          convert=cu.Currency.convert_currency(value,self.currency,cu.get_sys_local_currency(),self.last_market_value_fetch_date) 
+          resul.set_value(convert,"LOCAL")
+        else:
+          resul.set_value(value,"LOCAL")      
       
-      self.last_market_value_unitary = resul
-      self.last_market_value = resul * self.curr_shares      
-      return self.last_market_value
+        self.last_market_value_unitary = resul
+        self.last_market_value = resul * self.curr_shares      
+        return self.last_market_value
+      else:
+        self.last_market_value = self.last_market_value_unitary * self.curr_shares
+        return self.last_market_value
     else:
-      self.last_market_value = self.last_market_value_unitary * self.curr_shares
-      return self.last_market_value
+      self.last_market_value_unitary = cu.Currency(0,self.currency,0,cu.get_sys_local_currency())
+      self.last_market_value = cu.Currency(0,self.currency,0,cu.get_sys_local_currency())
+
     
   def update_asset(self):
 
