@@ -376,6 +376,8 @@ class AssetEquity(Asset):
   def __init__(self, name, currency, symbol, validate=True,validation_method=yahoofin_validation, sector=None,market_type=None, size=None, caract=None):
     # Main information
     super().__init__(name,currency)  
+    self.validation_method=validation_method
+    
     if validate == True:
       if self.validation_method(symbol):
         self.symbol = symbol
@@ -383,8 +385,9 @@ class AssetEquity(Asset):
       else:
         self.validated = False
         return "Error: símbolo no válido"
+    
     self.asset_type="Equity"
-    self.validation_method=validation_method
+    
     
     #Asset general information
     self.sector=sector
