@@ -111,7 +111,7 @@ def yahoofin_validation(symbol):
     return True
   except:    
     return False
-  
+
   
 
 
