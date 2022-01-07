@@ -1,36 +1,33 @@
 Fecha,Cartera,Valor,Moneda,TIKR,Operación,Unidades,Precio unitario,Comisiones,Precio unitario (€),Comisiones (€),Retenciones (€)
-2017-08-21,Degiro,Medical Properties Trust,USD,MPW,BUY,35.0,12.54,0.73,10.64,0.62,
-2017-08-22,Degiro,Medical Properties Trust,USD,MPW,BUY,44.0,12.8,0.76,10.88,0.65,
+2017-08-21,Degiro,Medical Properties Trust,USD,MPW,BUY,35.0,12.54,0.73,10.64,0.62,0.0
+2017-08-22,Degiro,Medical Properties Trust,USD,MPW,BUY,44.0,12.8,0.76,10.88,0.65,0.0
 2017-10-13,Degiro,Medical Properties Trust,USD,MPW,DIV,1.0,18.96,0.0,16.03,0.0,2.4
-2017-10-13,Degiro,Medical Properties Trust,USD,MPW,SELL,79.0,13.16,0.91,11.13,0.77,
-2017-10-13,Degiro,Omega Heathcare Inversors,USD,OHI,BUY,33.0,31.65,0.71,26.77,0.6,
-2017-10-13,Degiro,Omega Heathcare Inversors,USD,OHI,BUY,8.0,31.69,0.63,26.8,0.53,
+2017-10-13,Degiro,Medical Properties Trust,USD,MPW,SELL,79.0,13.16,0.91,11.13,0.77,0.0
+2017-10-13,Degiro,Omega Heathcare Inversors,USD,OHI,BUY,33.0,31.65,0.71,26.77,0.6,0.0
+2017-10-13,Degiro,Omega Heathcare Inversors,USD,OHI,BUY,8.0,31.69,0.63,26.8,0.53,0.0
 2017-11-16,Degiro,Omega Heathcare Inversors,USD,OHI,DIV,1.0,26.65,0.0,22.54,0.0,3.38
-2018-01-28,Crypto,Ripple (KRAKEN),EUR,KRAKEN:XRPEUR,BUY,175.745,1.13699,0.0,1.13699,0.0,
-2018-01-24,Crypto,Ethereum (GDAX),EUR,GDAX:ETHEUR,BUY,0.11917779,836.99,0.25,836.99,0.25,
-2018-01-24,Crypto,Bitcoin (GDAX),EUR,GDAX:BTCEUR,BUY,0.0107956,9239.9,0.25,9239.9,0.25,
 2018-02-15,Degiro,Omega Heathcare Inversors,USD,OHI,DIV,1.0,27.06,0.0,21.89,0.0,3.28
-2018-04-10,Degiro,Omega Heathcare Inversors,USD,OHI,SELL,27.0,26.61,0.11,21.53,0.09,
-2018-04-10,Degiro,Omega Heathcare Inversors,USD,OHI,SELL,14.0,26.61,0.68,21.53,0.55,
-2018-04-10,Degiro,Medical Properties Trust,USD,MPW,BUY,48.0,12.84,0.81,10.41,0.66,
-2018-04-10,Degiro,AT&T,USD,T,BUY,18.0,35.36,0.69,28.67,0.56,
-2018-04-10,Degiro,AT&T,USD,T,SELL,1.0,35.34,0.62,28.65,0.5,
+2018-04-10,Degiro,Omega Heathcare Inversors,USD,OHI,SELL,27.0,26.61,0.11,21.53,0.09,0.0
+2018-04-10,Degiro,Omega Heathcare Inversors,USD,OHI,SELL,14.0,26.61,0.68,21.53,0.55,0.0
+2018-04-10,Degiro,Medical Properties Trust,USD,MPW,BUY,48.0,12.84,0.81,10.41,0.66,0.0
+2018-04-10,Degiro,AT&T,USD,T,BUY,18.0,35.36,0.69,28.67,0.56,0.0
+2018-04-10,Degiro,AT&T,USD,T,SELL,1.0,35.34,0.62,28.65,0.5,0.0
 2018-07-13,Degiro,Medical Properties Trust,USD,MPW,DIV,1.0,12.0,0.0,10.27,0.0,1.54
 2018-08-01,Degiro,AT&T,USD,T,DIV,1.0,8.5,0.0,7.29,0.0,1.09
 2018-10-12,Degiro,Medical Properties Trust,USD,MPW,DIV,1.0,12.0,0.0,10.38,0.0,1.56
 2018-11-01,Degiro,AT&T,USD,T,DIV,1.0,8.5,0.0,7.45,0.0,1.12
-2018-11-06,Degiro,W.P. Carey,USD,WPC,BUY,4.0,64.73,0.58,56.64,0.51,
-2018-11-06,Degiro,TransMontaigne Partners L.P.,USD,TLP,BUY,6.0,37.66,0.59,32.95,0.52,
-2018-11-06,Degiro,Enterprise Products Partners L.P,USD,EPD,BUY,8.0,27.07,0.6,23.69,0.53,
-2018-11-06,Degiro,Holly Energy Partners,USD,HEP,BUY,8.0,29.02,0.6,25.39,0.53,
-2018-11-06,Degiro,Main Street Capital Corp.,USD,MAIN,BUY,7.0,38.42,0.59,33.62,0.52,
-2018-11-06,Degiro,Holly Energy Partners,USD,HEP,SELL,1.0,29.44,0.57,25.76,0.5,
+2018-11-06,Degiro,W.P. Carey,USD,WPC,BUY,4.0,64.73,0.58,56.64,0.51,0.0
+2018-11-06,Degiro,TransMontaigne Partners L.P.,USD,TLP,BUY,6.0,37.66,0.59,32.95,0.52,0.0
+2018-11-06,Degiro,Enterprise Products Partners L.P,USD,EPD,BUY,8.0,27.07,0.6,23.69,0.53,0.0
+2018-11-06,Degiro,Holly Energy Partners,USD,HEP,BUY,8.0,29.02,0.6,25.39,0.53,0.0
+2018-11-06,Degiro,Main Street Capital Corp.,USD,MAIN,BUY,7.0,38.42,0.59,33.62,0.52,0.0
+2018-11-06,Degiro,Holly Energy Partners,USD,HEP,SELL,1.0,29.44,0.57,25.76,0.5,0.0
 2018-12-17,Degiro,Main Street Capital Corp.,USD,MAIN,DIV,1.0,1.37,0.0,1.19,0.0,0.17
-2018-12-31,Degiro,AT&T,USD,T,BUY,10.0,28.3,0.61,24.74,0.53,
-2018-12-31,Degiro,Altria Group Inc,USD,MO,BUY,6.0,48.88,0.6,42.74,0.52,
-2018-12-31,Degiro,Magellan Midstream,USD,MMP,BUY,5.0,56.97,0.6,49.82,0.52,
-2018-12-31,Degiro,IBM,USD,IBM,BUY,2.0,113.65,0.58,99.34,0.51,
-2018-12-31,Degiro,Magellan Midstream,USD,MMP,BUY,1.0,57.03,0.57,49.85,0.5,
+2018-12-31,Degiro,AT&T,USD,T,BUY,10.0,28.3,0.61,24.74,0.53,0.0
+2018-12-31,Degiro,Altria Group Inc,USD,MO,BUY,6.0,48.88,0.6,42.74,0.52,0.0
+2018-12-31,Degiro,Magellan Midstream,USD,MMP,BUY,5.0,56.97,0.6,49.82,0.52,0.0
+2018-12-31,Degiro,IBM,USD,IBM,BUY,2.0,113.65,0.58,99.34,0.51,0.0
+2018-12-31,Degiro,Magellan Midstream,USD,MMP,BUY,1.0,57.03,0.57,49.85,0.5,0.0
 2019-01-11,Degiro,Medical Properties Trust,USD,MPW,DIV,1.0,12.0,0.0,10.42,0.0,1.56
 2018-12-28,Degiro,Main Street Capital Corp.,USD,MAIN,DIV,1.0,1.93,0.0,1.68,0.0,0.25
 2019-01-16,Degiro,W.P. Carey,USD,WPC,DIV,1.0,4.12,0.0,3.61,0.0,0.54
@@ -63,29 +60,18 @@ Fecha,Cartera,Valor,Moneda,TIKR,Operación,Unidades,Precio unitario,Comisiones,P
 2019-07-16,Degiro,Main Street Capital Corp.,USD,MAIN,DIV,1.0,1.44,0.0,1.28,0.0,0.19
 2019-07-16,Degiro,W.P. Carey,USD,WPC,DIV,1.0,4.14,0.0,3.69,0.0,0.55
 2019-08-01,Degiro,AT&T,USD,T,DIV,1.0,13.77,0.0,12.41,0.0,1.86
-2019-08-12,Acc. Empleado,Telefónica SA,EUR,BME:TEF,BUY,23.9846,6.25,0.0,6.25,0.0,0.0
 2019-08-14,Degiro,Holly Energy Partners,USD,HEP,DIV,1.0,4.71,0.0,4.21,0.0,1.55
 2019-08-14,Degiro,Enterprise Products Partners L.P,USD,EPD,DIV,1.0,3.52,0.0,3.16,0.0,1.17
 2019-08-14,Degiro,Magellan Midstream,USD,MMP,DIV,1.0,6.08,0.0,5.45,0.0,2.02
 2019-08-16,Degiro,Tanger Factory Outlet Centers,USD,SKT,DIV,1.0,4.97,0.0,4.47,0.0,0.67
 2019-08-16,Degiro,Main Street Capital Corp.,USD,MAIN,DIV,1.0,1.44,0.0,1.3,0.0,0.2
-2019-08-31,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,BUY,1.0,3000.0,0.0,3000.0,0.0,0.0
-2019-08-31,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,INT,1.0,3.68,0.0,3.68,0.0,0.0
-2019-08-31,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,BUY,1.0,3.68,0.0,3.68,0.0,0.0
 2019-09-10,Degiro,IBM,USD,IBM,DIV,1.0,3.24,0.0,2.93,0.0,0.44
-2019-09-11,Acc. Empleado,Telefónica SA,EUR,BME:TEF,BUY,22.4181,6.69,0.0,6.69,0.0,0.0
 2019-09-17,Degiro,Main Street Capital Corp.,USD,MAIN,DIV,1.0,1.44,0.0,1.3,0.0,0.2
-2019-09-30,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,INT,1.0,21.81,0.0,21.81,0.0,0.0
-2019-09-30,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,BUY,1.0,21.81,0.0,21.81,0.0,0.0
 2019-10-08,Degiro,AbbVie,USD,ABBV,BUY,1.0,73.72,0.55,67.23,0.5,0.0
 2019-10-10,Degiro,Altria Group Inc,USD,MO,DIV,1.0,5.04,0.0,4.58,0.0,0.69
 2019-10-11,Degiro,Medical Properties Trust,USD,MPW,DIV,1.0,12.48,0.0,11.33,0.0,1.7
-2019-10-11,Acc. Empleado,Telefónica SA,EUR,BME:TEF,BUY,21.30984,7.04,0.0,7.04,0.0,0.0
 2019-10-16,Degiro,W.P. Carey,USD,WPC,DIV,1.0,4.14,0.0,3.74,0.0,0.56
 2019-10-16,Degiro,Main Street Capital Corp.,USD,MAIN,DIV,1.0,1.44,0.0,1.3,0.0,0.2
-2019-10-31,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,INT,1.0,45.52,0.0,45.52,0.0,0.0
-2019-10-31,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,BUY,1.0,45.52,0.0,45.52,0.0,0.0
-2019-11-11,Acc. Empleado,Telefónica SA,EUR,BME:TEF,BUY,21.72338,6.91,0.0,6.91,0.0,0.0
 2019-11-12,Degiro,Meredith,USD,MDP,BUY,6.0,36.2,0.57,32.87,0.52,0.0
 2019-11-12,Degiro,Occidental Petroleoum,USD,OXY,BUY,6.0,38.18,0.57,34.67,0.52,0.0
 2019-11-12,Degiro,Preferred Apt. Communities,USD,APTS,BUY,17.0,13.06,0.57,11.86,0.52,0.0
@@ -99,18 +85,10 @@ Fecha,Cartera,Valor,Moneda,TIKR,Operación,Unidades,Precio unitario,Comisiones,P
 2019-11-15,Degiro,Tanger Factory Outlet Centers,USD,SKT,DIV,1.0,4.97,0.0,4.49,0.0,0.68
 2019-11-18,Degiro,Main Street Capital Corp.,USD,MAIN,DIV,1.0,1.44,0.0,1.3,0.0,0.2
 2019-11-29,Degiro,Simon Property,USD,SPG,DIV,1.0,4.2,0.0,3.8,0.0,0.57
-2019-11-30,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,BUY,1.0,500.0,0.0,500.0,0.0,0.0
-2019-11-30,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,INT,1.0,27.42,0.0,27.42,0.0,0.0
-2019-11-30,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,BUY,1.0,27.42,0.0,27.42,0.0,0.0
 2019-12-10,Degiro,IBM,USD,IBM,DIV,1.0,3.24,0.0,2.91,0.0,0.44
-2019-12-11,Acc. Empleado,Telefónica SA,EUR,BME:TEF,BUY,22.18606,6.76,0.0,6.76,0.0,0.0
 2019-12-12,Degiro,Main Street Capital Corp.,USD,MAIN,DIV,1.0,1.44,0.0,1.29,0.0,0.2
 2019-12-14,Degiro,Meredith,USD,MDP,DIV,1.0,3.45,0.0,3.1,0.0,0.47
 2019-12-27,Degiro,Main Street Capital Corp.,USD,MAIN,DIV,1.0,1.68,0.0,1.49,0.0,0.22
-2019-12-31,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,INT,1.0,26.02,0.0,26.02,0.0,0.0
-2019-12-31,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,BUY,1.0,26.02,0.0,26.02,0.0,0.0
-2020-01-03,Acc. Empleado,Telefónica SA,EUR,BME:TEF,DIV,1.0,22.32,0.0,22.32,0.0,4.24
-2020-01-03,Acc. Empleado,Telefónica SA,EUR,BME:TEF,BUY,2.7951,6.36,0.31,6.36,0.31,0.0
 2020-01-10,Degiro,Medical Properties Trust,USD,MPW,DIV,1.0,12.48,0.0,11.22,0.0,1.68
 2020-01-10,Degiro,Altria Group Inc,USD,MO,DIV,1.0,5.04,0.0,4.53,0.0,0.68
 2020-01-22,Degiro,National Health Investement,USD,NHI,BUY,2.0,85.19,0.55,76.81,0.5,0.0
@@ -121,12 +99,6 @@ Fecha,Cartera,Valor,Moneda,TIKR,Operación,Unidades,Precio unitario,Comisiones,P
 2020-01-15,Degiro,Occidental Petroleoum,USD,OXY,DIV,1.0,4.74,0.0,4.25,0.0,0.64
 2020-01-16,Degiro,Preferred Apt. Communities,USD,APTS,DIV,1.0,4.46,0.0,4.0,0.0,0.6
 2020-01-16,Degiro,Main Street Capital Corp.,USD,MAIN,DIV,1.0,1.44,0.0,1.29,0.0,0.2
-2020-01-13,Acc. Empleado,Telefónica SA,EUR,BME:TEF,BUY,24.60226,6.1,0.0,6.1,0.0,0.0
-2020-01-31,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,INT,1.0,27.71,0.0,27.71,0.0,0.0
-2020-01-31,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,BUY,1.0,27.71,0.0,27.71,0.0,0.0
-2020-02-29,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,INT,1.0,29.17,0.0,29.17,0.0,0.0
-2020-02-29,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,BUY,1.0,29.17,0.0,29.17,0.0,0.0
-2020-02-11,Acc. Empleado,Telefónica SA,EUR,BME:TEF,BUY,24.31118,6.17,0.0,6.17,0.0,0.0
 2020-02-03,Degiro,AT&T,USD,T,DIV,1.0,14.04,0.0,12.68,0.0,2.26
 2020-02-13,Degiro,Enterprise Products Partners L.P,USD,EPD,DIV,1.0,3.56,0.0,3.28,0.0,1.22
 2020-02-14,Degiro,Holly Energy Partners,USD,HEP,DIV,1.0,4.71,0.0,4.34,0.0,1.6
@@ -152,18 +124,6 @@ Fecha,Cartera,Valor,Moneda,TIKR,Operación,Unidades,Precio unitario,Comisiones,P
 2020-05-13,Degiro,Enterprise Products Partners L.P,USD,EPD,DIV,1.0,3.56,0.0,3.29,0.0,1.22
 2020-05-15,Degiro,Holly Energy Partners,USD,HEP,DIV,1.0,2.45,0.0,2.27,0.0,0.84
 2020-05-16,Degiro,Tanger Factory Outlet Centers,USD,SKT,DIV,1.0,5.01,0.0,4.63,0.0,0.69
-2020-03-11,Acc. Empleado,Telefónica SA,EUR,BME:TEF,BUY,33.94433,4.42,0.0,4.42,0.0,0.0
-2020-04-14,Acc. Empleado,Telefónica SA,EUR,BME:TEF,BUY,34.70615,4.32,0.0,4.32,0.0,0.0
-2020-03-31,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,INT,1.0,25.7,0.0,25.7,0.0,0.0
-2020-03-31,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,BUY,1.0,25.7,0.0,25.7,0.0,0.0
-2020-04-30,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,INT,1.0,26.03,0.0,26.03,0.0,0.0
-2020-04-30,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,BUY,1.0,26.03,0.0,26.03,0.0,0.0
-2020-05-31,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,INT,1.0,34.05,0.0,34.05,0.0,0.0
-2020-05-31,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,BUY,1.0,34.05,0.0,34.05,0.0,0.0
-2020-05-11,Acc. Empleado,Telefónica SA,EUR,BME:TEF,BUY,35.75685,4.2,0.0,4.2,0.0,0.0
-2020-06-11,Acc. Empleado,Telefónica SA,EUR,BME:TEF,BUY,33.39269,4.49,0.0,4.49,0.0,0.0
-2020-06-30,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,INT,1.0,35.8,0.0,35.8,0.0,0.0
-2020-06-30,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,BUY,1.0,35.8,0.0,35.8,0.0,0.0
 2020-05-18,Degiro,Magellan Midstream,USD,MMP,DIV,1.0,6.17,0.0,5.65,0.0,2.09
 2020-05-18,Degiro,AbbVie,USD,ABBV,DIV,1.0,1.18,0.0,1.08,0.0,0.16
 2020-05-18,Degiro,Main Street Capital Corp.,USD,MAIN,DIV,1.0,1.44,0.0,1.32,0.0,0.2
@@ -172,14 +132,6 @@ Fecha,Cartera,Valor,Moneda,TIKR,Operación,Unidades,Precio unitario,Comisiones,P
 2020-06-11,Degiro,IBM,USD,IBM,DIV,1.0,3.26,0.0,2.88,0.0,0.43
 2020-06-16,Degiro,Main Street Capital Corp.,USD,MAIN,DIV,1.0,1.44,0.0,1.28,0.0,0.2
 2020-06-23,Degiro,Dominion Energy,USD,D,DIV,1.0,1.88,0.0,1.66,0.0,0.25
-2020-07-31,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,INT,1.0,33.91,0.0,33.91,0.0,0.0
-2020-07-31,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,BUY,1.0,33.91,0.0,33.91,0.0,0.0
-2020-08-31,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,INT,1.0,26.53,0.0,26.53,0.0,0.0
-2020-08-31,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,BUY,1.0,26.53,0.0,26.53,0.0,0.0
-2020-07-17,Acc. Empleado,Telefónica SA,EUR,BME:TEF,BUY,36.73769,4.08,0.0,4.08,0.0,0.0
-2020-07-15,Acc. Empleado,Telefónica SA,EUR,BME:TEF,DIV,1.0,60.41,0.0,60.41,0.0,0.0
-2020-07-15,Acc. Empleado,Telefónica SA,EUR,BME:TEF,BUY,12.5471,4.82,0.0,4.82,0.0,0.0
-2020-07-17,Acc. Empleado,Telefónica SA,EUR,BME:TEF,BUY,167.53649,0.0,0.0,0.0,0.0,0.0
 2020-07-03,Degiro,Iron Mountain,USD,IRM,DIV,1.0,4.33,0.0,3.85,0.0,0.58
 2020-07-11,Degiro,Altria Group Inc,USD,MO,DIV,1.0,5.04,0.0,4.46,0.0,0.67
 2020-07-16,Degiro,Occidental Petroleoum,USD,OXY,DIV,1.0,0.06,0.0,0.05,0.0,0.01
@@ -196,37 +148,7 @@ Fecha,Cartera,Valor,Moneda,TIKR,Operación,Unidades,Precio unitario,Comisiones,P
 2020-08-17,Degiro,AbbVie,USD,ABBV,DIV,1.0,2.36,0.0,1.99,0.0,0.29
 2020-08-17,Degiro,Magellan Midstream,USD,MMP,DIV,1.0,6.17,0.0,5.19,0.0,1.92
 2020-08-19,Degiro,Energy Transfer,USD,ET,DIV,1.0,5.49,0.0,4.63,0.0,1.71
-2020-09-08,Degiro,Banco Sabadell,EUR,BME:SAB,BUY,200.0,0.4,2.04,0.4,2.04,0.0
-2018-05-04,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,8.80463,24.39,0.0,24.39,0.0,0.0
-2018-06-01,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,8.82714,24.33,0.0,24.33,0.0,0.0
-2018-07-04,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,8.86485,24.23,0.0,24.23,0.0,0.0
-2018-08-02,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,13.20773,24.39,0.0,24.39,0.0,0.0
-2018-09-05,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,8.85945,24.24,0.0,24.24,0.0,0.0
-2018-10-02,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,8.82379,24.34,0.0,24.34,0.0,0.0
-2018-11-06,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,8.96726,23.95,0.0,23.95,0.0,0.0
-2018-12-05,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,9.01643,23.82,0.0,23.82,0.0,0.0
-2018-12-27,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,18.48683,23.24,0.0,23.24,0.0,0.0
-2019-02-01,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,8.95925,23.97,0.0,23.97,0.0,0.0
-2019-03-04,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,8.83746,24.3,0.0,24.3,0.0,0.0
-2019-03-14,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,6.60467,24.39,0.0,24.39,0.0,0.0
-2019-04-04,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,8.7159,24.64,0.0,24.64,0.0,0.0
-2019-05-02,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,8.68249,24.74,0.0,24.74,0.0,0.0
-2019-06-03,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,9.07964,24.36,0.0,24.36,0.0,0.0
-2019-07-05,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,8.66601,24.91,0.0,24.91,0.0,0.0
-2019-07-31,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,17.33392,24.91,0.0,24.91,0.0,0.0
-2019-08-30,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,8.70541,24.8,0.0,24.8,0.0,0.0
-2019-10-03,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,8.71849,24.76,0.0,24.76,0.0,0.0
-2019-11-06,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,9.78295,25.21,0.0,25.21,0.0,0.0
-2019-12-02,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,8.6924,25.14,0.0,25.14,0.0,0.0
-2019-12-23,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,17.18849,25.43,0.0,25.43,0.0,0.0
-2020-02-05,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,9.66961,25.53,0.0,25.53,0.0,0.0
-2020-03-05,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,19.97418,24.72,0.0,24.72,0.0,0.0
-2020-04-02,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,10.83556,22.79,0.0,22.79,0.0,0.0
-2020-05-21,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,10.37729,23.62,0.0,23.62,0.0,0.0
-2020-06-10,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,10.20664,24.2,0.0,24.2,0.0,0.0
-2020-07-08,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,10.17843,24.23,0.0,24.23,0.0,0.0
-2020-08-05,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,20.33399,24.28,0.0,24.28,0.0,0.0
-2020-09-08,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,10.16794,24.28,0.0,24.28,0.0,0.0
+2020-09-08,Degiro,Banco Sabadell,EUR,SAB.MC,BUY,200.0,0.4,2.04,0.4,2.04,0.0
 2020-09-11,Degiro,IBM,USD,IBM,DIV,1.0,3.26,0.0,2.75,0.0,0.41
 2020-09-16,Degiro,Main Street Capital Corp.,USD,MAIN,DIV,1.0,1.44,0.0,1.21,0.0,0.19
 2020-09-22,Degiro,Dominion Energy,USD,D,DIV,1.0,1.88,0.0,1.6,0.0,0.24
@@ -252,35 +174,13 @@ Fecha,Cartera,Valor,Moneda,TIKR,Operación,Unidades,Precio unitario,Comisiones,P
 2020-12-08,Degiro,UGI Corp,USD,UGI,BUY,4.0,35.46,0.62,29.31,0.51,0.0
 2020-12-08,Degiro,Merck,USD,MRK,BUY,2.0,83.47,0.62,68.98,0.51,0.0
 2020-12-08,Degiro,Cisco,USD,CSCO,BUY,2.0,44.32,0.62,36.63,0.51,0.0
-2020-09-30,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,INT,1.0,41.16,0.0,41.16,0.0,0.0
-2020-09-30,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,BUY,1.0,41.16,0.0,41.16,0.0,0.0
-2020-10-31,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,INT,1.0,27.87,0.0,27.87,0.0,0.0
-2020-10-31,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,BUY,1.0,27.87,0.0,27.87,0.0,0.0
-2020-11-30,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,INT,1.0,30.22,0.0,30.22,0.0,0.0
-2020-11-30,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,BUY,1.0,30.22,0.0,30.22,0.0,0.0
-2020-10-05,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,10.14169,24.34,0.0,24.34,0.0,0.0
-2020-11-04,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,10.09148,24.46,0.0,24.46,0.0,0.0
 2020-12-11,Degiro,IBM,USD,IBM,DIV,1.0,3.26,0.0,2.69,0.0,0.0
 2020-12-11,Degiro,Magellan Midstream,USD,MMP,SELL,6.0,46.0,0.63,37.91,0.52,0.0
 2020-12-16,Degiro,Main Street Capital Corp.,USD,MAIN,DIV,1.0,1.44,0.0,1.18,0.0,0.18
 2020-12-21,Degiro,Dominion Energy,USD,D,DIV,1.0,1.26,0.0,1.03,0.0,0.16
 2021-01-05,Degiro,UGI Corp,USD,UGI,DIV,1.0,1.32,0.0,1.08,0.0,0.16
-2021-01-05,Degiro,Danone,EUR,EPA:BN,BUY,4.0,54.6,4.77,54.6,4.77,0.0
+2021-01-05,Degiro,Danone,EUR,BN.PA,BUY,4.0,54.6,4.77,54.6,4.77,0.0
 2021-01-07,Degiro,Iron Mountain,USD,IRM,DIV,1.0,4.33,0.0,3.51,0.0,0.53
-2021-01-07,Crypto,Ripple (KRAKEN),EUR,KRAKEN:XRPEUR,SELL,175.745,0.27,0.09,0.27,0.09,0.0
-2021-01-07,Fondos,AXA World Funds - Global Factors - Sustainable Equity A Capitalisation EUR,EUR,LU1774149998,BUY,7.37844,135.53,0.0,135.53,0.0,0.0
-2020-12-31,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,INT,1.0,37.77,0.0,37.77,0.0,0.0
-2020-12-31,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,BUY,1.0,37.77,0.0,37.77,0.0,0.0
-2020-12-04,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,9.83877,25.09,0.0,25.09,0.0,0.0
-2020-12-31,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,19.5494,25.25,0.0,25.25,0.0,0.0
-2021-01-31,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,INT,1.0,37.89,0.0,37.89,0.0,0.0
-2021-01-31,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,BUY,1.0,37.89,0.0,37.89,0.0,0.0
-2021-02-28,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,INT,1.0,32.39,0.0,32.39,0.0,0.0
-2021-02-28,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,BUY,1.0,32.39,0.0,32.39,0.0,0.0
-2021-02-05,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,9.77894,25.6,0.0,25.6,0.0,0.0
-2021-03-04,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,19.63948,25.49,0.0,25.49,0.0,0.0
-2021-02-08,Fondos,AXA World Funds - Global Factors - Sustainable Equity A Capitalisation EUR,EUR,LU1774149998,BUY,0.43284,138.62,0.0,138.62,0.0,0.0
-2021-01-13,Acc. Empleado,Telefónica SA,EUR,BME:TEF,BUY,19.46751,3.69,0.0,3.69,0.0,0.0
 2021-01-08,Degiro,Medical Properties Trust,USD,MPW,DIV,1.0,12.96,0.0,10.6,0.0,1.59
 2021-01-11,Degiro,Merck,USD,MRK,DIV,1.0,1.3,0.0,1.07,0.0,0.16
 2021-01-12,Degiro,Altria Group Inc,USD,MO,DIV,1.0,5.16,0.0,4.24,0.0,0.63
@@ -310,7 +210,7 @@ Fecha,Cartera,Valor,Moneda,TIKR,Operación,Unidades,Precio unitario,Comisiones,P
 2021-05-03,Degiro,Altria Group Inc,USD,MO,DIV,1.0,5.16,0.0,4.27,0.0,0.64
 2021-05-04,Degiro,AT&T,USD,T,DIV,1.0,14.04,0.0,11.68,0.0,1.75
 2021-05-08,Degiro,National Health Investement,USD,NHI,DIV,1.0,2.21,0.0,1.82,0.0,0.27
-2021-05-13,Degiro,Danone,EUR,EPA:BN,DIV,1.0,7.76,0.0,6.38,0.0,1.69
+2021-05-13,Degiro,Danone,EUR,BN.PA,DIV,1.0,7.76,0.0,6.38,0.0,1.69
 2021-05-17,Degiro,AbbVie,USD,ABBV,DIV,1.0,2.6,0.0,2.14,0.0,0.32
 2021-05-17,Degiro,Tanger Factory Outlet Centers,USD,SKT,DIV,1.0,2.49,0.0,2.05,0.0,0.3
 2021-05-18,Degiro,Main Street Capital Corp.,USD,MAIN,DIV,1.0,1.44,0.0,1.18,0.0,0.18
@@ -331,7 +231,7 @@ Fecha,Cartera,Valor,Moneda,TIKR,Operación,Unidades,Precio unitario,Comisiones,P
 2021-07-22,Degiro,Intel,USD,INTC,BUY,1.0,56.1,0.59,47.47,0.5,0.0
 2021-07-24,Degiro,Simon Property,USD,SPG,DIV,1.0,2.8,0.0,2.38,0.0,0.36
 2021-07-29,Degiro,Cisco,USD,CSCO,DIV,1.0,0.74,0.0,0.62,0.0,0.09
-2021-07-30,Degiro,Red Eléctrica Corporación,EUR,BME:REE,BUY,1.0,16.65,2.04,16.65,2.04,0.0
+2021-07-30,Degiro,Red Eléctrica Corporación,EUR,REE.MC,BUY,1.0,16.65,2.04,16.65,2.04,0.0
 2021-08-03,Degiro,AT&T,USD,T,DIV,1.0,14.04,0.0,11.82,0.0,1.78
 2021-08-09,Degiro,National Health Investement,USD,NHI,DIV,1.0,1.8,0.0,1.53,0.0,0.23
 2021-08-14,Degiro,Tanger Factory Outlet Centers,USD,SKT,DIV,1.0,2.49,0.0,2.11,0.0,0.31
@@ -364,22 +264,8 @@ Fecha,Cartera,Valor,Moneda,TIKR,Operación,Unidades,Precio unitario,Comisiones,P
 2021-12-06,Degiro,Intel,USD,INTC,BUY,2.0,102.28,0.0,90.76,0.0,0.0
 2021-12-06,Degiro,VMWare,USD,VMW,BUY,2.0,232.78,0.0,206.57,0.0,0.0
 2021-12-06,Degiro,Intel,USD,INTC,BUY,1.0,51.13,0.0,45.37,0.0,0.0
-2021-03-08,Fondos,AXA World Funds - Global Factors - Sustainable Equity A Capitalisation EUR,EUR,LU1774149998,BUY,0.42583,140.9,0.0,140.9,0.0,0.0
-2021-04-06,Fondos,AXA World Funds - Global Factors - Sustainable Equity A Capitalisation EUR,EUR,LU1774149998,BUY,0.40667,147.54,0.0,147.54,0.0,0.0
-2021-05-06,Fondos,AXA World Funds - Global Factors - Sustainable Equity A Capitalisation EUR,EUR,LU1774149998,BUY,0.39936,150.24,0.0,150.24,0.0,0.0
-2021-06-08,Fondos,AXA World Funds - Global Factors - Sustainable Equity A Capitalisation EUR,EUR,LU1774149998,BUY,0.40024,149.91,0.0,149.91,0.0,0.0
-2021-07-06,Fondos,AXA World Funds - Global Factors - Sustainable Equity A Capitalisation EUR,EUR,LU1774149998,BUY,0.37795,158.75,0.0,158.75,0.0,0.0
-2021-08-06,Fondos,AXA World Funds - Global Factors - Sustainable Equity A Capitalisation EUR,EUR,LU1774149998,BUY,0.73678,162.87,0.0,162.87,0.0,0.0
-2021-09-07,Fondos,AXA World Funds - Global Factors - Sustainable Equity A Capitalisation EUR,EUR,LU1774149998,BUY,0.72582,165.33,0.0,165.33,0.0,0.0
-2021-10-06,Fondos,AXA World Funds - Global Factors - Sustainable Equity A Capitalisation EUR,EUR,LU1774149998,BUY,0.74198,161.73,0.0,161.73,0.0,0.0
-2021-11-08,Fondos,AXA World Funds - Global Factors - Sustainable Equity A Capitalisation EUR,EUR,LU1774149998,BUY,0.69979,171.48,0.0,171.48,0.0,0.0
-2021-06-30,Acc. Empleado,Telefónica SA,EUR,BME:TEF,BUY,18.49414,4.15,0.0,4.15,0.0,0.0
-2021-11-30,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,INT,1.0,294.75,0.0,294.75,0.0,0.0
-2021-11-30,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,BUY,1.0,294.75,0.0,294.75,0.0,0.0
-2021-11-30,Plan Pensiones,Plan Pensiones TSOL,EUR,P.PENSIONES,BUY,100.2994,26.63,0.0,26.63,0.0,0.0
-2021-11-08,Mintos - Auto1,Mintos - Créditos,EUR,MINTOS,BUY,1.0,500.0,0.0,500.0,0.0,0.0
 2021-11-08,Degiro,Tencent Holdings,EUR,NNND,BUY,3.0,52.8,3.9,52.8,3.9,0.0
-2021-11-08,Degiro,Danone,EUR,EPA:BN,BUY,1.0,53.41,4.19,53.41,4.19,0.0
+2021-11-08,Degiro,Danone,EUR,BN.PA,BUY,1.0,53.41,4.19,53.41,4.19,0.0
 2021-11-08,Degiro,Merck,USD,MRK,BUY,1.0,72.9,0.0,64.54,0.0,0.0
 2021-11-08,Degiro,Alibaba Holding Group,USD,BABA,BUY,2.0,123.47,0.0,109.31,0.0,0.0
 2021-12-10,Degiro,Meredith,USD,MDP,SELL,6.0,59.17,0.0,52.28,0.0,0.0
