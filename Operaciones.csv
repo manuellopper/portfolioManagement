@@ -1,0 +1,385 @@
+﻿Fecha;Cartera;Valor;Moneda;TIKR;Operación;Unidades;Precio unitario;Comisiones;Precio unitario (€);Comisiones (€);Retenciones (€)
+21/08/2017;Degiro;Medical Properties Trust;USD;MPW;BUY;35;12,54;0,73;10,64;0,62;
+22/08/2017;Degiro;Medical Properties Trust;USD;MPW;BUY;44;12,80;0,76;10,88;0,65;
+13/10/2017;Degiro;Medical Properties Trust;USD;MPW;DIV;1;18,96;0,00;16,03;0,00;2,40
+13/10/2017;Degiro;Medical Properties Trust;USD;MPW;SELL;79;13,16;0,91;11,13;0,77;
+13/10/2017;Degiro;Omega Heathcare Inversors;USD;OHI;BUY;33;31,65;0,71;26,77;0,60;
+13/10/2017;Degiro;Omega Heathcare Inversors;USD;OHI;BUY;8;31,69;0,63;26,80;0,53;
+16/11/2017;Degiro;Omega Heathcare Inversors;USD;OHI;DIV;1;26,65;0,00;22,54;0,00;3,38
+28/01/2018;Crypto;Ripple (KRAKEN);EUR;KRAKEN:XRPEUR;BUY;175,745;1,13699;0,00;1,13699;0,00;
+24/01/2018;Crypto;Ethereum (GDAX);EUR;GDAX:ETHEUR;BUY;0,11917779;836,99;0,25;836,99;0,25;
+24/01/2018;Crypto;Bitcoin (GDAX);EUR;GDAX:BTCEUR;BUY;0,0107956;9.239,90;0,25;9.239,90;0,25;
+15/02/2018;Degiro;Omega Heathcare Inversors;USD;OHI;DIV;1;27,06;0,00;21,89;0,00;3,28
+10/04/2018;Degiro;Omega Heathcare Inversors;USD;OHI;SELL;27;26,61;0,11;21,53;0,09;
+10/04/2018;Degiro;Omega Heathcare Inversors;USD;OHI;SELL;14;26,61;0,68;21,53;0,55;
+10/04/2018;Degiro;Medical Properties Trust;USD;MPW;BUY;48;12,84;0,81;10,41;0,66;
+10/04/2018;Degiro;AT&T;USD;T;BUY;18;35,36;0,69;28,67;0,56;
+10/04/2018;Degiro;AT&T;USD;T;SELL;1;35,34;0,62;28,65;0,50;
+13/07/2018;Degiro;Medical Properties Trust;USD;MPW;DIV;1;12,00;0,00;10,27;0,00;1,54
+1/08/2018;Degiro;AT&T;USD;T;DIV;1;8,50;0,00;7,29;0,00;1,09
+12/10/2018;Degiro;Medical Properties Trust;USD;MPW;DIV;1;12,00;0,00;10,38;0,00;1,56
+1/11/2018;Degiro;AT&T;USD;T;DIV;1;8,50;0,00;7,45;0,00;1,12
+6/11/2018;Degiro;W.P. Carey;USD;WPC;BUY;4;64,73;0,58;56,64;0,51;
+6/11/2018;Degiro;TransMontaigne Partners L.P.;USD;TLP;BUY;6;37,66;0,59;32,95;0,52;
+6/11/2018;Degiro;Enterprise Products Partners L.P;USD;EPD;BUY;8;27,07;0,60;23,69;0,53;
+6/11/2018;Degiro;Holly Energy Partners;USD;HEP;BUY;8;29,02;0,60;25,39;0,53;
+6/11/2018;Degiro;Main Street Capital Corp.;USD;MAIN;BUY;7;38,42;0,59;33,62;0,52;
+6/11/2018;Degiro;Holly Energy Partners;USD;HEP;SELL;1;29,44;0,57;25,76;0,50;
+17/12/2018;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,37;0,00;1,19;0,00;0,17
+31/12/2018;Degiro;AT&T;USD;T;BUY;10;28,30;0,61;24,74;0,53;
+31/12/2018;Degiro;Altria Group Inc;USD;MO;BUY;6;48,88;0,60;42,74;0,52;
+31/12/2018;Degiro;Magellan Midstream;USD;MMP;BUY;5;56,97;0,60;49,82;0,52;
+31/12/2018;Degiro;IBM;USD;IBM;BUY;2;113,65;0,58;99,34;0,51;
+31/12/2018;Degiro;Magellan Midstream;USD;MMP;BUY;1;57,03;0,57;49,85;0,50;
+11/1/2019;Degiro;Medical Properties Trust;USD;MPW;DIV;1;12,00;0,00;10,42;0,00;1,56
+28/12/2018;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,93;0,00;1,68;0,00;0,25
+16/01/2019;Degiro;W.P. Carey;USD;WPC;DIV;1;4,12;0,00;3,61;0,00;0,54
+16/01/2019;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,37;0,00;1,20;0,00;0,18
+1/2/2019;Degiro;AT&T;USD;T;DIV;1;13,77;0,00;12,02;0,00;1,81
+9/2/2019;Degiro;TransMontaigne Partners L.P.;USD;TLP;DIV;1;4,83;0,00;4,27;0,00;0,64
+11/2/2019;Degiro;Enterprise Products Partners L.P;USD;EPD;DIV;1;3,48;0,00;3,09;0,00;0,46
+15/2/2019;Degiro;Holly Energy Partners;USD;HEP;DIV;1;4,67;0,00;4,13;0,00;0,62
+14/2/2019;Degiro;Magellan Midstream;USD;MMP;DIV;1;5,99;0,00;5,30;0,00;0,80
+16/2/2019;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,37;0,00;1,21;0,00;0,18
+27/2/2019;Degiro;TransMontaigne Partners L.P.;USD;TLP;SELL;6;41,00;0,76;36,06;0,67;0,00
+11/3/2019;Degiro;IBM;USD;IBM;DIV;1;3,14;0,00;2,79;0,00;0,42
+16/3/2019;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,37;0,00;1,21;0,00;0,18
+8/4/2019;Degiro;Tanger Factory Outlet Centers;USD;SKT;BUY;14;20,51;0,62;18,21;0,55;0,00
+12/4/2019;Degiro;Medical Properties Trust;USD;MPW;DIV;1;12,00;0,00;10,66;0,00;1,60
+15/4/2019;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,40;0,00;1,24;0,00;0,19
+15/4/2019;Degiro;W.P. Carey;USD;WPC;DIV;1;4,13;0,00;3,66;0,00;0,55
+30/4/2019;Degiro;Altria Group Inc;USD;MO;DIV;1;4,80;0,00;4,28;0,00;0,64
+1/5/2019;Degiro;AT&T;USD;T;DIV;1;13,77;0,00;12,33;0,00;1,85
+13/5/2019;Degiro;Enterprise Products Partners L.P;USD;EPD;DIV;1;3,50;0,00;3,12;0,00;1,16
+14/5/2019;Degiro;Holly Energy Partners;USD;HEP;DIV;1;4,69;0,00;4,18;0,00;1,55
+16/5/2019;Degiro;Tanger Factory Outlet Centers;USD;SKT;DIV;1;4,97;0,00;4,43;0,00;0,67
+16/5/2019;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,40;0,00;1,25;0,00;0,19
+16/5/2019;Degiro;Magellan Midstream;USD;MMP;DIV;1;6,03;0,00;5,39;0,00;1,99
+10/6/2019;Degiro;IBM;USD;IBM;DIV;1;3,24;0,00;2,86;0,00;0,43
+17/6/2019;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,40;0,00;1,25;0,00;0,19
+25/6/2019;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,75;0,00;1,54;0,00;0,23
+10/7/2019;Degiro;Altria Group Inc;USD;MO;DIV;1;4,80;0,00;4,26;0,00;0,64
+12/7/2019;Degiro;Medical Properties Trust;USD;MPW;DIV;1;12,00;0,00;10,65;0,00;1,60
+16/7/2019;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,44;0,00;1,28;0,00;0,19
+16/7/2019;Degiro;W.P. Carey;USD;WPC;DIV;1;4,14;0,00;3,69;0,00;0,55
+1/8/2019;Degiro;AT&T;USD;T;DIV;1;13,77;0,00;12,41;0,00;1,86
+12/8/2019;Acc. Empleado;Telefónica SA;EUR;BME:TEF;BUY;23,9846;6,25;0,00;6,25;0,00;0,00
+14/8/2019;Degiro;Holly Energy Partners;USD;HEP;DIV;1;4,71;0,00;4,21;0,00;1,55
+14/8/2019;Degiro;Enterprise Products Partners L.P;USD;EPD;DIV;1;3,52;0,00;3,16;0,00;1,17
+14/8/2019;Degiro;Magellan Midstream;USD;MMP;DIV;1;6,08;0,00;5,45;0,00;2,02
+16/8/2019;Degiro;Tanger Factory Outlet Centers;USD;SKT;DIV;1;4,97;0,00;4,47;0,00;0,67
+16/8/2019;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,44;0,00;1,30;0,00;0,20
+31/8/2019;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;BUY;1;3.000,00;0,00;3.000,00;0,00;0,00
+31/8/2019;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;INT;1;3,68;0,00;3,68;0,00;0,00
+31/8/2019;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;BUY;1;3,68;0,00;3,68;0,00;0,00
+10/9/2019;Degiro;IBM;USD;IBM;DIV;1;3,24;0,00;2,93;0,00;0,44
+11/9/2019;Acc. Empleado;Telefónica SA;EUR;BME:TEF;BUY;22,4181;6,69;0,00;6,69;0,00;0,00
+17/9/2019;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,44;0,00;1,30;0,00;0,20
+30/9/2019;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;INT;1;21,81;0,00;21,81;0,00;0,00
+30/9/2019;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;BUY;1;21,81;0,00;21,81;0,00;0,00
+8/10/2019;Degiro;AbbVie;USD;ABBV;BUY;1;73,72;0,55;67,23;0,50;0,00
+10/10/2019;Degiro;Altria Group Inc;USD;MO;DIV;1;5,04;0,00;4,58;0,00;0,69
+11/10/2019;Degiro;Medical Properties Trust;USD;MPW;DIV;1;12,48;0,00;11,33;0,00;1,70
+11/10/2019;Acc. Empleado;Telefónica SA;EUR;BME:TEF;BUY;21,30984;7,04;0,00;7,04;0,00;0,00
+16/10/2019;Degiro;W.P. Carey;USD;WPC;DIV;1;4,14;0,00;3,74;0,00;0,56
+16/10/2019;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,44;0,00;1,30;0,00;0,20
+31/10/2019;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;INT;1;45,52;0,00;45,52;0,00;0,00
+31/10/2019;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;BUY;1;45,52;0,00;45,52;0,00;0,00
+11/11/2019;Acc. Empleado;Telefónica SA;EUR;BME:TEF;BUY;21,72338;6,91;0,00;6,91;0,00;0,00
+12/11/2019;Degiro;Meredith;USD;MDP;BUY;6;36,20;0,57;32,87;0,52;0,00
+12/11/2019;Degiro;Occidental Petroleoum;USD;OXY;BUY;6;38,18;0,57;34,67;0,52;0,00
+12/11/2019;Degiro;Preferred Apt. Communities;USD;APTS;BUY;17;13,06;0,57;11,86;0,52;0,00
+12/11/2019;Degiro;Simon Property;USD;SPG;BUY;2;154,75;0,57;140,53;0,52;0,00
+12/11/2019;Degiro;Energy Transfer;USD;ET;BUY;18;11,80;0,57;10,71;0,52;0,00
+1/11/2019;Degiro;AT&T;USD;T;DIV;1;13,77;0,00;12,32;0,00;1,85
+13/11/2019;Degiro;Holly Energy Partners;USD;HEP;DIV;1;4,71;0,00;4,27;0,00;1,58
+13/11/2019;Degiro;Enterprise Products Partners L.P;USD;EPD;DIV;1;3,54;0,00;3,21;0,00;1,19
+15/11/2019;Degiro;Magellan Midstream;USD;MMP;DIV;1;6,12;0,00;5,53;0,00;2,04
+15/11/2019;Degiro;AbbVie;USD;ABBV;DIV;1;1,07;0,00;0,97;0,00;0,14
+15/11/2019;Degiro;Tanger Factory Outlet Centers;USD;SKT;DIV;1;4,97;0,00;4,49;0,00;0,68
+18/11/2019;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,44;0,00;1,30;0,00;0,20
+29/11/2019;Degiro;Simon Property;USD;SPG;DIV;1;4,20;0,00;3,80;0,00;0,57
+30/11/2019;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;BUY;1;500,00;0,00;500,00;0,00;0,00
+30/11/2019;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;INT;1;27,42;0,00;27,42;0,00;0,00
+30/11/2019;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;BUY;1;27,42;0,00;27,42;0,00;0,00
+10/12/2019;Degiro;IBM;USD;IBM;DIV;1;3,24;0,00;2,91;0,00;0,44
+11/12/2019;Acc. Empleado;Telefónica SA;EUR;BME:TEF;BUY;22,18606;6,76;0,00;6,76;0,00;0,00
+12/12/2019;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,44;0,00;1,29;0,00;0,20
+14/12/2019;Degiro;Meredith;USD;MDP;DIV;1;3,45;0,00;3,10;0,00;0,47
+27/12/2019;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,68;0,00;1,49;0,00;0,22
+31/12/2019;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;INT;1;26,02;0,00;26,02;0,00;0,00
+31/12/2019;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;BUY;1;26,02;0,00;26,02;0,00;0,00
+03/01/2020;Acc. Empleado;Telefónica SA;EUR;BME:TEF;DIV;1;22,32;0,00;22,32;0,00;4,24
+03/01/2020;Acc. Empleado;Telefónica SA;EUR;BME:TEF;BUY;2,7951;6,36;0,31;6,36;0,31;0,00
+10/01/2020;Degiro;Medical Properties Trust;USD;MPW;DIV;1;12,48;0,00;11,22;0,00;1,68
+10/1/2020;Degiro;Altria Group Inc;USD;MO;DIV;1;5,04;0,00;4,53;0,00;0,68
+22/1/2020;Degiro;National Health Investement;USD;NHI;BUY;2;85,19;0,55;76,81;0,50;0,00
+22/1/2020;Degiro;Dominion Energy;USD;D;BUY;2;83,89;0,57;75,64;0,51;0,00
+22/1/2020;Degiro;Iron Mountain;USD;IRM;BUY;6;31,79;0,58;28,66;0,52;0,00
+22/1/2020;Degiro;Iron Mountain;USD;IRM;BUY;1;31,78;0,55;28,65;0,50;0,00
+16/01/2020;Degiro;W.P. Carey;USD;WPC;DIV;1;4,15;0,00;3,72;0,00;0,56
+15/01/2020;Degiro;Occidental Petroleoum;USD;OXY;DIV;1;4,74;0,00;4,25;0,00;0,64
+16/01/2020;Degiro;Preferred Apt. Communities;USD;APTS;DIV;1;4,46;0,00;4,00;0,00;0,60
+16/01/2020;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,44;0,00;1,29;0,00;0,20
+13/01/2020;Acc. Empleado;Telefónica SA;EUR;BME:TEF;BUY;24,60226;6,10;0,00;6,10;0,00;0,00
+31/1/2020;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;INT;1;27,71;0,00;27,71;0,00;0,00
+31/1/2020;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;BUY;1;27,71;0,00;27,71;0,00;0,00
+29/2/2020;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;INT;1;29,17;0,00;29,17;0,00;0,00
+29/2/2020;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;BUY;1;29,17;0,00;29,17;0,00;0,00
+11/2/2020;Acc. Empleado;Telefónica SA;EUR;BME:TEF;BUY;24,31118;6,17;0,00;6,17;0,00;0,00
+3/2/2020;Degiro;AT&T;USD;T;DIV;1;14,04;0,00;12,68;0,00;2,26
+13/2/2020;Degiro;Enterprise Products Partners L.P;USD;EPD;DIV;1;3,56;0,00;3,28;0,00;1,22
+14/2/2020;Degiro;Holly Energy Partners;USD;HEP;DIV;1;4,71;0,00;4,34;0,00;1,60
+14/2/2020;Degiro;Tanger Factory Outlet Centers;USD;SKT;DIV;1;4,97;0,00;4,58;0,00;0,69
+14/2/2020;Degiro;AbbVie;USD;ABBV;DIV;1;1,18;0,00;1,09;0,00;0,17
+15/2/2020;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,44;0,00;1,33;0,00;0,20
+15/2/2020;Degiro;Magellan Midstream;USD;MMP;DIV;1;6,17;0,00;5,69;0,00;2,10
+19/2/2020;Degiro;Energy Transfer;USD;ET;DIV;1;5,49;0,00;5,08;0,00;1,88
+28/2/2020;Degiro;Simon Property;USD;SPG;DIV;1;4,20;0,00;3,81;0,00;0,57
+10/3/2020;Degiro;IBM;USD;IBM;DIV;1;3,24;0,00;2,87;0,00;0,43
+15/3/2020;Degiro;Meredith;USD;MDP;DIV;1;3,57;0,00;3,21;0,00;0,49
+16/3/2020;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,44;0,00;1,29;0,00;0,20
+23/03/2020;Degiro;Dominion Energy;USD;D;DIV;1;1,88;0,00;1,75;0,00;0,26
+07/04/2020;Degiro;Iron Mountain;USD;IRM;DIV;1;4,33;0,00;4,01;0,00;0,60
+14/4/2020;Degiro;Medical Properties Trust;USD;MPW;DIV;1;12,96;0,00;11,87;0,00;1,78
+16/04/2020;Degiro;Preferred Apt. Communities;USD;APTS;DIV;1;4,46;0,00;4,08;0,00;0,61
+16/4/2020;Degiro;W.P. Carey;USD;WPC;DIV;1;4,16;0,00;3,81;0,00;0,57
+16/4/2020;Degiro;Occidental Petroleoum;USD;OXY;DIV;1;4,74;0,00;4,37;0,00;0,65
+16/4/2020;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,44;0,00;1,33;0,00;0,20
+1/5/2020;Degiro;Altria Group Inc;USD;MO;DIV;1;5,04;0,00;4,59;0,00;0,69
+4/5/2020;Degiro;AT&T;USD;T;DIV;1;14,04;0,00;12,86;0,00;1,93
+9/5/2020;Degiro;National Health Investement;USD;NHI;DIV;1;2,21;0,00;2,04;0,00;0,30
+13/5/2020;Degiro;Enterprise Products Partners L.P;USD;EPD;DIV;1;3,56;0,00;3,29;0,00;1,22
+15/5/2020;Degiro;Holly Energy Partners;USD;HEP;DIV;1;2,45;0,00;2,27;0,00;0,84
+16/5/2020;Degiro;Tanger Factory Outlet Centers;USD;SKT;DIV;1;5,01;0,00;4,63;0,00;0,69
+11/3/2020;Acc. Empleado;Telefónica SA;EUR;BME:TEF;BUY;33,94433;4,42;0,00;4,42;0,00;0,00
+14/4/2020;Acc. Empleado;Telefónica SA;EUR;BME:TEF;BUY;34,70615;4,32;0,00;4,32;0,00;0,00
+31/3/2020;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;INT;1;25,70;0,00;25,70;0,00;0,00
+31/3/2020;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;BUY;1;25,70;0,00;25,70;0,00;0,00
+30/4/2020;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;INT;1;26,03;0,00;26,03;0,00;0,00
+30/4/2020;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;BUY;1;26,03;0,00;26,03;0,00;0,00
+31/5/2020;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;INT;1;34,05;0,00;34,05;0,00;0,00
+31/5/2020;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;BUY;1;34,05;0,00;34,05;0,00;0,00
+11/5/2020;Acc. Empleado;Telefónica SA;EUR;BME:TEF;BUY;35,75685;4,20;0,00;4,20;0,00;0,00
+11/6/2020;Acc. Empleado;Telefónica SA;EUR;BME:TEF;BUY;33,39269;4,49;0,00;4,49;0,00;0,00
+30/06/2020;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;INT;1;35,80;0,00;35,80;0,00;0,00
+30/06/2020;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;BUY;1;35,80;0,00;35,80;0,00;0,00
+18/05/2020;Degiro;Magellan Midstream;USD;MMP;DIV;1;6,17;0,00;5,65;0,00;2,09
+18/05/2020;Degiro;AbbVie;USD;ABBV;DIV;1;1,18;0,00;1,08;0,00;0,16
+18/05/2020;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,44;0,00;1,32;0,00;0,20
+20/05/2020;Degiro;Energy Transfer;USD;ET;DIV;1;5,49;0,00;5,00;0,00;1,85
+29/05/2020;Degiro;AbbVie;USD;ABBV;BUY;1;91,00;0,56;81,97;0,50;0,00
+11/06/2020;Degiro;IBM;USD;IBM;DIV;1;3,26;0,00;2,88;0,00;0,43
+16/06/2020;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,44;0,00;1,28;0,00;0,20
+23/06/2020;Degiro;Dominion Energy;USD;D;DIV;1;1,88;0,00;1,66;0,00;0,25
+31/7/2020;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;INT;1;33,91;0,00;33,91;0,00;0,00
+31/7/2020;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;BUY;1;33,91;0,00;33,91;0,00;0,00
+31/8/2020;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;INT;1;26,53;0,00;26,53;0,00;0,00
+31/8/2020;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;BUY;1;26,53;0,00;26,53;0,00;0,00
+17/7/2020;Acc. Empleado;Telefónica SA;EUR;BME:TEF;BUY;36,73769;4,08;0,00;4,08;0,00;0,00
+15/7/2020;Acc. Empleado;Telefónica SA;EUR;BME:TEF;DIV;1;60,41;0,00;60,41;0,00;0,00
+15/7/2020;Acc. Empleado;Telefónica SA;EUR;BME:TEF;BUY;12,5471;4,82;0,00;4,82;0,00;0,00
+17/7/2020;Acc. Empleado;Telefónica SA;EUR;BME:TEF;BUY;167,53649;0,00;0,00;0,00;0,00;0,00
+3/7/2020;Degiro;Iron Mountain;USD;IRM;DIV;1;4,33;0,00;3,85;0,00;0,58
+11/7/2020;Degiro;Altria Group Inc;USD;MO;DIV;1;5,04;0,00;4,46;0,00;0,67
+16/7/2020;Degiro;Occidental Petroleoum;USD;OXY;DIV;1;0,06;0,00;0,05;0,00;0,01
+16/7/2020;Degiro;Preferred Apt. Communities;USD;APTS;DIV;1;2,98;0,00;2,62;0,00;0,39
+16/7/2020;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,44;0,00;1,26;0,00;0,19
+16/7/2020;Degiro;W.P. Carey;USD;WPC;DIV;1;4,17;0,00;3,66;0,00;0,55
+17/7/2020;Degiro;Medical Properties Trust;USD;MPW;DIV;1;12,96;0,00;11,33;0,00;1,70
+27/7/2020;Degiro;Simon Property;USD;SPG;DIV;1;2,60;0,00;2,22;0,00;0,33
+4/8/2020;Degiro;AT&T;USD;T;DIV;1;14,04;0,00;11,92;0,00;1,79
+8/8/2020;Degiro;National Health Investement;USD;NHI;DIV;1;2,21;0,00;1,87;0,00;0,28
+13/8/2020;Degiro;Enterprise Products Partners L.P;USD;EPD;DIV;1;3,56;0,00;3,02;0,00;1,12
+14/8/2020;Degiro;Holly Energy Partners;USD;HEP;DIV;1;2,45;0,00;2,07;0,00;0,77
+17/8/2020;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,44;0,00;1,21;0,00;0,19
+17/8/2020;Degiro;AbbVie;USD;ABBV;DIV;1;2,36;0,00;1,99;0,00;0,29
+17/8/2020;Degiro;Magellan Midstream;USD;MMP;DIV;1;6,17;0,00;5,19;0,00;1,92
+19/8/2020;Degiro;Energy Transfer;USD;ET;DIV;1;5,49;0,00;4,63;0,00;1,71
+08/09/2020;Degiro;Banco Sabadell;EUR;BME:SAB;BUY;200;0,40;2,04;0,40;2,04;0,00
+4/5/2018;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;8,80463;24,39;0,00;24,39;0,00;0,00
+1/6/2018;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;8,82714;24,33;0,00;24,33;0,00;0,00
+4/7/2018;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;8,86485;24,23;0,00;24,23;0,00;0,00
+2/8/2018;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;13,20773;24,39;0,00;24,39;0,00;0,00
+5/9/2018;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;8,85945;24,24;0,00;24,24;0,00;0,00
+2/10/2018;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;8,82379;24,34;0,00;24,34;0,00;0,00
+6/11/2018;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;8,96726;23,95;0,00;23,95;0,00;0,00
+5/12/2018;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;9,01643;23,82;0,00;23,82;0,00;0,00
+27/12/2018;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;18,48683;23,24;0,00;23,24;0,00;0,00
+1/2/2019;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;8,95925;23,97;0,00;23,97;0,00;0,00
+4/3/2019;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;8,83746;24,30;0,00;24,30;0,00;0,00
+14/3/2019;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;6,60467;24,39;0,00;24,39;0,00;0,00
+4/4/2019;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;8,7159;24,64;0,00;24,64;0,00;0,00
+2/5/2019;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;8,68249;24,74;0,00;24,74;0,00;0,00
+3/6/2019;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;9,07964;24,36;0,00;24,36;0,00;0,00
+5/7/2019;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;8,66601;24,91;0,00;24,91;0,00;0,00
+31/7/2019;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;17,33392;24,91;0,00;24,91;0,00;0,00
+30/8/2019;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;8,70541;24,80;0,00;24,80;0,00;0,00
+3/10/2019;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;8,71849;24,76;0,00;24,76;0,00;0,00
+6/11/2019;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;9,78295;25,21;0,00;25,21;0,00;0,00
+2/12/2019;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;8,6924;25,14;0,00;25,14;0,00;0,00
+23/12/2019;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;17,18849;25,43;0,00;25,43;0,00;0,00
+5/2/2020;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;9,66961;25,53;0,00;25,53;0,00;0,00
+5/3/2020;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;19,97418;24,72;0,00;24,72;0,00;0,00
+2/4/2020;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;10,83556;22,79;0,00;22,79;0,00;0,00
+21/5/2020;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;10,37729;23,62;0,00;23,62;0,00;0,00
+10/6/2020;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;10,20664;24,20;0,00;24,20;0,00;0,00
+8/7/2020;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;10,17843;24,23;0,00;24,23;0,00;0,00
+5/8/2020;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;20,33399;24,28;0,00;24,28;0,00;0,00
+8/9/2020;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;10,16794;24,28;0,00;24,28;0,00;0,00
+11/9/2020;Degiro;IBM;USD;IBM;DIV;1;3,26;0,00;2,75;0,00;0,41
+16/9/2020;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,44;0,00;1,21;0,00;0,19
+22/9/2020;Degiro;Dominion Energy;USD;D;DIV;1;1,88;0,00;1,60;0,00;0,24
+3/10/2020;Degiro;Iron Mountain;USD;IRM;DIV;1;4,33;0,00;3,69;0,00;0,55
+9/10/2020;Degiro;Medical Properties Trust;USD;MPW;DIV;1;12,96;0,00;11,01;0,00;1,65
+10/10/2020;Degiro;Altria Group Inc;USD;MO;DIV;1;5,16;0,00;4,36;0,00;0,65
+16/10/2020;Degiro;Preferred Apt. Communities;USD;APTS;DIV;1;2,98;0,00;2,54;0,00;0,38
+16/10/2020;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,44;0,00;1,23;0,00;0,19
+16/10/2020;Degiro;W.P. Carey;USD;WPC;DIV;1;4,18;0,00;3,57;0,00;0,54
+16/10/2020;Degiro;Occidental Petroleoum;USD;OXY;DIV;1;0,06;0,00;0,05;0,00;0,01
+26/10/2020;Degiro;Simon Property;USD;SPG;DIV;1;2,69;0,00;2,28;0,00;0,33
+3/11/2020;Degiro;AT&T;USD;T;DIV;1;14,04;0,00;11,97;0,00;1,80
+7/11/2020;Degiro;National Health Investement;USD;NHI;DIV;1;2,21;0,00;1,86;0,00;0,28
+13/11/2020;Degiro;Holly Energy Partners;USD;HEP;DIV;1;2,45;0,00;2,07;0,00;0,77
+13/11/2020;Degiro;Enterprise Products Partners L.P;USD;EPD;DIV;1;3,56;0,00;3,01;0,00;1,12
+16/11/2020;Degiro;Magellan Midstream;USD;MMP;DIV;1;6,17;0,00;5,20;0,00;1,92
+16/11/2020;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,44;0,00;1,21;0,00;0,19
+17/11/2020;Degiro;AbbVie;USD;ABBV;DIV;1;2,36;0,00;1,99;0,00;0,29
+20/11/2020;Degiro;Energy Transfer;USD;ET;DIV;1;2,75;0,00;2,32;0,00;0,86
+25/11/2020;Degiro;Holly Energy Partners;USD;HEP;SELL;7;14,46;0,62;12,12;0,52;0,00
+25/11/2020;Degiro;Enterprise Products Partners L.P;USD;EPD;SELL;8;20,42;0,63;17,13;0,53;0,00
+25/11/2020;Degiro;Energy Transfer;USD;ET;SELL;18;6,48;0,67;5,43;0,56;0,00
+8/12/2020;Degiro;UGI Corp;USD;UGI;BUY;4;35,46;0,62;29,31;0,51;0,00
+8/12/2020;Degiro;Merck;USD;MRK;BUY;2;83,47;0,62;68,98;0,51;0,00
+8/12/2020;Degiro;Cisco;USD;CSCO;BUY;2;44,32;0,62;36,63;0,51;0,00
+30/9/2020;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;INT;1;41,16;0,00;41,16;0,00;0,00
+30/9/2020;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;BUY;1;41,16;0,00;41,16;0,00;0,00
+31/10/2020;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;INT;1;27,87;0,00;27,87;0,00;0,00
+31/10/2020;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;BUY;1;27,87;0,00;27,87;0,00;0,00
+30/11/2020;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;INT;1;30,22;0,00;30,22;0,00;0,00
+30/11/2020;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;BUY;1;30,22;0,00;30,22;0,00;0,00
+5/10/2020;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;10,14169;24,34;0,00;24,34;0,00;0,00
+4/11/2020;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;10,09148;24,46;0,00;24,46;0,00;0,00
+11/12/2020;Degiro;IBM;USD;IBM;DIV;1;3,26;0,00;2,69;0,00;0,00
+11/12/2020;Degiro;Magellan Midstream;USD;MMP;SELL;6;46,00;0,63;37,91;0,52;0,00
+16/12/2020;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,44;0,00;1,18;0,00;0,18
+21/12/2020;Degiro;Dominion Energy;USD;D;DIV;1;1,26;0,00;1,03;0,00;0,16
+5/1/2021;Degiro;UGI Corp;USD;UGI;DIV;1;1,32;0,00;1,08;0,00;0,16
+5/1/2021;Degiro;Danone;EUR;EPA:BN;BUY;4;54,60;4,77;54,60;4,77;0,00
+7/1/2021;Degiro;Iron Mountain;USD;IRM;DIV;1;4,33;0,00;3,51;0,00;0,53
+7/1/2021;Crypto;Ripple (KRAKEN);EUR;KRAKEN:XRPEUR;SELL;175,745;0,27;0,09;0,27;0,09;0,00
+7/1/2021;Fondos;AXA World Funds - Global Factors - Sustainable Equity A Capitalisation EUR;EUR;LU1774149998;BUY;7,37844;135,53;0,00;135,53;0,00;0,00
+31/12/2020;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;INT;1;37,77;0,00;37,77;0,00;0,00
+31/12/2020;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;BUY;1;37,77;0,00;37,77;0,00;0,00
+4/12/2020;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;9,83877;25,09;0,00;25,09;0,00;0,00
+31/12/2020;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;19,5494;25,25;0,00;25,25;0,00;0,00
+31/01/2021;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;INT;1;37,89;0,00;37,89;0,00;0,00
+31/01/2021;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;BUY;1;37,89;0,00;37,89;0,00;0,00
+28/02/2021;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;INT;1;32,39;0,00;32,39;0,00;0,00
+28/02/2021;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;BUY;1;32,39;0,00;32,39;0,00;0,00
+05/02/2021;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;9,77894;25,60;0,00;25,60;0,00;0,00
+4/3/2021;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;19,63948;25,49;0,00;25,49;0,00;0,00
+8/2/2021;Fondos;AXA World Funds - Global Factors - Sustainable Equity A Capitalisation EUR;EUR;LU1774149998;BUY;0,43284;138,62;0,00;138,62;0,00;0,00
+13/1/2021;Acc. Empleado;Telefónica SA;EUR;BME:TEF;BUY;19,46751;3,69;0,00;3,69;0,00;0,00
+8/1/2021;Degiro;Medical Properties Trust;USD;MPW;DIV;1;12,96;0,00;10,60;0,00;1,59
+11/1/2021;Degiro;Merck;USD;MRK;DIV;1;1,30;0,00;1,07;0,00;0,16
+12/1/2021;Degiro;Altria Group Inc;USD;MO;DIV;1;5,16;0,00;4,24;0,00;0,63
+16/1/2021;Degiro;Preferred Apt. Communities;USD;APTS;DIV;1;2,98;0,00;2,47;0,00;0,37
+18/1/2021;Degiro;W.P. Carey;USD;WPC;DIV;1;4,18;0,00;3,46;0,00;0,52
+18/1/2021;Degiro;Occidental Petroleoum;USD;OXY;DIV;1;0,06;0,00;0,05;0,00;0,01
+18/1/2021;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,44;0,00;1,19;0,00;0,18
+21/1/2021;Degiro;Cisco;USD;CSCO;DIV;1;0,72;0,00;0,59;0,00;0,09
+25/1/2021;Degiro;National Health Investement;USD;NHI;DIV;1;2,21;0,00;1,82;0,00;0,27
+2/2/2021;Degiro;AT&T;USD;T;DIV;1;14,04;0,00;11,65;0,00;1,75
+15/2/2021;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,44;0,00;1,19;0,00;0,18
+15/2/2021;Degiro;Tanger Factory Outlet Centers;USD;SKT;DIV;1;2,49;0,00;2,05;0,00;0,30
+17/2/2021;Degiro;AbbVie;USD;ABBV;DIV;1;2,60;0,00;2,16;0,00;0,32
+11/3/2021;Degiro;IBM;USD;IBM;DIV;1;3,26;0,00;2,73;0,00;0,41
+16/3/2021;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,44;0,00;1,21;0,00;0,18
+23/03/2021;Degiro;Dominion Energy;USD;D;DIV;1;1,26;0,00;1,06;0,00;0,16
+3/4/2021;Degiro;UGI Corp;USD;UGI;DIV;1;1,32;0,00;1,12;0,00;0,17
+7/4/2021;Degiro;Iron Mountain;USD;IRM;DIV;1;4,33;0,00;3,64;0,00;0,55
+8/4/2021;Degiro;Merck;USD;MRK;DIV;1;1,30;0,00;1,09;0,00;0,17
+9/4/2021;Degiro;Medical Properties Trust;USD;MPW;DIV;1;13,44;0,00;11,27;0,00;1,69
+16/4/2021;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,44;0,00;1,20;0,00;0,18
+16/4/2021;Degiro;Occidental Petroleoum;USD;OXY;DIV;1;0,06;0,00;0,05;0,00;0,01
+16/4/2021;Degiro;Preferred Apt. Communities;USD;APTS;DIV;1;2,96;0,00;2,47;0,00;0,38
+16/4/2021;Degiro;W.P. Carey;USD;WPC;DIV;1;4,19;0,00;3,49;0,00;0,53
+26/4/2021;Degiro;Simon Property;USD;SPG;DIV;1;2,60;0,00;2,15;0,00;0,32
+29/4/2021;Degiro;Cisco;USD;CSCO;DIV;1;0,74;0,00;0,61;0,00;0,09
+3/5/2021;Degiro;Altria Group Inc;USD;MO;DIV;1;5,16;0,00;4,27;0,00;0,64
+4/5/2021;Degiro;AT&T;USD;T;DIV;1;14,04;0,00;11,68;0,00;1,75
+8/5/2021;Degiro;National Health Investement;USD;NHI;DIV;1;2,21;0,00;1,82;0,00;0,27
+13/5/2021;Degiro;Danone;EUR;EPA:BN;DIV;1;7,76;0,00;6,38;0,00;1,69
+17/5/2021;Degiro;AbbVie;USD;ABBV;DIV;1;2,60;0,00;2,14;0,00;0,32
+17/5/2021;Degiro;Tanger Factory Outlet Centers;USD;SKT;DIV;1;2,49;0,00;2,05;0,00;0,30
+18/5/2021;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,44;0,00;1,18;0,00;0,18
+8/6/2021;Degiro;Merck;USD;MRK;DIV;1;6,75;0,00;5,54;0,00;0,00
+11/6/2021;Degiro;IBM;USD;IBM;DIV;1;3,28;0,00;2,71;0,00;0,40
+16/6/2021;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,44;0,00;1,20;0,00;0,18
+22/6/2021;Degiro;Dominion Energy;USD;D;DIV;1;1,26;0,00;1,05;0,00;0,16
+2/7/2021;Degiro;UGI Corp;USD;UGI;DIV;1;1,38;0,00;1,16;0,00;0,18
+7/7/2021;Degiro;Iron Mountain;USD;IRM;DIV;1;4,33;0,00;3,66;0,00;0,55
+8/7/2021;Degiro;Merck;USD;MRK;DIV;1;1,30;0,00;1,10;0,00;0,17
+9/7/2021;Degiro;Medical Properties Trust;USD;MPW;DIV;1;13,44;0,00;11,30;0,00;1,70
+12/7/2021;Degiro;Altria Group Inc;USD;MO;DIV;1;5,16;0,00;4,34;0,00;0,65
+16/7/2021;Degiro;Preferred Apt. Communities;USD;APTS;DIV;1;2,98;0,00;2,52;0,00;0,38
+16/7/2021;Degiro;W.P. Carey;USD;WPC;DIV;1;4,20;0,00;3,55;0,00;0,53
+16/7/2021;Degiro;Occidental Petroleoum;USD;OXY;DIV;1;0,06;0,00;0,05;0,00;0,01
+16/7/2021;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,44;0,00;1,22;0,00;0,19
+21/7/2021;Degiro;Taiwan Semiconductor Manufacturing;USD;TSM;BUY;1;117,08;0,59;99,40;0,50;0,00
+22/7/2021;Degiro;Intel;USD;INTC;BUY;1;56,10;0,59;47,47;0,50;0,00
+24/7/2021;Degiro;Simon Property;USD;SPG;DIV;1;2,80;0,00;2,38;0,00;0,36
+29/7/2021;Degiro;Cisco;USD;CSCO;DIV;1;0,74;0,00;0,62;0,00;0,09
+30/7/2021;Degiro;Red Eléctrica Corporación;EUR;BME:REE;BUY;1;16,65;2,04;16,65;2,04;0,00
+3/8/2021;Degiro;AT&T;USD;T;DIV;1;14,04;0,00;11,82;0,00;1,78
+9/8/2021;Degiro;National Health Investement;USD;NHI;DIV;1;1,80;0,00;1,53;0,00;0,23
+14/8/2021;Degiro;Tanger Factory Outlet Centers;USD;SKT;DIV;1;2,49;0,00;2,11;0,00;0,31
+16/8/2021;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,44;0,00;1,22;0,00;0,19
+17/8/2021;Degiro;AbbVie;USD;ABBV;DIV;1;2,60;0,00;2,22;0,00;0,33
+2/9/2021;Degiro;Intel;USD;INTC;DIV;1;0,35;0,00;0,29;0,00;0,04
+13/9/2021;Degiro;IBM;USD;IBM;DIV;1;3,28;0,00;2,77;0,00;0,41
+16/9/2021;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,44;0,00;1,22;0,00;0,19
+21/9/2021;Degiro;Dominion Energy;USD;D;DIV;1;1,26;0,00;1,07;0,00;0,16
+1/10/2021;Degiro;Simon Property;USD;SPG;DIV;1;3,00;0,00;2,59;0,00;0,39
+4/10/2021;Degiro;UGI Corp;USD;UGI;DIV;1;1,38;0,00;1,19;0,00;0,18
+7/10/2021;Degiro;Iron Mountain;USD;IRM;DIV;1;4,33;0,00;3,74;0,00;0,56
+8/10/2021;Degiro;Merck;USD;MRK;DIV;1;1,30;0,00;1,12;0,00;0,17
+13/10/2021;Degiro;Altria Group Inc;USD;MO;DIV;1;5,40;0,00;4,65;0,00;0,70
+15/10/2021;Degiro;Taiwan Semiconductor Manufacturing;USD;TSM;DIV;1;0,49;0,00;0,42;0,00;0,09
+15/10/2021;Degiro;Medical Properties Trust;USD;MPW;DIV;1;13,44;0,00;11,58;0,00;1,74
+16/10/2021;Degiro;Preferred Apt. Communities;USD;APTS;DIV;1;2,98;0,00;2,57;0,00;0,39
+18/10/2021;Degiro;W.P. Carey;USD;WPC;DIV;1;4,21;0,00;3,62;0,00;0,20
+18/10/2021;Degiro;Occidental Petroleoum;USD;OXY;DIV;1;0,06;0,00;0,05;0,00;0,01
+18/10/2021;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,47;0,00;1,26;0,00;0,19
+28/10/2021;Degiro;Cisco;USD;CSCO;DIV;1;0,74;0,00;0,63;0,00;0,09
+1/11/2021;Degiro;AT&T;USD;T;DIV;1;14,04;0,00;12,08;0,00;1,82
+8/11/2021;Degiro;National Health Investement;USD;NHI;DIV;1;1,80;0,00;1,55;0,00;0,23
+16/11/2021;Degiro;Tanger Factory Outlet Centers;USD;SKT;DIV;1;2,56;0,00;2,26;0,00;0,34
+16/11/2021;Degiro;Main Street Capital Corp.;USD;MAIN;DIV;1;1,47;0,00;1,30;0,00;0,19
+16/11/2021;Degiro;AbbVie;USD;ABBV;DIV;1;2,60;0,00;2,29;0,00;0,34
+2/12/2021;Degiro;Intel;USD;INTC;DIV;1;0,35;0,00;0,31;0,00;0,04
+6/12/2021;Degiro;Dominion Energy;USD;D;SELL;2;74,38;0,00;65,88;0,00;0,00
+6/12/2021;Degiro;Occidental Petroleoum;USD;OXY;SELL;6;30,16;0,00;26,71;0,00;0,00
+6/12/2021;Degiro;Intel;USD;INTC;BUY;2;102,28;0,00;90,76;0,00;0,00
+6/12/2021;Degiro;VMWare;USD;VMW;BUY;2;232,78;0,00;206,57;0,00;0,00
+6/12/2021;Degiro;Intel;USD;INTC;BUY;1;51,13;0,00;45,37;0,00;0,00
+8/3/2021;Fondos;AXA World Funds - Global Factors - Sustainable Equity A Capitalisation EUR;EUR;LU1774149998;BUY;0,42583;140,90;0,00;140,90;0,00;0,00
+6/4/2021;Fondos;AXA World Funds - Global Factors - Sustainable Equity A Capitalisation EUR;EUR;LU1774149998;BUY;0,40667;147,54;0,00;147,54;0,00;0,00
+6/5/2021;Fondos;AXA World Funds - Global Factors - Sustainable Equity A Capitalisation EUR;EUR;LU1774149998;BUY;0,39936;150,24;0,00;150,24;0,00;0,00
+8/6/2021;Fondos;AXA World Funds - Global Factors - Sustainable Equity A Capitalisation EUR;EUR;LU1774149998;BUY;0,40024;149,91;0,00;149,91;0,00;0,00
+6/7/2021;Fondos;AXA World Funds - Global Factors - Sustainable Equity A Capitalisation EUR;EUR;LU1774149998;BUY;0,37795;158,75;0,00;158,75;0,00;0,00
+6/8/2021;Fondos;AXA World Funds - Global Factors - Sustainable Equity A Capitalisation EUR;EUR;LU1774149998;BUY;0,73678;162,87;0,00;162,87;0,00;0,00
+7/9/2021;Fondos;AXA World Funds - Global Factors - Sustainable Equity A Capitalisation EUR;EUR;LU1774149998;BUY;0,72582;165,33;0,00;165,33;0,00;0,00
+6/10/2021;Fondos;AXA World Funds - Global Factors - Sustainable Equity A Capitalisation EUR;EUR;LU1774149998;BUY;0,74198;161,73;0,00;161,73;0,00;0,00
+8/11/2021;Fondos;AXA World Funds - Global Factors - Sustainable Equity A Capitalisation EUR;EUR;LU1774149998;BUY;0,69979;171,48;0,00;171,48;0,00;0,00
+30/6/2021;Acc. Empleado;Telefónica SA;EUR;BME:TEF;BUY;18,49414;4,15;0,00;4,15;0,00;0,00
+30/11/2021;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;INT;1;294,75;0,00;294,75;0,00;0,00
+30/11/2021;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;BUY;1;294,75;0,00;294,75;0,00;0,00
+30/11/2021;Plan Pensiones;Plan Pensiones TSOL;EUR;P.PENSIONES;BUY;100,2994;26,63;0,00;26,63;0,00;0,00
+8/11/2021;Mintos - Auto1;Mintos - Créditos;EUR;MINTOS;BUY;1;500,00;0,00;500,00;0,00;0,00
+8/11/2021;Degiro;Tencent Holdings;EUR;NNND;BUY;3;52,80;3,90;52,80;3,90;0,00
+8/11/2021;Degiro;Danone;EUR;EPA:BN;BUY;1;53,41;4,19;53,41;4,19;0,00
+8/11/2021;Degiro;Merck;USD;MRK;BUY;1;72,90;0,00;64,54;0,00;0,00
+8/11/2021;Degiro;Alibaba Holding Group;USD;BABA;BUY;2;123,47;0,00;109,31;0,00;0,00
+10/12/2021;Degiro;Meredith;USD;MDP;SELL;6;59,17;0,00;52,28;0,00;0,00
