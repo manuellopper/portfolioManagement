@@ -131,6 +131,9 @@ class Portfolio:
     self.assets_list=[] 
     self.transactions_list=[]
     self.account = None
+
+    self.last_market_value = 0
+    self.curr_cost = 0
     
     ## Total Current benefit variables
     self.current_benefit = 0
@@ -216,6 +219,8 @@ class Portfolio:
     self.pot_benefit = 0
     self.pot_currency_benefit = 0
     self.pot_product_benefit = 0
+    self.last_market_value=0
+    self.underlying_cost=0
         
     
     for asset_aux in self.assets_list:
@@ -227,9 +232,12 @@ class Portfolio:
       self.current_product_benefit += asset_aux.current_product_benefit.get_value("LOCAL")
       self.pot_benefit += asset_aux.pot_benefit.get_value("LOCAL")
       self.pot_currency_benefit += asset_aux.pot_currency_benefit.get_value("LOCAL")
-      self.pot_product_benefit += asset_aux.pot_product_benefit.get_value("LOCAL")     
+      self.pot_product_benefit += asset_aux.pot_product_benefit.get_value("LOCAL") 
+      self.last_market_value+=asset_aux.last_market_value.get_value("LOCAL")
+      self.curr_cost+=asset_aux.curr_cost.get_value("LOCAL")
 
-        
+  def get_summary_dataframe(self):
+    data_titles=["Cuenta Completa","Cartera (Invertido)","Cash (No invertido)","TOTAL B/P","Current benefit"]        
 
   def get_assets_info_dataframe(self):
     aux_data=[]
