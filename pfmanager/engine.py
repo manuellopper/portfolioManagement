@@ -237,7 +237,7 @@ class Portfolio:
       self.curr_cost+=asset_aux.curr_cost.get_value("LOCAL")
 
   def get_summary_dataframe(self):
-    data_titles=["Cuenta Completa","Cartera (Invertido)","Cash (No invertido)","TOTAL B/P","Current benefit"]        
+    data_titles=["Complete Account","Porfolio Value (Invested)","Cash Value (Not invested)","TOTAL B/P","Current benefit"]        
 
   def get_assets_info_dataframe(self):
     aux_data=[]
